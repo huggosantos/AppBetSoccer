@@ -5,15 +5,17 @@
         Futbol
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
-        By desconhecido 
+        Desconhecido 
     </author>
     <content src="index.html" />
+    <preference name="webviewbounce" value="false" />
+    <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
-
-    <preference name="android-minSdkVersion" value="15" />
-    <preference name="android-versionCode" value="15" />
-    <preference name="android-build-tool" value="15" />
-
+    <preference name="android-versionCode" value="16" />
+    <preference name="android-minSdkVersion" value="16" />
+    <preference name="cdvVersionCode" value="16" />
+    <preference name="cdvMinSdkVersion" value="16" />
+    <preference name="cdvBuildMultipleApks" value="true" />
 
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1" />
@@ -35,10 +37,9 @@
     <plugin name="cordova-plugin-statusbar" source="npm" spec="~2.1.2" />
     <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0" />
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
-    <plugin name="cordova-plugin-datecs-printer" source="npm" />
+    <plugin name="cordova-plugin-datecs-printer" source="npm"  spec="~0.4.4"/>
     <plugin name="cordova-plugin-broadcaster" source="npm" />
-    <plugin name="org.crosswalk.engine" spec="1.3.0" source="pgb" />
-    <preference name="xwalkVersion" value="15" />
+    <plugin name="cordova-plugin-crosswalk-webview" spec="~2.1.0" source="npm" />
     <icon src="icon.png" />
     <platform name="android">
         <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
@@ -134,4 +135,3 @@
 
 
 </widget>
-    

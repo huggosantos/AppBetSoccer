@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.cordova.hellocordova" version="0.0.1" android-versionCode="15" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-</widget>
+<widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>BetSoccer</name>
     <description>
         Futbol
@@ -12,10 +11,10 @@
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
-    <preference name="android-versionCode" value="15" />
-    <preference name="android-minSdkVersion" value="15" />
-    <preference name="cdvVersionCode" value="15" />
-    <preference name="cdvMinSdkVersion" value="15" />
+    <preference name="android-versionCode" value="16" />
+    <preference name="android-minSdkVersion" value="16" />
+    <preference name="cdvVersionCode" value="16" />
+    <preference name="cdvMinSdkVersion" value="16" />
     <preference name="cdvBuildMultipleApks" value="true" />
 
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />

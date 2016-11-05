@@ -36,28 +36,7 @@ app.controller('aposta', function($scope, $http, $routeParams, $location) {
     $('.modal').modal();
   });
 
-$http({
-      url: 'http://betsocceroficial.herokuapp.com/aposta',
-      method: 'GET',
-      
 
-      },
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-
-      }
-
-    }).
-     success(function (data) {
-      $scope.success = true;
-      alert(data);
-      $scope.user = {};
-    }).
-     error(function (data) {
-      $scope.error = true;
-
-    });
   
 
 });

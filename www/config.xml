@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>BEtsoccer</name>
+    <name>Betsoccer</name>
     <description>
         futbol
     </description>
@@ -8,7 +8,8 @@
         By 
     </author>
     <content src="index.html" />
-    
+    <preference name="webviewbounce" value="false" />
+    <preference name="UIWebViewBounce" value="false" />
     <preference name="android-versionCode" value="16" />
     <preference name="android-minSdkVersion" value="16" />
     <preference name="cdvVersionCode" value="16" />
@@ -36,7 +37,7 @@
     <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0" />
     <plugin name="cordova-plugin-datecs-printer" source="npm"  spec="~0.4.4"/>
     <plugin name="cordova-plugin-broadcaster" source="npm" />
- 
+    <plugin name="cordova-plugin-crosswalk-webview" spec="~2.1.0" source="npm" />
     <icon src="icon.png" />
     <platform name="android">
         <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />

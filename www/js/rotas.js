@@ -58,13 +58,7 @@ app.controller('aposta', function($scope, $http, $routeParams, $location) {
     });
   });
   
-  $http.get('http://betsocceroficial.herokuapp.com/aposta').then(function(response) {
-     window.localStorage.setItem("ArquivoServidor",response.data);
-     list = response.data;
-     console.log(response.data);
-  }, function(err) {
-    console.log(err);
-  });
+ 
 
 });
 

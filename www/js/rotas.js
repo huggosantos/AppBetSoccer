@@ -30,7 +30,7 @@ app.controller('aposta', function($scope, $http, $routeParams, $location) {
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
   });
-/*
+
   $(document).ready(function(){
     $('input').each(function(){
       var self = $(this),
@@ -59,7 +59,7 @@ app.controller('aposta', function($scope, $http, $routeParams, $location) {
 }, function(err) {
   console.log(err);
 });
-*/
+
 
 });
 

@@ -11,10 +11,6 @@ app.config(function($routeProvider) {
     templateUrl: 'paginas/aposta.html',
     controller: 'aposta'
   })
-  .when('/teste', {
-    templateUrl: 'paginas/teste.html',
-    controller: 'teste'
-  })
   .otherwise('/aposta', {
    templateUrl: 'templates/aposta.html',
    controller: 'home'
@@ -56,7 +52,7 @@ app.controller('aposta', function($scope, $http, $routeParams, $location) {
       $(this).iCheck('uncheck');
     });
   });
-  
+
   $http.get('http://betsocceroficial.herokuapp.com/aposta').then(function(response) {
    var json = JSON.stringify(response.data)
    window.localStorage.setItem("ArquivoServidor",json);
@@ -77,63 +73,6 @@ app.elememt(document).ready(function(){
     if (e.isConnected) {
       alert('connect impress');
     }
-  }); } );
-
-
-app.controller('formularioChamado', function($scope, $http, $routeParams, $location) {
-
- toTop();
- $scope.enviarForm = function(chamado){
-   var value = window.localStorage.getItem("chave");
-   console.log(value);
-   if(latitude==undefined){
-     Materialize.toast('Chamado não enviado, Ativar geolocalização !', 7000)
-   }
-   else if($scope.chamado.tipo==true && value==undefined){
-     Materialize.toast('Chamado não enviado, Enviar Foto !', 7000)
-   }else{
-
-     console.log(value);
-     pararCaptura();
-     window.localStorage.removeItem("chave");
-     $http({
-      url: 'https://modulosamu.herokuapp.com/chamado/store',
-      method: 'POST',
-      data: {
-        nome: $scope.chamado.nome,
-        numero: $scope.chamado.numero,
-        rua: $scope.chamado.rua,
-        bairro: $scope.chamado.bairro,
-        cidade: $scope.chamado.cidade,
-        ref: $scope.chamado.ref,
-        clinico: $scope.chamado.tipo,
-        latitude: latitude,
-        longitude: longitude,
-        descricao: $scope.chamado.descricao,
-        img: value,
-
-      },
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-
-      }
-
-    }).
-     success(function (data) {
-      $scope.success = true;
-      alert(data);
-      latitude=undefined;
-      longitude=undefined;
-      $location.path("/sobre");
-      $scope.user = {};
-    }).
-     error(function (data) {
-      $scope.error = true;
-
-    }); 
-   }
- }
-
-
+  }); 
 });
+

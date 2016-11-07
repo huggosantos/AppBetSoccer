@@ -31,7 +31,6 @@ function toTop(){
 }
 
 
-
 var list;
 app.controller('aposta', function($scope, $http, $routeParams, $location) {  
   toTop();
@@ -58,7 +57,17 @@ app.controller('aposta', function($scope, $http, $routeParams, $location) {
     });
   });
   
- 
+  $http.get('http://betsocceroficial.herokuapp.com/aposta').then(function(response) {
+   var json = JSON.stringify(response.data)
+   window.localStorage.setItem("ArquivoServidor",json);
+   while (json.length > 0) {
+    document.write(json.pop() + "<br/>");
+  }
+  alert(json);
+}, function(err) {
+  console.log(err);
+});
+
 
 });
 

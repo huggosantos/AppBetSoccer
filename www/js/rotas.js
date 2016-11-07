@@ -3,11 +3,7 @@ var app = angular.module('MyApp', ['ngRoute']);
 app.config(function($routeProvider) {
   /*ROTAS*/
   $routeProvider
-  .when('/formularioChamado', {
-    templateUrl: 'paginas/formularioChamado.html',
-    controller: 'formularioChamado'
-  })
-  .when('/aposta', {
+  when('/aposta', {
     templateUrl: 'paginas/aposta.html',
     controller: 'aposta'
   })
@@ -27,14 +23,14 @@ function toTop(){
 }
 
 
-var list;
+
 app.controller('aposta', function($scope, $http, $routeParams, $location) {  
   toTop();
   $(document).ready(function(){
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
   });
-
+/*
   $(document).ready(function(){
     $('input').each(function(){
       var self = $(this),
@@ -63,7 +59,7 @@ app.controller('aposta', function($scope, $http, $routeParams, $location) {
 }, function(err) {
   console.log(err);
 });
-
+*/
 
 });
 

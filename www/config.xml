@@ -8,8 +8,7 @@
         Desconhecido 
     </author>
     <content src="index.html" />
-    <preference name="webviewbounce" value="false" />
-    <preference name="UIWebViewBounce" value="false" />
+    
    
     <preference name="android-versionCode" value="16" />
     <preference name="android-minSdkVersion" value="16" />

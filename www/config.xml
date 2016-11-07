@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>SAMU</name>
+    <name>Betsoccer</name>
     <description>
-        Chamados Emergênciais
+       Apostas
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
         Huggo 
     </author>
     <content src="index.html" />
-    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" /<name />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />

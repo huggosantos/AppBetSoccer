@@ -11,8 +11,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
-  <title>ModuloSAMU</title>
-
+  <title>BetSoccer</title>
+  <link  type="text/css" rel="stylesheet" href="css/all.css" media="screen,projection" >
   <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
   <link type="text/css" rel="stylesheet" href="css/estilo.css"  media="screen,projection"/>
 
@@ -23,9 +23,9 @@
     <div class="nav-wrapper green ">
       <a class=" left brand-logo">BetSoccer</a>
       <ul class="right">
-        <li><a href="#aposta"><i class="material-icons">add_circle</i></a></li>
+        <li><a href="#aposta"  data-target="modal1" ><i class="material-icons">add_circle</i></a></li>
         <li><a onclick="imprimirFactura()"><i class="material-icons">print</i></a></li>
-        <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
+        <li><a href="#teste"><i class="material-icons">refresh</i></a></li>
         <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
       </ul>
     </div>
@@ -37,14 +37,14 @@
 
 
 
-<!-- Links && scripts -->
+ <!-- Links && scripts -->
 
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
-<script type="text/javascript" src="js/materialize.js"></script>
+ <script type="text/javascript" src="js/jquery.js"></script>
+ <script type="text/javascript" src="js/materialize.min.js"></script>
+ <script type="text/javascript" src="js/materialize.js"></script>
 
 
-<script type="text/javascript">
+ <script type="text/javascript">
   app.initialize();
 </script>
 <script type="text/javascript" >     
@@ -64,5 +64,12 @@
 <script type="text/javascript" src="js/geolocalizacao.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
 <script src='js/impresora.js'></script>
+
+<!-- End Links icheked -->
+
+
+<script type="text/javascript" src="js/zepto.js"></script>
+<script type="text/javascript" src="js/icheck.js"></script>
+<script type="text/javascript" src="js/form.js"></script>
 </body>
 </html>

@@ -11,6 +11,10 @@ app.config(function($routeProvider) {
     templateUrl: 'paginas/aposta.html',
     controller: 'aposta'
   })
+  .when('/teste', {
+    templateUrl: 'paginas/teste.html',
+    controller: 'teste'
+  })
   .otherwise('/aposta', {
    templateUrl: 'templates/aposta.html',
    controller: 'home'
@@ -28,7 +32,7 @@ function toTop(){
 
 
 
-
+var list;
 app.controller('aposta', function($scope, $http, $routeParams, $location) {  
   toTop();
   $(document).ready(function(){
@@ -36,8 +40,31 @@ app.controller('aposta', function($scope, $http, $routeParams, $location) {
     $('.modal').modal();
   });
 
+  $(document).ready(function(){
+    $('input').each(function(){
+      var self = $(this),
+      label = self.next(),
+      label_text = label.text();
 
+      label.remove();
+      self.iCheck({
+        checkboxClass: 'icheckbox_line-red',
+        radioClass: 'iradio_line-red',
+        insert: '<div class="icheck_line-icon"></div>' + label_text
+      });
+    });
+    $('input').on('ifClicked', function(){
+      $(this).iCheck('uncheck');
+    });
+  });
   
+  $http.get('http://betsocceroficial.herokuapp.com/aposta').then(function(response) {
+     window.localStorage.setItem("ArquivoServidor",response.data);
+     list = response.data;
+     console.log(response.data);
+  }, function(err) {
+    console.log(err);
+  });
 
 });
 

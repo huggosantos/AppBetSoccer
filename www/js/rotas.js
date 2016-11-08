@@ -3,7 +3,7 @@ var app = angular.module('MyApp', ['ngRoute']);
 app.config(function($routeProvider) {
   /*ROTAS*/
   $routeProvider
-  when('/aposta', {
+  .when('/aposta', {
     templateUrl: 'paginas/aposta.html',
     controller: 'aposta'
   })
@@ -50,12 +50,13 @@ app.controller('aposta', function($scope, $http, $routeParams, $location) {
   });
 
   $http.get('http://betsocceroficial.herokuapp.com/aposta').then(function(response) {
-   var json = JSON.stringify(response.data)
-   window.localStorage.setItem("ArquivoServidor",json);
-   while (json.length > 0) {
-    document.write(json.pop() + "<br/>");
-  }
-  alert(json);
+  // var json = JSON.stringify(response.data)
+//var json = JSON.parse(jso); 
+  // window.localStorage.setItem("ArquivoServidor",response.data);
+   $scope.aposta=response.data;
+console.log(response.data[1].ativo);
+console.log(json)
+
 }, function(err) {
   console.log(err);
 });

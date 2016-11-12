@@ -1,61 +1,70 @@
 <br>
 <br>
 <br>
-{{aposta[1]}}
-<label>{{aposta[1].valor_casa}}</label>
 <div class="row">
 	<table >
 		<thead>
 			<tr>
-				<th data-field="id">T.casa</th>
-				<th data-field="name">T.fora</th>
-				<th data-field="price">casa</th>
-				<th data-field="price">fora</th>
-				<th data-field="price">emp</th>
-				<th data-field="price">gol&frac12;</th>
-				<th data-field="price">max</th>
-				<th data-field="price">+2.5</th>
-				<th data-field="price">-2.5</th>
-				<th data-field="price">+2.5</th>
+				<th data-field="price" style="background-color:grey;">casa</th>
+				<th data-field="price" style="background-color:#76ff03;">fora</th>
+				<th data-field="price" style="background-color:#b39ddb;">emp</th>
+				<th data-field="price" style="background-color:#e91e63;">dupla</th>
+				<th data-field="price" style="background-color:#eeff41;">gol&frac12;</th>
+				<th data-field="price" style="background-color:#0d47a1;">+2.5</th>
+				<th data-field="price" style="background-color:#fff;">-2.5</th>
+				<th data-field="price" style="background-color:#00c853;">ambas</th>
 			</tr>
 		</thead>
 
-		<tbody>
+	</table>
 
-			<tr ng-repeat="x in aposta">
-				<td>Juventus</td>
-				<td>{{x.valor_casa}}</td>
-				<td><input type="radio" name="iCheck" value="2"/>{{x.valor_casa}}</td>
-				<td><input type="radio" name="iCheck" value="2"></td>
-				<td><input type="radio" name="iCheck" value="2">
-				<label>1.2</label></td>
-				<td><input type="radio" name="iCheck" value="2">
-				<label>1.2</label></td>
-				<td><input type="radio" name="iCheck" value="2">
-				<label>1.2</label></td>
-				<td><input type="radio" name="iCheck" value="2">
-				<label>1.2</label></td>
-				<td><input type="radio" name="iCheck" value="2">
-				<label>1.2</label></td>
-				<td><input type="radio" name="iCheck" value="2">
-				<label>1.2</label></td>
-			</tr>
-			
-				</tbody>
-			</table>
-			<button data-target="modal1" class="btn">Apostar</button>
+	<ul class="collapsible popout" data-collapsible="accordion">
+		<li ng-repeat="x in aposta.jogos | orderBy: -data">
+			<div class="collapsible-header">{{x.data | date}} {{x.time[0].descricao_time}} VS {{x.time[1].descricao_time}}</div>
+			<div class="collapsible-body">
+				<ul class="collection with-header">
+					<li class="collection-item">
+						<input type="radio"  id ="valor_casa{{x.id}}"  name="{{x.id}}" value="2"/><label for="valor_casa{{x.id}}">{{x.valor_casa}} apostar <a href="#!" class="secondary-content"><i class="material-icons">send</i></a></label>
+					</li>
+					<li class="collection-item">
+						<input type="radio"  id ="valor_fora{{x.id}}"  name="{{x.id}}" value="2" /><label for="valor_fora{{x.id}}">{{x.valor_fora}}</label>
+					</li>
+					<li class="collection-item">
+						<input type="radio"  id ="valor_empate{{x.id}}"  name="{{x.id}}" value="2"/><label for="valor_empate{{x.id}}">{{x.valor_empate}}</label>
+					</li>
+					<li class="collection-item">
+						<input type="radio"  id ="valor_dupla{{x.id}}"  name="{{x.id}}" value="2"/><label for="valor_dupla{{x.id}}">{{x.valor_dupla}}</label>
+					</li>
+					<li class="collection-item">
+						<input type="radio"  id ="valor_1_2{{x.id}}"  name="{{x.id}}" value="2"/><label for="valor_1_2{{x.id}}">{{x.valor_1_2}}</label> 
+					</li>
+					<li class="collection-item">
+						<input type="radio"  id ="max_gol_2{{x.id}}"  name="{{x.id}}" value="2"/><label for="max_gol_2{{x.id}}">{{x.max_gol_2}}</label>
+					</li>
+					<li class="collection-item">
+						<input type="radio"  id ="min_gol_3{{x.id}}"  name="{{x.id}}" value="2"/><label for="min_gol_3{{x.id}}">{{x.min_gol_3}}</label>
+					</li>
+					<li class="collection-item">
+						<input type="radio"  id ="ambas_gol{{x.id}}"  name="{{x.id}}" value="2"/><label for="ambas_gol{{x.id}}">{{x.ambas_gol}}</label>
+					</li>
 
-			<!-- Modal Structure -->
-			<div id="modal1" class="modal">
-				<div class="modal-content">
-					<h4>Lista dos jogos apostados</h4>
-
-				</div>
-				<div class="modal-footer">
-					<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Confirma</a>
-				</div>
+				</ul>	
 			</div>
+		</li>
+	</ul>
+
+	<button data-target="modal1" class="btn">Apostar</button>
+
+	<!-- Modal Structure -->
+	<div id="modal1" class="modal">
+		<div class="modal-content">
+			<h4>Lista dos jogos apostados</h4>
+
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Confirma</a>
+		</div>
+	</div>
 
 </div>
-<script  type="text/javascript" src="js/zepto.js"></script>
-<script  type="text/javascript" src="js/icheck.js"></script>
+

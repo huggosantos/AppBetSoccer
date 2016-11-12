@@ -30,32 +30,16 @@ app.controller('aposta', function($scope, $http, $routeParams, $location) {
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
   });
-
-  $(document).ready(function(){
-    $('input').each(function(){
-      var self = $(this),
-      label = self.next(),
-      label_text = label.text();
-
-      label.remove();
-      self.iCheck({
-        checkboxClass: 'icheckbox_line-red',
-        radioClass: 'iradio_line-red',
-        insert: '<div class="icheck_line-icon"></div>' + label_text
-      });
-    });
-    $('input').on('ifClicked', function(){
-      $(this).iCheck('uncheck');
-    });
+    $(document).ready(function(){
+    $('.collapsible').collapsible();
   });
-
+ 
   $http.get('http://betsocceroficial.herokuapp.com/aposta').then(function(response) {
   // var json = JSON.stringify(response.data)
 //var json = JSON.parse(jso); 
   // window.localStorage.setItem("ArquivoServidor",response.data);
    $scope.aposta=response.data;
-console.log(response.data[1].ativo);
-console.log(json)
+   $scope.teste=1;
 
 }, function(err) {
   console.log(err);

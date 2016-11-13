@@ -22,10 +22,28 @@ function toTop(){
   }, 800, 'linear');
 }
 
+
 app.controller('controlCollapseible', function($scope) { 
  $(document).ready(function(){
   $('.collapsible').collapsible();
 });
+ var teste;
+ var allRadios = [];
+ var booRadio;
+
+ console.log(1);
+ $scope.check = function () {
+  if(allRadios[teste = $(this).attr('name')]!=null){
+    console.log(2);
+    this.checked = false;
+    booRadio = null;
+    allRadios[teste = $(this).attr('name')] = booRadio;
+  }else{    
+    console.log(3);
+    booRadio = this;
+    allRadios[$(this).attr('name')] = booRadio; 
+  }
+}
 });
 
 var vetor = new Array();
@@ -80,33 +98,16 @@ function dadosCamp(vetor, valor){
   return false;
 }
 
-for(var i in vetor){
-  //console.log(vetor[i]);
-}
-for(var i in vetorHora){
-  console.log("Vet Datas ->>"+vetorHora[i]);
-}
-
-
 $scope.CampEmJogos = function(hora){
   aux=new Array();
-  console.log("View data-> "+hora);
   for(var k in response.data.jogos){
-    console.log("--------------------");
     if(hora==response.data.jogos[k].data){
-      console.log("Json data -> "+response.data.jogos[k].data);
       aux.push(response.data.jogos[k].campeonato.descricao_campeonato);
-      console.log("Camp Aux -> "+aux);
       break;
     }
-
   }
   return aux;
 };
-
-for(var i in aux){
-  //console.log(aux[i]);
-}
 
 $scope.campeonatos=vetor;
 $scope.horas=vetorHora;
@@ -120,6 +121,9 @@ $scope.aposta=response.data;
 
 });
 
+app.controller('MainCtrl', ['$scope', function (scope) {
+
+}]); 
 
 app.elememt(document).ready(function(){
   alert("entrei");

@@ -84,17 +84,18 @@ for(var i in vetor){
   //console.log(vetor[i]);
 }
 for(var i in vetorHora){
-  //console.log(vetorHora[i]);
+  console.log("Vet Datas ->>"+vetorHora[i]);
 }
 
 
 $scope.CampEmJogos = function(hora){
+  aux=new Array();
   console.log("View data-> "+hora);
   for(var k in response.data.jogos){
-    console.log("-------------------");
+    console.log("--------------------");
     if(hora==response.data.jogos[k].data){
       console.log("Json data -> "+response.data.jogos[k].data);
-      aux[]=response.data.jogos[k].campeonato.descricao_campeonato;
+      aux.push(response.data.jogos[k].campeonato.descricao_campeonato);
       console.log("Camp Aux -> "+aux);
       break;
     }

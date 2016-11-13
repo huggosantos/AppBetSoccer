@@ -1,60 +1,64 @@
-<br>
-<br>
-<br>
+<br><br><br>
 <div class="row">
-	<table >
+	<table class="pinned" style="z-index: 9999;">
 		<thead>
 			<tr>
-				<th data-field="price" style="background-color:grey;">casa</th>
-				<th data-field="price" style="background-color:#76ff03;">fora</th>
-				<th data-field="price" style="background-color:#b39ddb;">emp</th>
-				<th data-field="price" style="background-color:#e91e63;">dupla</th>
-				<th data-field="price" style="background-color:#eeff41;">gol&frac12;</th>
-				<th data-field="price" style="background-color:#0d47a1;">+2.5</th>
+				<th data-field="price" style="background-color:#f5f5f5;">Casa</th>
+				<th data-field="price" style="background-color:#e8f5e9;">Fora</th>
+				<th data-field="price" style="background-color:#f3e5f5;">Empt</th>
+				<th data-field="price" style="background-color:#fce4ec ">Dupla</th>
+				<th data-field="price" style="background-color:#fff9c4;">Gol&frac12;</th>
+				<th data-field="price" style="background-color:#e3f2fd;">+2.5</th>
 				<th data-field="price" style="background-color:#fff;">-2.5</th>
-				<th data-field="price" style="background-color:#00c853;">ambas</th>
+				<th data-field="price" style="background-color:#dcedc8;">Ambas</th>
 			</tr>
 		</thead>
 
 	</table>
+	<br><br><br>
 
-	<ul class="collapsible popout" data-collapsible="accordion">
-		<li ng-repeat="x in aposta.jogos | orderBy: -data">
-			<div class="collapsible-header">{{x.data | date}} {{x.time[0].descricao_time}} VS {{x.time[1].descricao_time}}</div>
-			<div class="collapsible-body">
-				<ul class="collection with-header">
-					<li class="collection-item">
-						<input type="radio"  id ="valor_casa{{x.id}}"  name="{{x.id}}" value="2"/><label for="valor_casa{{x.id}}">{{x.valor_casa}} apostar <a href="#!" class="secondary-content"><i class="material-icons">send</i></a></label>
-					</li>
-					<li class="collection-item">
-						<input type="radio"  id ="valor_fora{{x.id}}"  name="{{x.id}}" value="2" /><label for="valor_fora{{x.id}}">{{x.valor_fora}}</label>
-					</li>
-					<li class="collection-item">
-						<input type="radio"  id ="valor_empate{{x.id}}"  name="{{x.id}}" value="2"/><label for="valor_empate{{x.id}}">{{x.valor_empate}}</label>
-					</li>
-					<li class="collection-item">
-						<input type="radio"  id ="valor_dupla{{x.id}}"  name="{{x.id}}" value="2"/><label for="valor_dupla{{x.id}}">{{x.valor_dupla}}</label>
-					</li>
-					<li class="collection-item">
-						<input type="radio"  id ="valor_1_2{{x.id}}"  name="{{x.id}}" value="2"/><label for="valor_1_2{{x.id}}">{{x.valor_1_2}}</label> 
-					</li>
-					<li class="collection-item">
-						<input type="radio"  id ="max_gol_2{{x.id}}"  name="{{x.id}}" value="2"/><label for="max_gol_2{{x.id}}">{{x.max_gol_2}}</label>
-					</li>
-					<li class="collection-item">
-						<input type="radio"  id ="min_gol_3{{x.id}}"  name="{{x.id}}" value="2"/><label for="min_gol_3{{x.id}}">{{x.min_gol_3}}</label>
-					</li>
-					<li class="collection-item">
-						<input type="radio"  id ="ambas_gol{{x.id}}"  name="{{x.id}}" value="2"/><label for="ambas_gol{{x.id}}">{{x.ambas_gol}}</label>
-					</li>
+	<div ng-repeat="hora in horas ">
+		<h4 id="texto2">{{hora}}</h4>
+		<div ng-repeat="campeonato in CampEmJogos(hora)"> 
+			<h6 id="texto2">{{campeonato}}</h6>
+			<ul class="collapsible popout" data-collapsible="accordion" ng-controller="controlCollapseible" >
+				<li ng-repeat="x in aposta.jogos | orderBy: -data" ng-if="x.campeonato.descricao_campeonato == campeonato && hora==x.data">
+					<div class="collapsible-header">{{x.data | date}} <b>{{x.time[0].descricao_time}}</b> VS <b>{{x.time[1].descricao_time}}</b></div>
+					<div class="collapsible-body ">
+						<ul class="collection">
+							<li class="collection-item" style="background-color:#f5f5f5;" >
+								<input type="radio"  id ="valor_casa{{x.id}}"  name="{{x.id}}" value="2"/><label style="text-align:center;" for="valor_casa{{x.id}}">&nbsp Valor: <i id="textoNegrito">{{x.valor_casa}}</i> &nbsp &nbsp &nbsp  -- &nbsp &nbsp &nbsp Apostar no time da <i id="textoNegrito">CASA </i></label>
+							</li>
+							<li  class="collection-item" style="background-color:#e8f5e9;">
+								<input type="radio"  id ="valor_fora{{x.id}}"  name="{{x.id}}" value="2" /><label for="valor_fora{{x.id}}">Valor: <i id="textoNegrito">{{x.valor_fora}}</i> -- Apostar no time de <i id="textoNegrito"> FORA </i></label>
+							</li>
+							<li class="collection-item" style="background-color:#f3e5f5 ;">
+								<input type="radio"  id ="valor_empate{{x.id}}"  name="{{x.id}}" value="2"/><label for="valor_empate{{x.id}}">Valor: <i id="textoNegrito">{{x.valor_empate}}</i> -- Apostar no <i id="textoNegrito"> EMPATE </i></label>
+							</li>
+							<li class="collection-item" style="background-color:#fce4ec;">  
+								<input type="radio"  id ="valor_dupla{{x.id}}"  name="{{x.id}}" value="2"/><label for="valor_dupla{{x.id}}">Valor: <i id="textoNegrito">{{x.valor_dupla}}</i> -- Apostar na <i id="textoNegrito"> DUPLA </i></label>
+							</li>
+							<li class="collection-item" style="background-color:#fff9c4;">
+								<input type="radio"  id ="valor_1_2{{x.id}}"  name="{{x.id}}" value="2"/><label for="valor_1_2{{x.id}}">Valor: <i id="textoNegrito">{{x.valor_1_2}}</i> -- Apostar no <i id="textoNegrito"> GOL&frac12; </i></label>
+							</li>
+							<li class="collection-item" style="background-color:#e3f2fd;">
+								<input type="radio"  id ="max_gol_2{{x.id}}"  name="{{x.id}}" value="2"/><label for="max_gol_2{{x.id}}">Valor: <i id="textoNegrito">{{x.max_gol_2}}</i> -- Apostar no <i id="textoNegrito"> +2.5 </i></label>
+							</li>
+							<li class="collection-item" ">
+								<input type="radio"  id ="min_gol_3{{x.id}}"  name="{{x.id}}" value="2"/><label for="min_gol_3{{x.id}}">Valor: <i id="textoNegrito">{{x.min_gol_3}}</i> -- Apostar no <i id="textoNegrito"> -2.5 </i></label>
+							</li>
+							<li class="collection-item" style="background-color:#dcedc8;">
+								<input type="radio"  id ="ambas_gol{{x.id}}"  name="{{x.id}}" value="2"/><label for="ambas_gol{{x.id}}">Valor: <i id="textoNegrito">{{x.ambas_gol}}</i> -- Apostar em <i id="textoNegrito"> AMBAS</i></label>
+							</li>
+						</ul>	
+					</div>
+				</li>
+			</ul>
 
-				</ul>	
-			</div>
-		</li>
-	</ul>
-
+		</div>
+	</div>
+	
 	<button data-target="modal1" class="btn">Apostar</button>
-
 	<!-- Modal Structure -->
 	<div id="modal1" class="modal">
 		<div class="modal-content">

@@ -98,13 +98,20 @@ function dadosCamp(vetor, valor){
   return false;
 }
 
+
 $scope.CampEmJogos = function(hora){
   aux=new Array();
+  console.log("View data-> "+hora);
   for(var k in response.data.jogos){
+    console.log("--------------------");
     if(hora==response.data.jogos[k].data){
-      aux.push(response.data.jogos[k].campeonato.descricao_campeonato);
-      break;
+      console.log("Json data -> "+response.data.jogos[k].data);
+      if(!dadosCamp(aux,response.data.jogos[k].campeonato.descricao_campeonato)){
+        aux.push(response.data.jogos[k].campeonato.descricao_campeonato);
+      }
+      console.log("Camp Aux -> "+aux);
     }
+
   }
   return aux;
 };

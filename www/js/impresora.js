@@ -11,14 +11,13 @@ function imprimirTodosJogos()
 
 }
 function printSomeTestText() {
-  var jogo=window.localStorage.getItem("jsonServidor");
-  alert("TestPrin"+jogo.jogos[1].campeonato.descricao_campeonato);
-
-  window.DatecsPrinter.printText("IMPRIMI POHHA",'ISO-8859-1', 
+  alert("TestPrin"+vetor[1]);
+for(var k in vetor){
+  window.DatecsPrinter.printText(vetor[k],'ISO-8859-1', 
     function() {
       printMyImage();
     }
-    );
+    );}
 }
 function printSomeTestText2() {
   var jogo=window.localStorage.getItem("jsonServidor");

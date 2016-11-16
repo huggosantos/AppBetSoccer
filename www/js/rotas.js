@@ -175,6 +175,22 @@ jsonServidor=response.data;
 
 });
 
+function CampEmJogosPorData(hora){
+  aux=new Array();
+  //console.log("View data-> "+hora);
+  for(var k in jsonServidor.jogos){
+  //console.log("--------------------");
+    if(hora==jsonServidor.jogos[k].data){
+  //console.log("Json data -> "+response.data.jogos[k].data);
+      if(!dadosCamp(aux,jsonServidor.jogos[k].campeonato.descricao_campeonato)){
+        aux.push(jsonServidor.jogos[k].campeonato.descricao_campeonato);
+      }
+  //console.log("Camp Aux -> "+aux);
+    }
+  }
+  return aux;
+};
+
 app.controller('MainCtrl', ['$scope', function (scope) {
 
 }]); 

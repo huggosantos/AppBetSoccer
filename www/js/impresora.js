@@ -26,19 +26,22 @@ return timeFinal;
 
 function printSomeTestText() {
  window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
- window.DatecsPrinter.printText("{b}{h}BETSOCCER{/h}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
+ window.DatecsPrinter.printText("{b}{w}{h}BETSOCCER{/h}{/w}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
  window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
 var vetor;
 for(var datas in vetorHora){
   window.DatecsPrinter.printText(toData(vetorHora[datas])+"{CENTER}{br}",'ISO-8859-1', function(){});
   vetor=CampEmJogosPorData(vetorHora[datas]);
 for(var camp in vetor){
- window.DatecsPrinter.printText("{b}"+vetor[camp]+"{/b}{CENTER}{br}",'ISO-8859-1',  function(){ });
+ window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} ); 
+ window.DatecsPrinter.printText(vetor[camp]+"{CENTER}{br}",'ISO-8859-1',  function(){ });
+ window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
  for(var jg in jsonServidor.jogos){
   if(jsonServidor.jogos[jg].campeonato.descricao_campeonato==vetor[camp] && jsonServidor.jogos[jg].data==vetorHora[datas]){
-    window.DatecsPrinter.printText(toHora(vetorHora[datas])+" "+jsonServidor.jogos[jg].time[0].descricao_time+" {b}VS{/b} "+ jsonServidor.jogos[jg].time[0].descricao_time+"{br}",'ISO-8859-1',  function(){ });
-    window.DatecsPrinter.printText("{s}Dupla Gol1/2 +2.5 -2.5 Ambas {/s}",'ISO-8859-1', function(){});
-    window.DatecsPrinter.printText("{s}"+jsonServidor.jogos[jg].valor_dupla+" "+jsonServidor.jogos[jg].valor_1_2+" "+jsonServidor.jogos[jg].max_gol_2+" "+jsonServidor.jogos[jg].min_gol_3+" "+jsonServidor.jogos[jg].ambas_gol+"{/s}{br}",'ISO-8859-1', function(){});
+    window.DatecsPrinter.printText(toHora(vetorHora[datas])+" "+jsonServidor.jogos[jg].time[0].descricao_time+" {b}VS{/b} "+ jsonServidor.jogos[jg].time[1].descricao_time+"{br}",'ISO-8859-1',  function(){ });
+    window.DatecsPrinter.printText("{s}Casa  Empate  Fora  Dupla  Gol1/2  +2.5  -2.5  Ambas {/s}{br}",'ISO-8859-1', function(){});
+    window.DatecsPrinter.printText("{s}"jsonServidor.jogos[jg].valor_casa+"  "+jsonServidor.jogos[jg].valor_emp+"  "+jsonServidor.jogos[jg].valor_fora+"  "+jsonServidor.jogos[jg].valor_dupla+"  "+jsonServidor.jogos[jg].valor_1_2+"  "+jsonServidor.jogos[jg].max_gol_2+"  "+jsonServidor.jogos[jg].min_gol_3+"  "+jsonServidor.jogos[jg].ambas_gol+"{/s}{br}",'ISO-8859-1', function(){});
+    window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
   
   }
 
@@ -46,7 +49,7 @@ for(var camp in vetor){
 
 }
 }
- window.DatecsPrinter.printText("{br}{br}{br}",'ISO-8859-1', function(){} );
+ window.DatecsPrinter.printText("{br}{br}{br}{br}{br}{br}",'ISO-8859-1', function(){} );
 }
 
 function printSomeTestText2() {

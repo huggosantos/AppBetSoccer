@@ -12,12 +12,22 @@ function imprimirTodosJogos()
 }
 function printSomeTestText() {
   var jogo=window.localStorage.getItem("jsonServidor");
+  alert("TestPrin"+jogo.jogos[1].campeonato.descricao_campeonato);
+
+  window.DatecsPrinter.printText("IMPRIMI POHHA",'ISO-8859-1', 
+    function() {
+      printMyImage();
+    }
+    );
+}
+function printSomeTestText2() {
+  var jogo=window.localStorage.getItem("jsonServidor");
   var campeonatos=window.localStorage.getItem("todosCampeonatos");
   var datas=window.localStorage.getItem("todasDatas");
   for(var k in jogo){
-    window.DatecsPrinter.printText(jogo.jogos[k].campeonato.descricao_campeonato,'ISO-8859-1', function() { 
+     window.DatecsPrinter.printText(jogo.jogos[k].campeonato.descricao_campeonato,'ISO-8859-1', function() { 
       alert("Impreso");
-    },function(erro) { 
+    },function() { 
       alert("Erro ao Imprimir");}
       );
   }

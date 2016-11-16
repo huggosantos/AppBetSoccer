@@ -11,14 +11,21 @@ function imprimirTodosJogos()
 
 }
 function printSomeTestText() {
- window.DatecsPrinter.printText("----------------------------{br}",'ISO-8859-1', function(){} );
- window.DatecsPrinter.printText("{b}BETSOCCER{/b}{CENTER}",'ISO-8859-1', function(){} );
- window.DatecsPrinter.printText("----------------------------{br}",'ISO-8859-1', function(){} );
- for(var k in vetorHora){
-  window.DatecsPrinter.printText(vetor[k]+"{CENTER}",'ISO-8859-1',  function(){ });
-  for(var i in vetor){
+ window.DatecsPrinter.printText("--------------------------------------------{br}",'ISO-8859-1', function(){} );
+ window.DatecsPrinter.printText("{h}BETSOCCER{/h}{CENTER}{br}",'ISO-8859-1', function(){} );
+ window.DatecsPrinter.printText("--------------------------------------------{br}",'ISO-8859-1', function(){} );
+ for(var datas in vetorHora){
+  window.DatecsPrinter.printText(toData(vetorHora[datas])+"{CENTER}",'ISO-8859-1',  function(){ });
+  for(var camp in aux){
+   window.DatecsPrinter.printText("{b}"+aux[camp]+"{/b}{CENTER}",'ISO-8859-1',  function(){ });
+    for(var jg in jsonServidor.jogos){
+      if(jsonServidor.jogos[jg].campeonato.descricao_campeonato==aux[camp] && jsonServidor.jogos[jg].data==vetorHora[datas]){
+        window.DatecsPrinter.printText(vetorHora[datas]+" "+jsonServidor.jogos[jg].time[0].descricao_time+" {b}VS{/b} "+ jsonServidor.jogos[jg].time[0].descricao_time,'ISO-8859-1',  function(){ });
+      }
 
-  }
+    }
+
+ }
 }
 }
 function printSomeTestText2() {

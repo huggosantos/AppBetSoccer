@@ -11,16 +11,17 @@ function imprimirTodosJogos()
 
 }
 function printSomeTestText() {
- window.DatecsPrinter.printText("-------------------------------------------------{br}",'ISO-8859-1', function(){} );
+ window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
  window.DatecsPrinter.printText("{b}{h}BETSOCCER{/h}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
- window.DatecsPrinter.printText("-------------------------------------------------{br}",'ISO-8859-1', function(){} );
+ window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
+ 
  for(var datas in vetorHora){
-  window.DatecsPrinter.printText(vetorHora[datas]+"{CENTER}",'ISO-8859-1', function(){});
-for(var camp in aux){
- window.DatecsPrinter.printText("{b}"+aux[camp]+"{/b}{CENTER}",'ISO-8859-1',  function(){ });
+  window.DatecsPrinter.printText(vetorHora[datas]+"{CENTER}{br}",'ISO-8859-1', function(){});
+for(var camp in vetor){
+ window.DatecsPrinter.printText("{b}"+vetor[camp]+"{/b}{CENTER}",'ISO-8859-1',  function(){ });
  for(var jg in jsonServidor.jogos){
-  if(jsonServidor.jogos[jg].campeonato.descricao_campeonato==aux[camp] && jsonServidor.jogos[jg].data==vetorHora[datas]){
-    window.DatecsPrinter.printText(vetorHora[datas]+" "+jsonServidor.jogos[jg].time[0].descricao_time+" {b}VS{/b} "+ jsonServidor.jogos[jg].time[0].descricao_time,'ISO-8859-1',  function(){ });
+  if(jsonServidor.jogos[jg].campeonato.descricao_campeonato==vetor[camp] && jsonServidor.jogos[jg].data==vetorHora[datas]){
+    window.DatecsPrinter.printText(vetorHora[datas]+" "+jsonServidor.jogos[jg].time[0].descricao_time+" {b}VS{/b} "+ jsonServidor.jogos[jg].time[0].descricao_time+"{br}",'ISO-8859-1',  function(){ });
   }
 
 }
@@ -28,6 +29,7 @@ for(var camp in aux){
 }
 }
 }
+
 function printSomeTestText2() {
   var jogo=window.localStorage.getItem("jsonServidor");
   var campeonatos=window.localStorage.getItem("todosCampeonatos");

@@ -24,39 +24,51 @@ function toTop(){
 
 var jogosIdAposta = new Array();
 var palpites = new Array();
-
 var contador=0;
 
 app.controller('controlCollapseible', function($scope) { 
  $(document).ready(function(){
   $('.collapsible').collapsible();
 });
- var teste;
  var allRadios = new Array();
- var booRadio;
 
+   // Função para deschecar um radio
  $scope.check = function (id,p) {
+   // Verifica se a possição do input atual está null
   if(allRadios[$(this).attr('name')]!=null){
-  	
-    console.log("Removendo Do Array->>"+p);
-    jogosIdAposta[jogosIdAposta.indexOf(id)]=null;
+    
+    console.log("Removendo Jogo "+id+" E Palpite"+p);
+   // Remove o id do jogo do array
+    jogosIdAposta[jogosIdAposta.indexOf(id)]=null; 
+   // Remove o um palpite do array
     palpites[palpites.indexOf(p)]=null;
+   // Seta o input.checked para false 
     this.checked = false;
-    booRadio = null;
-    allRadios[$(this).attr('name')] = booRadio;
+   // Seta a posição atual do input para null 
+    allRadios[$(this).attr('name')] = null;
   }else{    
-  	jogosIdAposta[contador]=id;
-  	palpites[contador]=p;
+    jogosIdAposta[contador]=id;
+    palpites[contador]=p;
     contador++;
-    console.log("Adicionando No Array ->>"+p);
-    booRadio = this;
-    allRadios[$(this).attr('name')] = booRadio; 
+    allRadios[$(this).attr('name')] = this;
+    //console.log(MontarJson(jogosIdAposta,palpites));
   }
-  console.log("Imprimindo Vetor com Apostas");
+    console.log("Imprimindo Vetor com Apostas");
   for (var i in jogosIdAposta) {
-  	console.log(jogosIdAposta[i]);
-  	console.log(palpites[i]);
-  	}
+    //console.log("Id do Jogo......:"+jogosIdAposta[i]);
+    //console.log("Valor do Palpite:"+palpites[i]);
+    console.log(JSON.stringify(palpites));
+    }
+}
+
+function MontarJson(j,p){
+      var dadosAposta = JSON.stringify({
+      
+      jogos : j,
+      palpites : p
+    
+  });
+ return dadosAposta;
 }
 
 });
@@ -64,7 +76,6 @@ app.controller('controlCollapseible', function($scope) {
 var vetor = new Array();
 var vetorHora = new Array();
 var aux = new Array();
-var count=0;
 
 app.controller('aposta', function($scope, $http, $routeParams, $location) {  
   toTop();
@@ -93,6 +104,25 @@ for(var k in response.data.jogos){
       vetorHora.push(response.data.jogos[k].data);
     }
   }
+}
+$scope.toData = function(dateTime) {
+
+var dateTime = dateTime.split(" ");//dateTime[0] = date, dateTime[1] = time
+
+var date = dateTime[0].split("-");
+var dataFinal = date[2]+"/"+date[1]+"/"+date[0];
+
+return dataFinal;   
+}
+
+$scope.toHora = function(Time) {
+var Time = Time.split(" ");//dateTime[0] = date, dateTime[1] = time
+
+var time = Time[1].split(":");
+var timeFinal = time[0]+":"+time[1];
+
+return timeFinal;
+    
 }
 
 function dadosHora(vetorHora,valor2){

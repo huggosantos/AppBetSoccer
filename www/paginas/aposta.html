@@ -18,13 +18,13 @@
 	<br><br><br>
 
 	<div ng-repeat="hora in horas ">
-		<h4 id="texto2">{{hora}}</h4>
+		<h4 id="texto2">{{toData(hora)}}</h4>
 		<div ng-repeat="campeonato in CampEmJogos(hora)"> 
 			<h6 id="texto2">{{campeonato}}</h6>
 			<ul class="collapsible popout" data-collapsible="accordion" ng-controller="controlCollapseible" 
 			ng-repeat="x in aposta.jogos | orderBy: -data" ng-if="x.campeonato.descricao_campeonato == campeonato && hora==x.data">
 				<li>
-					<div class="collapsible-header">{{x.data | date}} <b>{{x.time[0].descricao_time}}</b> VS <b>{{x.time[1].descricao_time}}</b></div>
+					<div class="collapsible-header">{{toHora(x.data)}} <b>{{x.time[0].descricao_time}}</b> VS <b>{{x.time[1].descricao_time}}</b></div>
 					<div class="collapsible-body ">
 						<ul class="collection">
 							<li class="collection-item" style="background-color:#f5f5f5;" >

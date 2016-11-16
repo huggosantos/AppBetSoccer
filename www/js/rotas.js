@@ -134,14 +134,7 @@ function dadosHora(vetorHora,valor2){
   }
   return false;
 }
-function dadosCamp(vetor, valor){
-  for(var i in vetor){
-    if(vetor[i]==valor){
-      return true;
-    }
-  }
-  return false;
-}
+
 
 
 $scope.CampEmJogos = function(hora){
@@ -174,6 +167,15 @@ jsonServidor=response.data;
 
 
 });
+
+function dadosCamp(vetor, valor){
+  for(var i in vetor){
+    if(vetor[i]==valor){
+      return true;
+    }
+  }
+  return false;
+}
 
 function CampEmJogosPorData(hora){
   aux=new Array();

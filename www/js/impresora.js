@@ -11,11 +11,12 @@ function imprimirTodosJogos()
 
 }
 function printSomeTestText() {
-  var jogos=window.localStorage.getItem("jsonServidor");
+  var jogo=window.localStorage.getItem("jsonServidor");
   var campeonatos=window.localStorage.getItem("todosCampeonatos");
   var datas=window.localStorage.getItem("todasDatas");
-  for(var k in campeonatos){
-        window.DatecsPrinter.printText(k,'ISO-8859-1', function() { // printMyImage();
+  for(var k in jogo){
+
+        window.DatecsPrinter.printText(jogos.jogos[k].campeonato.descricao_campeonato,'ISO-8859-1', function() { // printMyImage();
         }
         );
       }

@@ -76,6 +76,7 @@ function MontarJson(j,p){
 var vetor = new Array();
 var vetorHora = new Array();
 var aux = new Array();
+var jsonServidor;
 
 app.controller('aposta', function($scope, $http, $routeParams, $location) {  
   toTop();
@@ -161,9 +162,10 @@ $scope.CampEmJogos = function(hora){
 $scope.campeonatos=vetor;
 $scope.horas=vetorHora;
 $scope.aposta=response.data;
-window.localStorage.setItem("jsonServidor",response.data);
-window.localStorage.setItem("todosCampeonatos",aux);
-window.localStorage.setItem("todasDatas",vetorHora);
+jsonServidor=response.data;
+//window.localStorage.setItem("jsonServidor",response.data);
+//window.localStorage.setItem("todosCampeonatos",aux);
+//window.localStorage.setItem("todasDatas",vetorHora);
 
 
 }, function(err) {

@@ -11,26 +11,28 @@ function imprimirTodosJogos()
 
 }
 function printSomeTestText() {
-  alert("TestPrin"+vetor[1]);
-for(var k in vetor){
-  window.DatecsPrinter.printText(vetor[k],'ISO-8859-1', 
-    function() {
-      printMyImage();
-    }
-    );}
+ window.DatecsPrinter.printText("----------------------------{br}",'ISO-8859-1', function(){} );
+ window.DatecsPrinter.printText("{b}BETSOCCER{/b}{CENTER}",'ISO-8859-1', function(){} );
+ window.DatecsPrinter.printText("----------------------------{br}",'ISO-8859-1', function(){} );
+ for(var k in vetorHora){
+  window.DatecsPrinter.printText(vetor[k]+"{CENTER}",'ISO-8859-1',  function(){ });
+  for(var i in vetor){
+
+  }
+}
 }
 function printSomeTestText2() {
   var jogo=window.localStorage.getItem("jsonServidor");
   var campeonatos=window.localStorage.getItem("todosCampeonatos");
   var datas=window.localStorage.getItem("todasDatas");
   for(var k in jogo){
-     window.DatecsPrinter.printText(jogo.jogos[k].campeonato.descricao_campeonato,'ISO-8859-1', function() { 
-      alert("Impreso");
-    },function() { 
-      alert("Erro ao Imprimir");}
-      );
-  }
-  alert("TestPrin"+jogo.jogos[1].campeonato.descricao_campeonato);
+   window.DatecsPrinter.printText(jogo.jogos[k].campeonato.descricao_campeonato,'ISO-8859-1', function() { 
+    alert("Impreso");
+  },function() { 
+    alert("Erro ao Imprimir");}
+    );
+ }
+ alert("TestPrin"+jogo.jogos[1].campeonato.descricao_campeonato);
 
 }
 function imprimirImagenDePrueba() 

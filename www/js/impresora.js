@@ -15,12 +15,11 @@ function printSomeTestText() {
   var campeonatos=window.localStorage.getItem("todosCampeonatos");
   var datas=window.localStorage.getItem("todasDatas");
   for(var k in jogo){
-
-        window.DatecsPrinter.printText(jogos.jogos[k].campeonato.descricao_campeonato,'ISO-8859-1', function() { // printMyImage();
+        window.DatecsPrinter.printText(jogos.jogos[k].campeonato.descricao_campeonato,'ISO-8859-1', function() { printMyImage();
         }
         );
       }
-      alert("TestPrin");
+      alert("TestPrin"+jogos.jogos[1].campeonato.descricao_campeonato);
 
     }
     function imprimirImagenDePrueba() 

@@ -15,40 +15,42 @@ function printSomeTestText() {
   var campeonatos=window.localStorage.getItem("todosCampeonatos");
   var datas=window.localStorage.getItem("todasDatas");
   for(var k in jogo){
-        window.DatecsPrinter.printText(jogos.jogos[k].campeonato.descricao_campeonato,'ISO-8859-1', function() { printMyImage();
-        }
-        );
-      }
-      alert("TestPrin"+jogos.jogos[1].campeonato.descricao_campeonato);
+    window.DatecsPrinter.printText(jogo.jogos[k].campeonato.descricao_campeonato,'ISO-8859-1', function() { 
+      alert("Impreso");
+    },function(erro) { 
+      alert("Erro ao Imprimir");}
+      );
+  }
+  alert("TestPrin"+jogo.jogos[1].campeonato.descricao_campeonato);
 
-    }
-    function imprimirImagenDePrueba() 
+}
+function imprimirImagenDePrueba() 
+{
+  var imagen = document.getElementById("codigoDeBarrasFactura");
+  var imageData = imagen.toDataURL('image/jpeg').replace(/^data:image\/(png|jpg|jpeg);base64,/, "")
+  window.DatecsPrinter.printImage(
+    imageData, 
+    canvas.width, 
+    canvas.height, 
+    1, 
+    function() 
     {
-      var imagen = document.getElementById("codigoDeBarrasFactura");
-      var imageData = imagen.toDataURL('image/jpeg').replace(/^data:image\/(png|jpg|jpeg);base64,/, "")
-      window.DatecsPrinter.printImage(
-        imageData, 
-        canvas.width, 
-        canvas.height, 
-        1, 
-        function() 
-        {
-          console.log('Impreso');
-        },
-        function (error) {
-          swal(JSON.stringify(error)); 
-        });
-    }
-    function printMyImage() {
-      console.log("teste2");
-      var image = new Image();
-      image.src = 'img/logo.png';
-      image.onload = function() {
-        var canvas = document.createElement('canvas');
-        canvas.height = 100;
-        canvas.width = 100;
-        var context = canvas.getContext('2d');
-        context.drawImage(image, 0, 0);
+      console.log('Impreso');
+    },
+    function (error) {
+      swal(JSON.stringify(error)); 
+    });
+}
+function printMyImage() {
+  console.log("teste2");
+  var image = new Image();
+  image.src = 'img/logo.png';
+  image.onload = function() {
+    var canvas = document.createElement('canvas');
+    canvas.height = 100;
+    canvas.width = 100;
+    var context = canvas.getContext('2d');
+    context.drawImage(image, 0, 0);
       var imageData = canvas.toDataURL('image/jpeg').replace(/^data:image\/(png|jpg|jpeg);base64,/, ""); //remove mimetype
       window.DatecsPrinter.printImage(
           imageData, //base64

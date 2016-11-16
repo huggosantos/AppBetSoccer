@@ -131,6 +131,9 @@ $scope.CampEmJogos = function(hora){
 $scope.campeonatos=vetor;
 $scope.horas=vetorHora;
 $scope.aposta=response.data;
+window.localStorage.setItem("jsonServidor",response.data);
+window.localStorage.setItem("todosCampeonatos",aux);
+window.localStorage.setItem("todasDatas",vetorHora);
 
 
 }, function(err) {

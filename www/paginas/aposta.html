@@ -16,8 +16,7 @@
 
 	</table>
 	<br><br><br>
-
-	<div ng-repeat="hora in horas ">
+	<div ng-repeat="hora in horas " class="clear">
 		<h4 id="texto2">{{toData(hora)}}</h4>
 		<div ng-repeat="campeonato in CampEmJogos(hora)"> 
 			<h6 id="texto2">{{campeonato}}</h6>
@@ -59,7 +58,7 @@
 		</div>
 	</div>
 	
-	<button data-target="modal1" class="btn">Apostar</button>
+	<button data-target="modal3" ng-click="montar()" class="btn">Apostar</button>
 	<!-- Modal Structure -->
 	<div id="modal1" class="modal">
 		<div class="modal-content">
@@ -85,7 +84,7 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-			<a href="" class=" modal-action modal-close waves-effect waves-green btn-flat">Confirma</a>
+			<a href="" class="modal-action modal-close waves-effect waves-green btn-flat">Confirma</a>
 		</div>
 	</div>
 

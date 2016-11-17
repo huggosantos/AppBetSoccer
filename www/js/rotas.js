@@ -38,9 +38,13 @@ app.controller('controlCollapseible', function($scope) {
   if(allRadios[$(this).attr('name')]!=null){
     var indice = jogosIdAposta.indexOf(id);
     console.log("Removendo Jogo "+id+" E Palpite"+p);   //Remove o id do jogo do array
-    console.log("nulo"+ jogosIdAposta.indexOf(id));
-    jogosIdAposta[indice]=null;      //Remove o um palpite do array
-    palpites[indice]=null;                 //Seta o input.checked para false 
+    //console.log("nulo"+ jogosIdAposta.indexOf(id));
+    jogosIdAposta.splice(indice,1);
+    palpites.splice(indice,1);
+    contador--;
+    console.log("decrementando contador -1:"+contador);
+    //jogosIdAposta[indice]=null;      //Remove o um palpite do array
+    //palpites[indice]=null;                 //Seta o input.checked para false 
     this.checked = false;                               //Seta a posição atual do input para null 
     allRadios[$(this).attr('name')] = null;
   }else{   
@@ -48,18 +52,22 @@ app.controller('controlCollapseible', function($scope) {
     jogosIdAposta[contador]=id;
     palpites[contador]=p;
     contador++;
+    console.log("Incrementando contador +1:"+contador);
     allRadios[$(this).attr('name')] = this;
   }
     console.log("Imprimindo Vetor com Apostas");
   for (var i in jogosIdAposta) {
-    if (jogosIdAposta[i] != null) {
-    console.log("Id do Jogo......:"+jogosIdAposta[i].id);
+    //if (jogosIdAposta[i] != null) {
+    console.log("Id do Jogo......:"+jogosIdAposta[i]);
     console.log("Valor do Palpite:"+palpites[i]);
-    }else{
-      console.log("nulo "+ jogosIdAposta.indexOf(null));
-    }
+    //}else{
+      //console.log("nulo "+ jogosIdAposta.indexOf(null));
+    //}
   }
   
+  $scope.montar = function(){
+    console.log(montarJson(jogosIdAposta,palpites));
+  }
 }
 
 function montarJson(j,p){
@@ -135,9 +143,6 @@ function dadosHora(vetorHora,valor2){
   }
   return false;
 }
-
-
-
 $scope.CampEmJogos = function(hora){
   aux=new Array();
   //console.log("View data-> "+hora);
@@ -153,6 +158,7 @@ $scope.CampEmJogos = function(hora){
   }
   return aux;
 };
+
 $scope.campeonatos=vetor;
 $scope.horas=vetorHora;
 $scope.aposta=response.data;

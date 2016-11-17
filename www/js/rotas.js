@@ -36,38 +36,39 @@ app.controller('controlCollapseible', function($scope) {
  $scope.check = function (id,p) {
    // Verifica se a possição do input atual está null
   if(allRadios[$(this).attr('name')]!=null){
-    
-    console.log("Removendo Jogo "+id+" E Palpite"+p);
-   // Remove o id do jogo do array
-    jogosIdAposta[jogosIdAposta.indexOf(id)]=null; 
-   // Remove o um palpite do array
-    palpites[palpites.indexOf(p)]=null;
-   // Seta o input.checked para false 
-    this.checked = false;
-   // Seta a posição atual do input para null 
+    var indice = jogosIdAposta.indexOf(id);
+    console.log("Removendo Jogo "+id+" E Palpite"+p);   //Remove o id do jogo do array
+    console.log("nulo"+ jogosIdAposta.indexOf(id));
+    jogosIdAposta[indice]=null;      //Remove o um palpite do array
+    palpites[indice]=null;                 //Seta o input.checked para false 
+    this.checked = false;                               //Seta a posição atual do input para null 
     allRadios[$(this).attr('name')] = null;
-  }else{    
+  }else{   
+    console.log("Adcionando Jogo "+id+" E Palpite "+p); 
     jogosIdAposta[contador]=id;
     palpites[contador]=p;
     contador++;
     allRadios[$(this).attr('name')] = this;
-    //console.log(MontarJson(jogosIdAposta,palpites));
   }
     console.log("Imprimindo Vetor com Apostas");
   for (var i in jogosIdAposta) {
-    //console.log("Id do Jogo......:"+jogosIdAposta[i]);
-    //console.log("Valor do Palpite:"+palpites[i]);
-    console.log(JSON.stringify(palpites));
+    if (jogosIdAposta[i] != null) {
+    console.log("Id do Jogo......:"+jogosIdAposta[i].id);
+    console.log("Valor do Palpite:"+palpites[i]);
+    }else{
+      console.log("nulo "+ jogosIdAposta.indexOf(null));
     }
+  }
+  
 }
 
-function MontarJson(j,p){
-      var dadosAposta = JSON.stringify({
+function montarJson(j,p){
+      var dadosAposta = JSON.stringify({aposta:{
       
       jogos : j,
-      palpites : p
+      valorPalpite : p
     
-  });
+  }});
  return dadosAposta;
 }
 

@@ -7,9 +7,13 @@ app.config(function($routeProvider) {
     templateUrl: 'paginas/aposta.html',
     controller: 'aposta'
   })
+  .when('/dadosCambista', {
+    templateUrl: 'paginas/dadosCambista.html',
+    controller: 'dadosCambista'
+  })
   .otherwise('/aposta', {
    templateUrl: 'templates/aposta.html',
-   controller: 'home'
+   controller: 'aposta'
  });
 }).run(function() {
     //remove 300ms delay touch
@@ -174,6 +178,11 @@ jsonServidor=response.data;
 
 
 });
+
+
+app.controller('dadosCambista', function($scope, $http, $routeParams, $location) { 
+ toTop();
+}); 
 
 function dadosCamp(vetor, valor){
   for(var i in vetor){

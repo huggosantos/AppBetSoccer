@@ -18,22 +18,27 @@
 
   <nav class="pinned" style="z-index:9999;">
     <div class="nav-wrapper green ">
-      <a class=" left brand-logo">BetSoccer</a>
+      <a href="#aposta" class="left brand-logo">BetSoccer</a>
       <ul class="right">
        <li><a data-target="modal2" ><i class="material-icons">person_add</i></a></li>
        <li><a href="#aposta"  data-target="modal1" ><i class="material-icons">add_circle</i></a></li>
        <li><a onclick="imprimirTodosJogos()"><i class="material-icons">print</i></a></li>
-       <li><a href="#aposta"><i class="material-icons">refresh</i></a></li>
-       <li><a ><i class="material-icons">more_vert</i></a></li>
+       <li><a href="#aposta" onclick="location.reload();"><i class="material-icons">refresh</i></a></li>
+       <li><a data-activates='dropdown1' class='dropdown-button' ><i class="material-icons">more_vert</i></a></li>
      </ul>
    </div>
  </nav>
-
+        
  <div class="content" id="divDinamica">
    <ng-view></ng-view>
  </div>
 
-
+  <!-- Dropdown Structure -->
+  <ul id='dropdown1' class='dropdown-content' style="z-index:99999;">
+    <li><a href="#dadosCambista">Apuração</a></li>
+    <li class="divider"></li>
+  
+  </ul>
 
  <!-- Links && scripts -->
  <script type="text/javascript" src="js/jquery.js"></script>

@@ -1,92 +1,89 @@
 <br><br><br>
 <div class="row">
-	<table class="pinned" style="z-index: 999;">
-		<thead>
-			<tr>
-				<th data-field="price" style="background-color:#f5f5f5;">Casa</th>
-				<th data-field="price" style="background-color:#e8f5e9;">Fora</th>
-				<th data-field="price" style="background-color:#f3e5f5;">Empt</th>
-				<th data-field="price" style="background-color:#fce4ec ">Dupla</th>
-				<th data-field="price" style="background-color:#fff9c4;">Gol&frac12;</th>
-				<th data-field="price" style="background-color:#e3f2fd;">+2.5</th>
-				<th data-field="price" style="background-color:#fff;">-2.5</th>
-				<th data-field="price" style="background-color:#dcedc8;">Ambas</th>
-			</tr>
-		</thead>
+    <table class="pinned" style="z-index: 9999; top:57px;">
+        <thead>
+            <tr>
+                <th data-field="price" style="background-color:#f5f5f5;">Casa</th>
+                <th data-field="price" style="background-color:#e8f5e9;">Fora</th>
+                <th data-field="price" style="background-color:#f3e5f5;">Empt</th>
+                <th data-field="price" style="background-color:#fce4ec ">Dupla</th>
+                <th data-field="price" style="background-color:#fff9c4;">Gol&frac12;</th>
+                <th data-field="price" style="background-color:#e3f2fd;">+2.5</th>
+                <th data-field="price" style="background-color:#fff;">-2.5</th>
+                <th data-field="price" style="background-color:#dcedc8;">Ambas</th>
+            </tr>
+        </thead>
 
-	</table>
-	<br><br><br>
-	<div ng-repeat="hora in horas " class="clear">
-		<h4 id="texto2">{{toData(hora)}}</h4>
-		<div ng-repeat="campeonato in CampEmJogos(hora)"> 
-			<h6 id="texto2">{{campeonato}}</h6>
-			<ul class="collapsible popout" data-collapsible="accordion" ng-controller="controlCollapseible" 
-			ng-repeat="x in aposta.jogos | orderBy: -data" ng-if="x.campeonato.descricao_campeonato == campeonato && hora==x.data">
-			<li>
-				<div class="collapsible-header">{{toHora(x.data)}} <b>{{x.time[0].descricao_time}}</b> VS <b>{{x.time[1].descricao_time}}</b></div>
-				<div class="collapsible-body ">
-					<ul class="collection">
-						<li class="collection-item" style="background-color:#f5f5f5;" >
-							<input type="radio" ng-model="checked" ng-click="check(x.id,x.valor_casa)" id="valor_casa{{x.id}}" name="{{x.id}}" value="{{x.valor_casa}}"/><label style="text-align:center;" for="valor_casa{{x.id}}">&nbsp Valor: <i id="textoNegrito">{{x.valor_casa}}</i> &nbsp &nbsp &nbsp  -- &nbsp &nbsp &nbsp Apostar no time da <i id="textoNegrito">CASA </i></label>
-						</li>
-						<li  class="collection-item" style="background-color:#e8f5e9;">
-							<input type="radio" ng-model="checked" ng-click="check(x.id,x.valor_fora)" id="valor_fora{{x.id}}" name="{{x.id}}" value="{{x.valor_fora}}" /><label for="valor_fora{{x.id}}">Valor: <i id="textoNegrito">{{x.valor_fora}}</i> -- Apostar no time de <i id="textoNegrito"> FORA </i></label>
-						</li>
-						<li class="collection-item" style="background-color:#f3e5f5 ;">
-							<input type="radio" ng-model="checked" ng-click="check(x.id,x.valor_empate)" id="valor_empate{{x.id}}" name="{{x.id}}" value="{{x.valor_empate}}"/><label for="valor_empate{{x.id}}">Valor: <i id="textoNegrito">{{x.valor_empate}}</i> -- Apostar no <i id="textoNegrito"> EMPATE </i></label>
-						</li>
-						<li class="collection-item" style="background-color:#fce4ec;">  
-							<input type="radio" ng-model="checked" ng-click="check(x.id,x.valor_dupla)" id="valor_dupla{{x.id}}" name="{{x.id}}" value="{{x.valor_dupla}}"/><label for="valor_dupla{{x.id}}">Valor: <i id="textoNegrito">{{x.valor_dupla}}</i> -- Apostar na <i id="textoNegrito"> DUPLA </i></label>
-						</li>
-						<li class="collection-item" style="background-color:#fff9c4;">
-							<input type="radio" ng-model="checked" ng-click="check(x.id,x.valor_1_2)" id="valor_1_2{{x.id}}" name="{{x.id}}" value="{{x.valor_1_2}}"/><label for="valor_1_2{{x.id}}">Valor: <i id="textoNegrito">{{x.valor_1_2}}</i> -- Apostar no <i id="textoNegrito"> GOL&frac12; </i></label>
-						</li>
-						<li class="collection-item" style="background-color:#e3f2fd;">
-							<input type="radio" ng-model="checked" ng-click="check(x.id,x.max_gol_2)" id="max_gol_2{{x.id}}" name="{{x.id}}" value="{{x.max_gol_2}}"/><label for="max_gol_2{{x.id}}">Valor: <i id="textoNegrito">{{x.max_gol_2}}</i> -- Apostar no <i id="textoNegrito"> +2.5 </i></label>
-						</li>
-						<li class="collection-item">
-							<input type="radio" ng-model="checked" ng-click="check(x.id,x.min_gol_3)" id="min_gol_3{{x.id}}" name="{{x.id}}" value="{{x.min_gol_3}}"/><label for="min_gol_3{{x.id}}">Valor: <i id="textoNegrito">{{x.min_gol_3}}</i> -- Apostar no <i id="textoNegrito"> -2.5 </i></label>
-						</li>
-						<li class="collection-item" style="background-color:#dcedc8;">
-							<input type="radio" ng-model="checked" ng-click="check(x.id,x.ambas_gol)" id="ambas_gol{{x.id}}" name="{{x.id}}" value="{{x.ambas_gol}}"/><label for="ambas_gol{{x.id}}">Valor: <i id="textoNegrito">{{x.ambas_gol}}</i> -- Apostar em <i id="textoNegrito"> AMBAS</i></label>
-						</li>
-					</ul>	
-				</div>
-			</li>
-		</ul>
+    </table>
+    <br><br><br>
+    <div ng-repeat="hora in horas " class="clear">
+        <h4 id="texto2">{{toData(hora)}}</h4>
+        <div ng-repeat="campeonato in CampEmJogos(hora)">
+            <h6 id="texto2">{{campeonato}}</h6>
+            <ul class="collapsible popout" data-collapsible="accordion" ng-controller="controlCollapseible" ng-repeat="x in aposta.jogos | orderBy: -data" ng-if="x.campeonato.descricao_campeonato == campeonato && hora==x.data">
+                <li>
+                    <div class="collapsible-header">{{toHora(x.data)}} <b>{{x.time[0].descricao_time}}</b> VS <b>{{x.time[1].descricao_time}}</b></div>
+                    <div class="collapsible-body ">
+                        <ul class="collection">
+                            <li class="collection-item" style="background-color:#f5f5f5;">
+                                <input type="radio" ng-model="checked" ng-click="check(x,x.valor_casa)" id="valor_casa{{x.id}}" name="{{x.id}}" value="{{x.valor_casa}}" /><label style="text-align:center;" for="valor_casa{{x.id}}">&nbsp Valor: <i id="textoNegrito">{{x.valor_casa}}</i> &nbsp &nbsp &nbsp  -- &nbsp &nbsp &nbsp Apostar no time da <i id="textoNegrito">CASA </i></label>
+                            </li>
+                            <li class="collection-item" style="background-color:#e8f5e9;">
+                                <input type="radio" ng-model="checked" ng-click="check(x,x.valor_fora)" id="valor_fora{{x.id}}" name="{{x.id}}" value="{{x.valor_fora}}" /><label for="valor_fora{{x.id}}">Valor: <i id="textoNegrito">{{x.valor_fora}}</i> -- Apostar no time de <i id="textoNegrito"> FORA </i></label>
+                            </li>
+                            <li class="collection-item" style="background-color:#f3e5f5 ;">
+                                <input type="radio" ng-model="checked" ng-click="check(x,x.valor_empate)" id="valor_empate{{x.id}}" name="{{x.id}}" value="{{x.valor_empate}}" /><label for="valor_empate{{x.id}}">Valor: <i id="textoNegrito">{{x.valor_empate}}</i> -- Apostar no <i id="textoNegrito"> EMPATE </i></label>
+                            </li>
+                            <li class="collection-item" style="background-color:#fce4ec;">
+                                <input type="radio" ng-model="checked" ng-click="check(x,x.valor_dupla)" id="valor_dupla{{x.id}}" name="{{x.id}}" value="{{x.valor_dupla}}" /><label for="valor_dupla{{x.id}}">Valor: <i id="textoNegrito">{{x.valor_dupla}}</i> -- Apostar na <i id="textoNegrito"> DUPLA </i></label>
+                            </li>
+                            <li class="collection-item" style="background-color:#fff9c4;">
+                                <input type="radio" ng-model="checked" ng-click="check(x,x.valor_1_2)" id="valor_1_2{{x.id}}" name="{{x.id}}" value="{{x.valor_1_2}}" /><label for="valor_1_2{{x.id}}">Valor: <i id="textoNegrito">{{x.valor_1_2}}</i> -- Apostar no <i id="textoNegrito"> GOL&frac12; </i></label>
+                            </li>
+                            <li class="collection-item" style="background-color:#e3f2fd;">
+                                <input type="radio" ng-model="checked" ng-click="check(x,x.max_gol_2)" id="max_gol_2{{x.id}}" name="{{x.id}}" value="{{x.max_gol_2}}" /><label for="max_gol_2{{x.id}}">Valor: <i id="textoNegrito">{{x.max_gol_2}}</i> -- Apostar no <i id="textoNegrito"> +2.5 </i></label>
+                            </li>
+                            <li class="collection-item">
+                                <input type="radio" ng-model="checked" ng-click="check(x,x.min_gol_3)" id="min_gol_3{{x.id}}" name="{{x.id}}" value="{{x.min_gol_3}}" /><label for="min_gol_3{{x.id}}">Valor: <i id="textoNegrito">{{x.min_gol_3}}</i> -- Apostar no <i id="textoNegrito"> -2.5 </i></label>
+                            </li>
+                            <li class="collection-item" style="background-color:#dcedc8;">
+                                <input type="radio" ng-model="checked" ng-click="check(x,x.ambas_gol)" id="ambas_gol{{x.id}}" name="{{x.id}}" value="{{x.ambas_gol}}" /><label for="ambas_gol{{x.id}}">Valor: <i id="textoNegrito">{{x.ambas_gol}}</i> -- Apostar em <i id="textoNegrito"> AMBAS</i></label>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
 
-	</div>
-</div>
+        </div>
+    </div>
+    <button ng-controller="controlCollapseible" ng-click="enviar()" class="btn">Apostar</button>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Lista dos jogos apostados</h4>
 
-<button data-target="modal3" ng-click="montar()" class="btn">Apostar</button>
-<!-- Modal Structure -->
-<div id="modal1" class="modal bottom-sheet">
-	<div class="modal-content">
-		<h4>Lista dos jogos apostados</h4>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Confirma</a>
+        </div>
+    </div>
+    <div id="modal2" class="modal bottom-sheet">
+        <div class="modal-content">
+            <h4>Adicionar Apostador</h4>
+            <div class="input-field col s6">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="icon_prefix" ng-model="nome" type="text" class="validate">
+                <label for="icon_prefix">Nome do Apostador</label>
+            </div>
+            <div class="input-field col s6">
+                <i class="material-icons prefix">attach_money</i>
+                <input id="icon_telephone" ng-model="valor" type="number" class="validate">
+                <label for="icon_telephone">Valor Aposta</label>
+            </div>
 
-	</div>
-	<div class="modal-footer">
-		<a data-target="modal4" class=" modal-action modal-close waves-effect waves-green btn-flat">Confirma</a>
-	</div>
-</div>
-
-<div id="modal2" class="modal bottom-sheet">
-	<div class="modal-content">
-		<h4>Adicionar Apostador</h4>
-		<div class="input-field col s6">
-			<i class="material-icons prefix">account_circle</i>
-			<input id="icon_prefix" type="text" class="validate">
-			<label for="icon_prefix">Nome do Apostador</label>
-		</div>
-		<div class="input-field col s6">
-			<i class="material-icons prefix">attach_money</i>
-			<input id="icon_telephone" type="tel" class="validate">
-			<label for="icon_telephone">Valor Aposta</label>
-		</div>
-	</div>
-</div>
-
-<div id="modal4" class="modal" width="100" style="width:300px;">
+        </div>
+    </div>
+    <div id="modal4" class="modal" width="100" style="width:300px;">
 	<div class="modal-content">
 		<div class="row">
 			<div class="input-field">

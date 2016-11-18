@@ -65,19 +65,20 @@ window.DatecsPrinter.printText("{br}{br}{br}{br}{br}{br}",'ISO-8859-1', function
 }
 
 function printSomeTestText2() {
-  var jogo=window.localStorage.getItem("jsonServidor");
-  var campeonatos=window.localStorage.getItem("todosCampeonatos");
-  var datas=window.localStorage.getItem("todasDatas");
-  for(var k in jogo){
-   window.DatecsPrinter.printText(jogo.jogos[k].campeonato.descricao_campeonato,'ISO-8859-1', function() { 
-    alert("Impreso");
-  },function() { 
-    alert("Erro ao Imprimir");}
-    );
- }
- alert("TestPrin"+jogo.jogos[1].campeonato.descricao_campeonato);
+console.log(Imprimir);
+window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
+window.DatecsPrinter.printText("{b}{w}{h}COMPROVANTE{/h}{/w}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
+
+for (var i in jogosIdAposta) {
+  window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText(casa[i]+" VS "+ fora[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
+  window.DatecsPrinter.printText(nome_palpites[i]+" : "+ palpites[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
+};
 
 }
+
+
+
 function imprimirImagenDePrueba() 
 {
   var imagen = document.getElementById("codigoDeBarrasFactura");

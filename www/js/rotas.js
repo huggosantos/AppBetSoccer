@@ -121,7 +121,9 @@ app.controller('controlCollapseible', function($scope, $http, $routeParams, $loc
             }
         }).
         success(function(data) {
-            console.log("Deu certo" + data);
+            Materialize.toast('Aposta realizada Com Sucesso', 4000);
+            imprimirAposta();
+            $route.reload();
 
         }).
         error(function(data) {

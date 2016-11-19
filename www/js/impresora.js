@@ -71,8 +71,8 @@ window.DatecsPrinter.printText("{b}{w}{h}COMPROVANTE{/h}{/w}{/b}{CENTER}{br}",'I
 
 for (var i in jogosIdAposta) {
   window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText(casa[i]+" VS "+ fora[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
-  window.DatecsPrinter.printText(nome_palpites[i]+" : "+ palpites[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
+  window.DatecsPrinter.printText("{b}"+casa[i]+" VS "+ fora[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
+  window.DatecsPrinter.printText("{b}"+nome_palpites[i]+" : "+ palpites[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
 };
 
 }

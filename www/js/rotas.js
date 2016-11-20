@@ -8,9 +8,9 @@ app.config(function($routeProvider) {
             controller: 'aposta'
         })
         .when('/dadosCambista', {
-    templateUrl: 'paginas/dadosCambista.html',
-    controller: 'dadosCambista'
-  })
+            templateUrl: 'paginas/dadosCambista.html',
+            controller: 'dadosCambista'
+        })
         .otherwise('/aposta', {
             templateUrl: 'templates/aposta.html',
             controller: 'home'
@@ -26,73 +26,73 @@ function toTop() {
     }, 800, 'linear');
 }
 
-var vetor = new Array();
-var vetorHora = new Array();
-var aux = new Array();
+var vetor = new Array(); //Vetor de Campeonatos Total
+var vetorHora = new Array(); //Vetor com as datas Dos jogos
+var aux = new Array(); //Vetor que armazera o camponatos Teporariamente/ Camp que estjam relacionados com uma data e jogo em comum
 var jsonServidor;
-var jogosIdAposta = new Array();
-var palpites = new Array();
-var nome_palpites = new Array();
-var casa = new Array();
-var fora = new Array();
-var contador = 0;
+var jogosIdAposta = new Array(); //Vetor para armazenar os id dos jogos que apostado
+var palpites = new Array(); //Vetor para armezenar os palpites selecionados
+var nome_palpites = new Array(); //Vetor para armazenar os nome do palpites Exemplo Casa Fora Empate
+var casa = new Array(); //Array que armazena o nome do time da casa
+var fora = new Array(); //Array que armazena o nome do time visitante
+var contador = 0; //Contador para gerenciar o indece do vetores ->>palpite,jogoIdAposta,nome_palpites,casa,fora
+//Vetor que armazena os tipo de aposta
 var tpapites = ["valor_casa", "valor_fora", "valor_empate", "valor_dupla", "valor_1_2", "max_gol_2", "min_gol_3", "ambas_gol"];
 
-app.controller('controlCollapseible', function($scope, $http, $routeParams, $location) {
+app.controller('controlCollapseible', function($scope, $http, $route, $location) {
     $(document).ready(function() {
         $('.collapsible').collapsible();
     });
     var allRadios = new Array();
 
+    //Metodo que verifica no jogo o nome do palpite a parte do valor passado.
+    //params j = jogo Obejeto  | p=palpite Double
     function nomePapite(j, p) {
+        //intera dentro do vetor com os tipo de palpites
         for (var i in tpapites) {
+            //compara o valor do jogo na possição dos palpites e verifica se e igual o valor do palpite passado
             if (j[tpapites[i]] == p) {
+                //Retonar um tipo de palpite Exemplo valor_casa / valor_fora
                 return tpapites[i];
             }
         }
     }
 
     // Função para deschecar um radio
+    // Adicionar ou remover dados das aposta dos arrays de acordo com os radios.
     $scope.check = function(j, p) {
         // Verifica se a possição do input atual está null
+        // caso verdadeiro seta pra nullo o radio autal ou o anterior.
         if (allRadios[$(this).attr('name')] != null) {
             var indice = jogosIdAposta.indexOf(j.id);
-            console.log("Removendo Jogo " + j.id + " E Palpite" + p); //Remove o id do jogo do array
-            //console.log("nulo"+ jogosIdAposta.indexOf(id));
-            jogosIdAposta.splice(indice, 1);
-            palpites.splice(indice, 1);
-            nome_palpites.splice(indice, 1);
-            casa.splice(indice, 1);
-            fora.splice(indice, 1);
-            contador--;
-            console.log("decrementando contador -1:" + contador);
-            //Remove o um palpite do array
-            //Seta o input.checked para false 
-            this.checked = false; //Seta a posição atual do input para null 
+            //Pega o indice do jogo atual
+            jogosIdAposta.splice(indice, 1); //Remove id do jogo na possição indice
+            palpites.splice(indice, 1); //Remove palpite do jogo na possição indice
+            nome_palpites.splice(indice, 1); //Remove Tpalpite do jogo na possição indice
+            casa.splice(indice, 1); //Remove o time da casa na possição indice
+            fora.splice(indice, 1); //Remove o time visitante do jogo na possição indice 
+            contador--; //Decremento o contator usando em todos o arrays
+            this.checked = false; //Seta o input.checked para false  
             allRadios[$(this).attr('name')] = null;
+
+            //Seta a posição atual do input para null
         } else {
-            console.log("Adcionando Jogo " + j.id + " E Palpite " + p);
+            //Adiciona os Atributos id palpite casa fora nome_palpito
+            //Todos na mesma posição (contador);
             jogosIdAposta[contador] = j.id;
             palpites[contador] = p;
             casa[contador] = j.time[0].descricao_time;
             fora[contador] = j.time[1].descricao_time;
             nome_palpites[contador] = nomePapite(j, p);
-            console.log($scope.montarJsonServidor(jogosIdAposta, palpites, nome_palpites, casa, fora));
             contador++;
-            console.log("Incrementando contador +1:" + contador);
             allRadios[$(this).attr('name')] = this;
         }
-        console.log("Imprimindo Vetor com Apostas");
-        for (var i in jogosIdAposta) {
-            //if (jogosIdAposta[i] != null) {
-            console.log("Id do Jogo.......:" + jogosIdAposta[i]);
-            console.log("Valor do Palpite.:" + palpites[i]);
-            //}else{
-            //console.log("nulo "+ jogosIdAposta.indexOf(null));
-            //}
-        }
-
     }
+
+    /*Metodo que controla o Json que será enviado ao servidor
+      parametros -> j = id_jogos | p = palpite double | t = tipo de palpite string 
+      parametros -> c = descrição_time visitante  String | f = descricao_time visitante String
+    */
     $scope.montarJsonServidor = function(j, p, t, c, f) {
         var dadosAposta = JSON.stringify({
             codigo_seguranca: "1234578",
@@ -100,17 +100,15 @@ app.controller('controlCollapseible', function($scope, $http, $routeParams, $loc
             nome_apostador: $scope.nome,
             jogo: j,
             valorPalpite: p,
-            tpalpite: t,
-            times: {
-                casa: c,
-                fora: f
-            }
+            tpalpite: t
         });
         console.log(dadosAposta);
         return dadosAposta;
     }
+
+    //Metodo que envia um json para o servidor com os dados das aposta.
     $scope.enviar = function() {
-        var json = $scope.montarJsonServidor(jogosIdAposta, palpites, nome_palpites, casa, fora);
+        var json = $scope.montarJsonServidor(jogosIdAposta, palpites, nome_palpites);
         $http({
             url: 'http://betsocceroficial.herokuapp.com/aposta/apostar',
             method: 'POST',
@@ -122,9 +120,7 @@ app.controller('controlCollapseible', function($scope, $http, $routeParams, $loc
         }).
         success(function(data) {
             Materialize.toast('Aposta realizada Com Sucesso', 4000);
-            imprimirAposta();
-            $route.reload();
-
+            // imprimirAposta();
         }).
         error(function(data) {
             console.log("Deu Ruim" + data);
@@ -164,45 +160,51 @@ app.controller('aposta', function($scope, $http, $routeParams, $location) {
                 }
             }
         }
+        //Metodo que faz um split em string DataTime e retonar apenas a Data
         $scope.toData = function(dateTime) {
 
-            var dateTime = dateTime.split(" "); //dateTime[0] = date, dateTime[1] = time
+                var dateTime = dateTime.split(" "); //Cria um array com uma posição ["2016-07-10 12:40:10"]
+                var date = dateTime[0].split("-"); //Separa A string aprtir do "-" Cria um Array com tres posições ["2016", "17", "10"]
+                var dataFinal = date[2] + "/" +
+                    date[1] + "/" + date[0];
+                return dataFinal; //Retona a data No Padrao Brasileiro ["10/17/2016"]
+            }
+            //Metodo que faz um split em string DataTime e retonar apenas a Hora
+        $scope.toHora = function(dateTime) {
+            var dateTime = dateTime.split(" "); //Cria um array com uma posição ["2016-07-10 12:40:10"]
 
-            var date = dateTime[0].split("-");
-            var dataFinal = date[2] + "/" + date[1] + "/" + date[0];
-
-            return dataFinal;
-        }
-
-        $scope.toHora = function(Time) {
-            var Time = Time.split(" "); //dateTime[0] = date, dateTime[1] = time
-
-            var time = Time[1].split(":");
+            var time = dateTime[1].split(":"); //Separa a string aprtir do ":" Cria um Array com tres posições ["12", "40", "10"]
             var timeFinal = time[0] + ":" + time[1];
 
-            return timeFinal;
+            return timeFinal; //Retona a hora descosiderando os segundos ["12:40"]
 
         }
 
-        function dadosHora(vetorHora, valor2) {
+        //Metodo para verifica se a data passada ja exite no vertorHora
+        function dadosHora(vetorHora, dataTime) {
             for (var i in vetorHora) {
-                if (vetorHora[i] == valor2) {
+                if (vetorHora[i] == dataTime) {
                     return true;
                 }
             }
             return false;
         }
+        /*
+          Metodo que que recebe uma hora->DataTime e retornar um vetor com os campeonatos
+          que tenha relação com algum jogo e a hora passada
+        */
         $scope.CampEmJogos = function(hora) {
             aux = new Array();
-            //console.log("View data-> "+hora);
+            //Inteira pelos jogos quem vem do Web service
             for (var k in response.data.jogos) {
-                //console.log("--------------------");
+                //verifica se alum jogo.data e igual a data passada por paramentro
                 if (hora == response.data.jogos[k].data) {
-                    //console.log("Json data -> "+response.data.jogos[k].data);
+                    //vefica se esse se o campeonato não ja foi inserido no vertor
                     if (!dadosCamp(aux, response.data.jogos[k].campeonato.descricao_campeonato)) {
+                        //Por fim insere no array o campeonato
                         aux.push(response.data.jogos[k].campeonato.descricao_campeonato);
                     }
-                    //console.log("Camp Aux -> "+aux);
+
                 }
             }
             return aux;
@@ -224,9 +226,9 @@ app.controller('aposta', function($scope, $http, $routeParams, $location) {
 
 });
 
-function dadosCamp(vetor, valor) {
+function dadosCamp(vetor, campeonato) {
     for (var i in vetor) {
-        if (vetor[i] == valor) {
+        if (vetor[i] == campeonato) {
             return true;
         }
     }
@@ -235,7 +237,7 @@ function dadosCamp(vetor, valor) {
 
 function CampEmJogosPorData(hora) {
     aux = new Array();
-    //console.log("View data-> "+hora);
+    //percorre
     for (var k in jsonServidor.jogos) {
         //console.log("--------------------");
         if (hora == jsonServidor.jogos[k].data) {

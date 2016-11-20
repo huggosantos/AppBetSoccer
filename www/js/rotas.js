@@ -77,6 +77,7 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location)
 
             //Seta a posição atual do input para null
         } else {
+            //var var_name = $("input[name='radio_name']:checked").val();
             //Adiciona os Atributos id palpite casa fora nome_palpito
             //Todos na mesma posição (contador);
             jogosIdAposta[contador] = j.id;
@@ -120,7 +121,7 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location)
         }).
         success(function(data) {
             Materialize.toast('Aposta realizada Com Sucesso', 4000);
-            // imprimirAposta();
+            imprimirAposta();
         }).
         error(function(data) {
             console.log("Deu Ruim" + data);

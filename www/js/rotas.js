@@ -3,18 +3,18 @@ var app = angular.module('MyApp', ['ngRoute']);
 app.config(function($routeProvider) {
     /*ROTAS*/
     $routeProvider
-        .when('/aposta', {
-            templateUrl: 'paginas/aposta.html',
-            controller: 'aposta'
-        })
-        .when('/dadosCambista', {
-            templateUrl: 'paginas/dadosCambista.html',
-            controller: 'dadosCambista'
-        })
-        .otherwise('/aposta', {
-            templateUrl: 'templates/aposta.html',
-            controller: 'home'
-        });
+    .when('/aposta', {
+        templateUrl: 'paginas/aposta.html',
+        controller: 'aposta'
+    })
+    .when('/dadosCambista', {
+        templateUrl: 'paginas/dadosCambista.html',
+        controller: 'dadosCambista'
+    })
+    .otherwise('/aposta', {
+        templateUrl: 'templates/aposta.html',
+        controller: 'home'
+    });
 }).run(function() {
     //remove 300ms delay touch
     //FastClick.attach(document.body);
@@ -38,8 +38,8 @@ var fora = new Array(); //Array que armazena o nome do time visitante
 var contador = 0; //Contador para gerenciar o indece do vetores ->>palpite,jogoIdAposta,nome_palpites,casa,fora
 //Vetor que armazena os tipo de aposta
 var tpapites = ["valor_casa", "valor_fora", "valor_empate", "valor_dupla", "valor_1_2", "max_gol_2", "min_gol_3", "ambas_gol"];
-
-app.controller('controlCollapseible', function($scope, $http, $route, $location) {
+var auxiliar=0;
+app.controller('controlCollapseible', function($scope, $http, $route, $location, $rootScope) {
     $(document).ready(function() {
         $('.collapsible').collapsible();
     });
@@ -58,7 +58,7 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location)
         }
     }
 
-    // Função para deschecar um radio
+      // Função para deschecar um radio
     // Adicionar ou remover dados das aposta dos arrays de acordo com os radios.
     $scope.check = function(j, p) {
         // Verifica se a possição do input atual está null
@@ -87,14 +87,15 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location)
             nome_palpites[contador] = nomePapite(j, p);
             contador++;
             allRadios[$(this).attr('name')] = this;
+
         }
     }
 
     /*Metodo que controla o Json que será enviado ao servidor
       parametros -> j = id_jogos | p = palpite double | t = tipo de palpite string 
       parametros -> c = descrição_time visitante  String | f = descricao_time visitante String
-    */
-    $scope.montarJsonServidor = function(j, p, t, c, f) {
+      */
+      $scope.montarJsonServidor = function(j, p, t) {
         var dadosAposta = JSON.stringify({
             codigo_seguranca: "1234578",
             valor_aposta: $scope.valor,
@@ -103,7 +104,8 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location)
             valorPalpite: p,
             tpalpite: t
         });
-        console.log(dadosAposta);
+
+        console.log("dados "+dadosAposta);
         return dadosAposta;
     }
 
@@ -128,18 +130,34 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location)
             $scope.error = true;
 
         });
+
+    }
+
+    $scope.re = function retornoPossivel(){
+        auxiliar=testeA;
+        for (var k in palpites) {
+            auxiliar = auxiliar * palpites[k];           
+        }
+        return auxiliar;
     }
 });
 
+var testeA; 
+
+app.controller('aposta', function($scope, $http, $routeParams, $location, $rootScope) {
 
 
+    $scope.enviarValor = function(){
+        testeA = $scope.valor;
+        console.log("cara"+testeA);
+    }
 
-app.controller('aposta', function($scope, $http, $routeParams, $location) {
     toTop();
     $(document).ready(function() {
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
         $('.modal').modal();
     });
+
     $http.get('http://betsocceroficial.herokuapp.com/aposta').then(function(response) {
         // var json = JSON.stringify(response.data)
         // var json = JSON.parse(jso); 
@@ -156,22 +174,24 @@ app.controller('aposta', function($scope, $http, $routeParams, $location) {
             if (k == 0) {
                 vetorHora.push(response.data.jogos[k].data);
             } else {
-                if (!dadosHora(vetorHora, response.data.jogos[k].data)) {
+                if (!dadosHora(vetorHora, toData(response.data.jogos[k].data))) {
                     vetorHora.push(response.data.jogos[k].data);
                 }
-            }
+            }      
         }
+        console.log("camp"+vetor);
+        console.log("hora"+vetorHora);
         //Metodo que faz um split em string DataTime e retonar apenas a Data
         $scope.toData = function(dateTime) {
 
                 var dateTime = dateTime.split(" "); //Cria um array com uma posição ["2016-07-10 12:40:10"]
                 var date = dateTime[0].split("-"); //Separa A string aprtir do "-" Cria um Array com tres posições ["2016", "17", "10"]
                 var dataFinal = date[2] + "/" +
-                    date[1] + "/" + date[0];
+                date[1] + "/" + date[0];
                 return dataFinal; //Retona a data No Padrao Brasileiro ["10/17/2016"]
             }
             //Metodo que faz um split em string DataTime e retonar apenas a Hora
-        $scope.toHora = function(dateTime) {
+            $scope.toHora = function(dateTime) {
             var dateTime = dateTime.split(" "); //Cria um array com uma posição ["2016-07-10 12:40:10"]
 
             var time = dateTime[1].split(":"); //Separa a string aprtir do ":" Cria um Array com tres posições ["12", "40", "10"]
@@ -184,7 +204,7 @@ app.controller('aposta', function($scope, $http, $routeParams, $location) {
         //Metodo para verifica se a data passada ja exite no vertorHora
         function dadosHora(vetorHora, dataTime) {
             for (var i in vetorHora) {
-                if (vetorHora[i] == dataTime) {
+                if (toData(vetorHora[i]) == dataTime) {
                     return true;
                 }
             }
@@ -193,13 +213,13 @@ app.controller('aposta', function($scope, $http, $routeParams, $location) {
         /*
           Metodo que que recebe uma hora->DataTime e retornar um vetor com os campeonatos
           que tenha relação com algum jogo e a hora passada
-        */
-        $scope.CampEmJogos = function(hora) {
+          */
+          $scope.CampEmJogos = function(hora) {
             aux = new Array();
             //Inteira pelos jogos quem vem do Web service
             for (var k in response.data.jogos) {
                 //verifica se alum jogo.data e igual a data passada por paramentro
-                if (hora == response.data.jogos[k].data) {
+                if ($scope.toData(hora) == $scope.toData(response.data.jogos[k].data)) {
                     //vefica se esse se o campeonato não ja foi inserido no vertor
                     if (!dadosCamp(aux, response.data.jogos[k].campeonato.descricao_campeonato)) {
                         //Por fim insere no array o campeonato
@@ -208,6 +228,7 @@ app.controller('aposta', function($scope, $http, $routeParams, $location) {
 
                 }
             }
+           
             return aux;
         };
 
@@ -227,9 +248,9 @@ app.controller('aposta', function($scope, $http, $routeParams, $location) {
 
 });
 
-function dadosCamp(vetor, campeonato) {
+function dadosCamp(vetor, valor) {
     for (var i in vetor) {
-        if (vetor[i] == campeonato) {
+        if (vetor[i] == valor) {
             return true;
         }
     }

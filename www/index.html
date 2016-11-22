@@ -16,9 +16,10 @@
 </head>
 <body ng-app="MyApp">
 
-  <nav class="pinned" style="z-index:9999;">
+  <nav class="pinned" style="z-index:9999;" ng-controller="controlCollapseible" >
     <div class="nav-wrapper green ">
       <a href="#aposta" class="left brand-logo">BetSoccer</a>
+      <a  class="center brand-logo" >${{re()}}</a>
       <ul class="right">
        <li><a data-target="modal2" ><i class="material-icons">person_add</i></a></li>
        <li><a href="#aposta"  data-target="modal1" ><i class="material-icons">add_circle</i></a></li>

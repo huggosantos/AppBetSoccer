@@ -54,7 +54,7 @@ function printSomeTestText() {
       window.DatecsPrinter.printText(toHora("{b}"+vetorHora[datas])+"  "+jsonServidor.jogos[jg].time[0].descricao_time+" VS "+ jsonServidor.jogos[jg].time[1].descricao_time+"{/b}{br}",'ISO-8859-1',  function(){ });
       window.DatecsPrinter.printText("{s}Casa  Empate  Fora  Dupla  Gol1/2  +2.5  -2.5  Ambas {/s}{br}",'ISO-8859-1', function(){});
       window.DatecsPrinter.printText("{s}"+jsonServidor.jogos[jg].valor_casa+"   "+jsonServidor.jogos[jg].valor_empate+"    "+jsonServidor.jogos[jg].valor_fora+"    "+jsonServidor.jogos[jg].valor_dupla+"    "+jsonServidor.jogos[jg].valor_1_2+"    "+jsonServidor.jogos[jg].max_gol_2+"    "+jsonServidor.jogos[jg].min_gol_3+"    "+jsonServidor.jogos[jg].ambas_gol+"{/s}{br}",'ISO-8859-1', function(){});
-       
+      
     }
 
   }
@@ -65,14 +65,21 @@ window.DatecsPrinter.printText("{br}{br}{br}{br}{br}{br}",'ISO-8859-1', function
 }
 
 function printSomeTestText2() {
-window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
-window.DatecsPrinter.printText("{b}{w}{h}COMPROVANTE{/h}{/w}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
+ window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
+ window.DatecsPrinter.printText("{b}{w}{h}BETSOCCER{/h}{/w}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
+ window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
 
-for (var i in jogosIdAposta) {
+ window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
+ window.DatecsPrinter.printText("{b}{w}{h}COMPROVANTE{/h}{/w}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
+
+ for (var i in jogosIdAposta) {
   window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("{b}"+casa[i]+" VS "+ fora[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
   window.DatecsPrinter.printText("{b}"+nome_palpites[i]+" : "+ palpites[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
-};
+}
+
+
+
 
 }
 

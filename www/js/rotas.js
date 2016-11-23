@@ -138,7 +138,7 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
         for (var k in palpites) {
             auxiliar = auxiliar * palpites[k];           
         }
-        return auxiliar;
+        return auxiliar.toFixed(2);
     }
 });
 

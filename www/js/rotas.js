@@ -38,7 +38,13 @@ var fora = new Array(); //Array que armazena o nome do time visitante
 var contador = 0; //Contador para gerenciar o indece do vetores ->>palpite,jogoIdAposta,nome_palpites,casa,fora
 //Vetor que armazena os tipo de aposta
 var tpapites = ["valor_casa", "valor_fora", "valor_empate", "valor_dupla", "valor_1_2", "max_gol_2", "min_gol_3", "ambas_gol"];
-var auxiliar=0;
+var auxiliar=0; //recebe o valor da aposta para mostrar na view
+var testeA=0; //recebe o valor da aposta
+var copiaJsonAposta;
+app.controller('dadosCambista', function($scope, $http, $route, $location, $rootScope) { 
+    toTop();
+});
+
 app.controller('controlCollapseible', function($scope, $http, $route, $location, $rootScope) {
     $(document).ready(function() {
         $('.collapsible').collapsible();
@@ -142,23 +148,19 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
     }
 });
 
-var testeA=0; 
+
 
 app.controller('aposta', function($scope, $http, $routeParams, $location, $rootScope) {
 
-
+    //recebe o valor da aposta
     $scope.enviarValor = function(){
+        usarNaApostas =
         testeA = $scope.valor;
-        console.log("cara"+testeA);
     }
 
-    toTop();
-    $(document).ready(function() {
-        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-        $('.modal').modal();
-    });
 
-    $http.get('http://betsocceroficial.herokuapp.com/aposta').then(function(response) {
+    $scope.buscar = function() {
+        $http.get('http://betsocceroficial.herokuapp.com/aposta').then(function(response) {
         // var json = JSON.stringify(response.data)
         // var json = JSON.parse(jso); 
         // window.localStorage.setItem("ArquivoServidor",response.data); 
@@ -179,8 +181,7 @@ app.controller('aposta', function($scope, $http, $routeParams, $location, $rootS
                 }
             }      
         }
-        console.log("camp"+vetor);
-        console.log("hora"+vetorHora);
+
         //Metodo que faz um split em string DataTime e retonar apenas a Data
         $scope.toData = function(dateTime) {
 
@@ -228,7 +229,7 @@ app.controller('aposta', function($scope, $http, $routeParams, $location, $rootS
 
                 }
             }
-           
+
             return aux;
         };
 
@@ -240,12 +241,76 @@ app.controller('aposta', function($scope, $http, $routeParams, $location, $rootS
         //window.localStorage.setItem("todosCampeonatos",aux);
         //window.localStorage.setItem("todasDatas",vetorHora);
 
-
     }, function(err) {
         console.log(err);
     });
+    }
 
+    $scope.buscar();// busca todos os dados dos jogos no servidor
+    $scope.timeCasa=casa;
+    $scope.timeFora=fora;
+    $scope.palpiteNumero=palpites;
 
+    $scope.nomePapites= function(np){
+        var vetorPalpitesCorretos;
+            
+            if(nome_palpites[np]=="valor_casa"){
+                vetorPalpitesCorretos="Valor Casa";
+            }
+            if(nome_palpites[np]=="valor_fora"){
+                vetorPalpitesCorretos="Valor Fora";
+            } 
+            if(nome_palpites[np]=="valor_empate"){
+                vetorPalpitesCorretos="Valor Empate";
+            } 
+            if(nome_palpites[np]=="valor_dupla"){
+                vetorPalpitesCorretos="Valor Dupla";
+            } 
+            if(nome_palpites[np]=="valor_1_2"){
+                vetorPalpitesCorretos="Valor Gol 1/2";
+            } 
+            if(nome_palpites[np]=="max_gol_2"){
+                vetorPalpitesCorretos="+2.5";
+            } 
+            if(nome_palpites[np]=="min_gol_3"){
+                vetorPalpitesCorretos="-2.5";
+            } 
+            if(nome_palpites[np]=="ambas_gol"){
+                vetorPalpitesCorretos="Ambas";
+            }
+       
+        return vetorPalpitesCorretos;       
+    }
+
+    $scope.tamanhoVetor = function(){
+        var array = new Array();
+        for(var i in  nome_palpites){
+            array.push(i);
+        }
+        return array;
+    }
+    $scope.jsonApostasDinamicas = function(){
+        var arrayJson= new Array();
+        for(var i in  nome_palpites){
+         var dadosAposta = JSON.stringify({
+            casa: $scope.timeCasa[i],
+            fora: $scope.timeFora[i],
+            valorPalpite: $scope.palpiteNumero[i],
+        });
+         arrayJson.push(dadosAposta);
+         console.log(arrayJson);
+         console.log("dados Dina"+dadosAposta);
+     }
+
+     return arrayJson;
+ }
+    toTop();// Rola a pagina pra cima
+
+    // Ativa a função do modal na rota, função do materialize
+    $(document).ready(function() {
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal').modal();
+    });
 });
 
 function dadosCamp(vetor, valor) {

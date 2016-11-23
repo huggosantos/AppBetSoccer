@@ -25,7 +25,8 @@ color:#fff;}
 	text-align: justify;
 	color: #494949;
 }
-#texto2{
+
+.texto2{
 	text-align: center;
 	color: #494949;
 }
@@ -39,6 +40,23 @@ color:#fff;}
 	font-weight: bolder;
 	text-align: justify;
 	color: #494949;
+}
+#texto4{
+	font-size: 20px;
+	font-weight: bolder;
+	text-align: justify;
+	color: #494949;
+}
+#texto5{
+	font-size: 24px;
+	font-weight: bolder;
+	text-align: justify;
+	color: #7cb342 ;
+}
+#texto6{
+	font-size: 20px;
+	text-align: justify;
+	color: #494949 ;
 }
 #titulo{
 	font-size: 2em;

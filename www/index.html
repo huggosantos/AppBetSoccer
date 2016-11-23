@@ -18,16 +18,16 @@
 <!-- Barra de navegação principal -->
   <nav class="pinned" style="z-index:999;" ng-controller="controlCollapseible" >
     <div class="nav-wrapper  green lighten-1">
-      <a href="#aposta" class="left brand-logo">BetSoccer</a>
+      <a href="#aposta" onclick="location.reload();" class="left brand-logo">BetSoccer</a>
       <a  class="center brand-logo" >${{re()}}</a>
       <ul class="right">
        <li><a onclick="imprimirTodosJogos()"><i class="material-icons">print</i></a></li>
-       <li><a href="#aposta" onclick="location.reload();"><i class="material-icons">refresh</i></a></li>
+       <li><a onclick="location.reload();"><i class="material-icons">refresh</i></a></li>
        <li><a data-activates='dropdown1' class='dropdown-button' ><i class="material-icons">more_vert</i></a></li>
      </ul>
    </div>
  </nav>
-        
+  <!-- Divisão dinamica, recebe as paginas das rotas -->     
  <div class="content" id="divDinamica">
    <ng-view></ng-view>
  </div>
@@ -54,7 +54,7 @@
  <script type="text/javascript" src="js/materialize.js"></script>
 
 
- <script type="text/javascript">
+<script type="text/javascript">
   app.initialize();
 </script>
 

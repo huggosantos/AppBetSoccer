@@ -17,9 +17,9 @@
 	</table>
 	<br><br><br>
 	<div ng-repeat="hora in horas " class="clear">
-		<h4 id="texto2">{{toData(hora)}}</h4>
+		<h3 class="texto2">{{toData(hora)}}</h3>
 		<div ng-repeat="campeonato in CampEmJogos(hora)">
-			<h6 id="texto2">{{campeonato}}</h6>
+			<h5 class="texto2">{{campeonato}}</h5>
 			<ul class="collapsible popout" data-collapsible="accordion" ng-controller="controlCollapseible" ng-repeat="x in aposta.jogos | orderBy: -data" ng-if="x.campeonato.descricao_campeonato == campeonato && toData(hora)==toData(x.data)">
 				<li>
 					<div class="collapsible-header">{{toHora(x.data)}} <b>{{x.time[0].descricao_time}}</b> VS <b>{{x.time[1].descricao_time}}</b></div>
@@ -61,17 +61,46 @@
 		</div>
 	</div>
 
+	<!-- butão fixo na tela -->
+	<div class="fixed-action-btn toolbar">
+		<a class="btn-floating btn-large green darken-3">
+			<i class="large material-icons">add</i>
+		</a>
+		<ul>
+			<li class="waves-effect waves-light"><a data-target="modal2" ><i class="material-icons">person_add</i></a></li> 
+			<li class="waves-effect waves-light"><a data-target="modal1"><i class="material-icons">send</i></a></li>
+		</ul>
+	</div>
+	
 	<!-- Modal Com listas de jogos, para começa o processo de aposta -->
 	<div id="modal1" class="modal bottom-sheet">
 		<div class="modal-content">
-			<h4>Lista dos jogos apostados</h4>
+			<h4 class="texto2">Lista dos jogos apostados</h4>
+			<p ng-controller="controlCollapseible"><i id="texto3">Apostator: </i><i id="texto6">&nbsp;{{nome}}&nbsp;</i><i id="texto3">&nbsp;Valor Pago: </i><i id="texto4">&nbsp;{{valor}}&nbsp;</i><i id="texto3">&nbsp;Retorno Possível: </i><i id="texto5">&nbsp;{{re()}}</i></p>
+			<table class="striped" >
+				<thead>
+					<tr>
+						<th data-field="name">CASA</th>
+						<th data-field="price">FORA</th>
+						<th data-field="price">PALPITE</th>
+						<th data-field="price">V.PALPITE</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="apostas in tamanhoVetor()">
+						<td >{{timeCasa[apostas]}}</td>
+						<td >{{timeFora[apostas]}}</td>
+						<td >{{nomePapites(apostas)}}</td>
+						<td >{{palpiteNumero[apostas]}}</td>
+					</tr>
+				</tbody>
+			</table>
 
-		</div>
-		<div class="modal-footer">
-			<a href="#aposta" data-target="modal4" class=" modal-action modal-close waves-effect waves-green btn-flat">CONFIRMAR</a>
+			<div class="modal-footer">
+				<a href="#aposta" data-target="modal4" class=" modal-action modal-close waves-effect waves-green btn-flat">CONFIRMAR</a>
+			</div>
 		</div>
 	</div>
-
 	<!-- Modal para adicionar os dados do apostador, nome e valor da aposta -->
 	<div id="modal2" class="modal bottom-sheet" >
 		<div class="modal-content">

@@ -15,14 +15,12 @@
 
 </head>
 <body ng-app="MyApp">
-
+<!-- Barra de navegação principal -->
   <nav class="pinned" style="z-index:9999;" ng-controller="controlCollapseible" >
-    <div class="nav-wrapper green ">
+    <div class="nav-wrapper  green lighten-1">
       <a href="#aposta" class="left brand-logo">BetSoccer</a>
       <a  class="center brand-logo" >${{re()}}</a>
       <ul class="right">
-       <li><a data-target="modal2" ><i class="material-icons">person_add</i></a></li>
-       <li><a href="#aposta"  data-target="modal1" ><i class="material-icons">add_circle</i></a></li>
        <li><a onclick="imprimirTodosJogos()"><i class="material-icons">print</i></a></li>
        <li><a href="#aposta" onclick="location.reload();"><i class="material-icons">refresh</i></a></li>
        <li><a data-activates='dropdown1' class='dropdown-button' ><i class="material-icons">more_vert</i></a></li>
@@ -33,12 +31,21 @@
  <div class="content" id="divDinamica">
    <ng-view></ng-view>
  </div>
+<!-- butão fixo na tela -->
+<div class="fixed-action-btn toolbar">
+    <a class="btn-floating btn-large green darken-3">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+    <ul>
+      <li class="waves-effect waves-light"><a data-target="modal2" ><i class="material-icons">person_add</i></a></li> 
+      <li class="waves-effect waves-light"><a data-target="modal1"><i class="material-icons">add_circle</i></a></li>
+    </ul>
+  </div>
 
   <!-- Dropdown Structure -->
   <ul id='dropdown1' class='dropdown-content' style="z-index:99999;">
     <li><a href="#dadosCambista">Apuração</a></li>
     <li class="divider"></li>
-  
   </ul>
 
  <!-- Links && scripts -->

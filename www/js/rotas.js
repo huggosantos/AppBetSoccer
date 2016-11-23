@@ -142,7 +142,7 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
     }
 });
 
-var testeA; 
+var testeA=0; 
 
 app.controller('aposta', function($scope, $http, $routeParams, $location, $rootScope) {
 

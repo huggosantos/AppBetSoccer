@@ -97,7 +97,7 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
       */
       $scope.montarJsonServidor = function(j, p, t) {
         var dadosAposta = JSON.stringify({
-            codigo_seguranca: "1234578",
+            codigo_seguranca: $scope.password,
             valor_aposta: $scope.valor,
             nome_apostador: $scope.nome,
             jogo: j,

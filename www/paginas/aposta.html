@@ -1,6 +1,6 @@
 <br><br><br>
 <div class="row">
-	<table class="pinned" style="z-index: 9999; top:57px;">
+	<table class="pinned" style="z-index: 999; top:57px;">
 		<thead>
 			<tr>
 				<th data-field="price" style="background-color:#8bc34a;">Casa</th>
@@ -61,18 +61,18 @@
 		</div>
 	</div>
 
-
-	<button ng-controller="controlCollapseible" ng-click="enviar()" class="btn">Apostar</button>
-	<!-- Modal Structure -->
+	<!-- Modal Com listas de jogos, para começa o processo de aposta -->
 	<div id="modal1" class="modal bottom-sheet">
 		<div class="modal-content">
 			<h4>Lista dos jogos apostados</h4>
 
 		</div>
 		<div class="modal-footer">
-			<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Confirma</a>
+			<a href="#aposta" data-target="modal4" class=" modal-action modal-close waves-effect waves-green btn-flat">CONFIRMAR</a>
 		</div>
 	</div>
+
+	<!-- Modal para adicionar os dados do apostador, nome e valor da aposta -->
 	<div id="modal2" class="modal bottom-sheet" >
 		<div class="modal-content">
 			<h4>Adicionar Apostador</h4>
@@ -91,17 +91,19 @@
 			<a href="#aposta" ng-click="enviarValor()" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
 		</div>
 	</div>
-	<div id="modal4" class="modal" width="100" style="width:300px;">
+
+	<!-- Modal para adicionar a senha do cambista e finalizar a aposta -->
+	<div id="modal4" class="modal" width="100" style="width:300px;" style="z-index: 9999;">
 		<div class="modal-content">
 			<div class="row">
 				<div class="input-field">
-					<input id="password" type="password" class="validate">
+					<input id="password" ng-model="password" type="password" class="validate">
 					<label for="password">Password</label>
 				</div>
 			</div>
 		</div>
 		<div class="modal-footer">
-			<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Confirma</a>
+			<a ng-controller="controlCollapseible" ng-click="enviar()" class=" modal-action modal-close waves-effect waves-green btn-flat">APOSTAR</a>
 		</div>
 	</div>
 

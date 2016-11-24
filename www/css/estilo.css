@@ -5,6 +5,10 @@ p, h1, h2, h3{
 a{text-decoration: nome;
 color:#fff;}
 
+.tabelaCenter{
+	width:12.5%; 
+	text-align:center;
+}
 #lista ul {	
 	list-style:none;
 }

@@ -3,18 +3,19 @@
 	<table class="pinned" style="z-index: 999; top:57px;">
 		<thead>
 			<tr>
-				<th data-field="price" style="background-color:#8bc34a;">Casa</th>
-				<th data-field="price" style="background-color:#D1D5D8;">Fora</th>
-				<th data-field="price" style="background-color:#3498DB;">Empt</th>
-				<th data-field="price" style="background-color:#fff">Dupla</th>
-				<th data-field="price" style="background-color:#ffeb3b;">Gol&frac12;</th>
-				<th data-field="price" style="background-color:#e3f2fd;">+2.5</th>
-				<th data-field="price" style="background-color:#ce93d8">-2.5</th>
-				<th data-field="price" style="background-color:#dcedc8;">Ambas</th>
+				<th data-field="price" style="background-color:#8bc34a;" class="tabelaCenter">Casa</th>
+				<th data-field="price" style="background-color:#D1D5D8;" class="tabelaCenter">Fora</th>
+				<th data-field="price" style="background-color:#3498DB;" class="tabelaCenter">Empt</th>
+				<th data-field="price" style="background-color:#fff"     class="tabelaCenter">Dupla</th>
+				<th data-field="price" style="background-color:#ffeb3b;" class="tabelaCenter">Gol&frac12;</th>
+				<th data-field="price" style="background-color:#e3f2fd;" class="tabelaCenter">+2.5</th>
+				<th data-field="price" style="background-color:#ce93d8"  class="tabelaCenter">-2.5</th>
+				<th data-field="price" style="background-color:#dcedc8;" class="tabelaCenter">Ambas</th>
 			</tr>
 		</thead>
 
 	</table>
+
 	<br><br><br>
 	<div ng-repeat="hora in horas " class="clear">
 		<h3 class="texto2">{{toData(hora)}}</h3>
@@ -71,7 +72,7 @@
 			<li class="waves-effect waves-light"><a data-target="modal1"><i class="material-icons">send</i></a></li>
 		</ul>
 	</div>
-	
+
 	<!-- Modal Com listas de jogos, para começa o processo de aposta -->
 	<div id="modal1" class="modal bottom-sheet">
 		<div class="modal-content">

@@ -71,9 +71,9 @@ function printSomeTestText2(data) {
 
  window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
  window.DatecsPrinter.printText("{b}{w}COMPROVANTE{/w}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
- window.DatecsPrinter.printText("DATA: "+data.created_at+"{br}",'ISO-8859-1', function(){} );
- window.DatecsPrinter.printText("{b}VALOR APOSTADO: "+casa[i]+"   RETORNO POSSIVEL: "+ fora[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
- window.DatecsPrinter.printText("NOME APOSTADOR: {b}"+data.nome_apostador+"{/b} CÓDIGO APOSTA: {b}"+data.codigo+"{/b}{br}",'ISO-8859-1', function(){} );
+ window.DatecsPrinter.printText("DATA: "+data.aposta.created_at+"{br}",'ISO-8859-1', function(){} );
+ window.DatecsPrinter.printText("{b}VALOR APOSTADO: "+data.aposta.valor_aposta+"   RETORNO POSSIVEL: "+auxiliar+"{/b}{br}",'ISO-8859-1',  function(){ });
+ window.DatecsPrinter.printText("NOME APOSTADOR: {b}"+data.aposta.nome_apostador+"{/b} CÓDIGO APOSTA: {b}"+data.aposta.codigo+"{/b}{br}",'ISO-8859-1', function(){} );
  
  for (var i in jogosIdAposta) {
   window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );

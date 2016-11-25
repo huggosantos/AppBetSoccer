@@ -12,7 +12,7 @@ app.config(function($routeProvider) {
         controller: 'dadosCambista'
     })
     .otherwise('/aposta', {
-        templateUrl: 'templates/aposta.html',
+        templateUrl: 'paginas/aposta.html',
         controller: 'home'
     });
 }).run(function() {
@@ -41,9 +41,27 @@ var tpapites = ["valor_casa", "valor_fora", "valor_empate", "valor_dupla", "valo
 var auxiliar=0; //recebe o valor da aposta para mostrar na view
 var testeA=0; //recebe o valor da aposta
 var copiaJsonAposta;
-app.controller('dadosCambista', function($scope, $http, $route, $location, $rootScope) { 
+
+app.controller('dadosCambista', function($scope, $http, $route, $location) { 
+
+    $scope.buscarDadosCambista = function() {
+        $http.get('http://betsocceroficial.herokuapp.com/aposta/ganhosApostas/'+$scope.password).then(function(response) {
+          $scope.dados = response.data;
+          if(response.data.status=="Inexistente"){
+             Materialize.toast('Código de Segurança Inexistente', 4000);
+          } 
+        }).catch(function(err) {
+               Materialize.toast('Erro !', 4000);
+           
+       });
+    }
     toTop();
+    $(document).ready(function() {
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal').modal();
+    });
 });
+
 
 app.controller('controlCollapseible', function($scope, $http, $route, $location, $rootScope) {
     $(document).ready(function() {

@@ -10,11 +10,11 @@ function imprimirTodosJogos()
     );
 }
 
-function imprimirAposta()
+function imprimirAposta(data)
 {
   window.DatecsPrinter.listBluetoothDevices(
     function (devices) {
-      window.DatecsPrinter.connect(devices[0].address,printSomeTestText2);
+      window.DatecsPrinter.connect(devices[0].address,printSomeTestText2(data));
     },
     function (error) {
       swal(JSON.stringify(error));
@@ -64,20 +64,22 @@ function printSomeTestText() {
 window.DatecsPrinter.printText("{br}{br}{br}{br}{br}{br}",'ISO-8859-1', function(){} );
 }
 
-function printSomeTestText2() {
+function printSomeTestText2(data) {
  window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
  window.DatecsPrinter.printText("{b}{w}{h}BETSOCCER{/h}{/w}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
  window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
 
  window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
- window.DatecsPrinter.printText("{b}{w}{h}COMPROVANTE{/h}{/w}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
-
+ window.DatecsPrinter.printText("{b}{w}COMPROVANTE{/w}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
+ window.DatecsPrinter.printText("DATA: "+data.created_at+"{br}",'ISO-8859-1', function(){} );
+ window.DatecsPrinter.printText("{b}VALOR APOSTADO: "+casa[i]+"   RETORNO POSSIVEL: "+ fora[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
+ window.DatecsPrinter.printText("NOME APOSTADOR: {b}"+data.nome_apostador+"{/b} CÓDIGO APOSTA: {b}"+data.codigo+"{/b}{br}",'ISO-8859-1', function(){} );
+ 
  for (var i in jogosIdAposta) {
   window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText("{b}"+casa[i]+" VS "+ fora[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
-  window.DatecsPrinter.printText("{b}"+nome_palpites[i]+" : "+ palpites[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
+  window.DatecsPrinter.printText("{b}JOGO: "+casa[i]+" VS "+ fora[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
+  window.DatecsPrinter.printText("{b}PALPITE: "+nome_palpites[i]+"  VALOR PALPITE: "+ palpites[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
 }
-
 
 
 

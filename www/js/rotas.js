@@ -49,14 +49,16 @@ app.controller('dadosCambista', function($scope, $http, $route, $location) {
           $scope.dados = response.data;
           if(response.data.status=="Inexistente"){
              Materialize.toast('Código de Segurança Inexistente', 4000);
-          } 
-        }).catch(function(err) {
-               Materialize.toast('Erro !', 4000);
-           
-       });
-    }
-    toTop();
-    $(document).ready(function() {
+         } else if(response.data.status=="Inativo"){
+             Materialize.toast('Código de Segurança Inativo', 4000);
+         }
+     }).catch(function(err) {
+       Materialize.toast('Erro !', 4000);
+
+   });
+ }
+ toTop();
+ $(document).ready(function() {
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
         $('.modal').modal();
     });
@@ -145,9 +147,11 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
                 'Content-Type': 'application/json'
             }
         }).
-        success(function(data) {
+        success(function(resposta) {
             Materialize.toast('Aposta realizada Com Sucesso', 4000);
-            imprimirAposta();
+            imprimirAposta(resposta.data);
+            $location.path("/aposta");
+            $location.reload();
         }).
         error(function(data) {
             console.log("Deu Ruim" + data);
@@ -271,32 +275,32 @@ app.controller('aposta', function($scope, $http, $routeParams, $location, $rootS
 
     $scope.nomePapites= function(np){
         var vetorPalpitesCorretos;
-            
-            if(nome_palpites[np]=="valor_casa"){
-                vetorPalpitesCorretos="Valor Casa";
-            }
-            if(nome_palpites[np]=="valor_fora"){
-                vetorPalpitesCorretos="Valor Fora";
-            } 
-            if(nome_palpites[np]=="valor_empate"){
-                vetorPalpitesCorretos="Valor Empate";
-            } 
-            if(nome_palpites[np]=="valor_dupla"){
-                vetorPalpitesCorretos="Valor Dupla";
-            } 
-            if(nome_palpites[np]=="valor_1_2"){
-                vetorPalpitesCorretos="Valor Gol 1/2";
-            } 
-            if(nome_palpites[np]=="max_gol_2"){
-                vetorPalpitesCorretos="+2.5";
-            } 
-            if(nome_palpites[np]=="min_gol_3"){
-                vetorPalpitesCorretos="-2.5";
-            } 
-            if(nome_palpites[np]=="ambas_gol"){
-                vetorPalpitesCorretos="Ambas";
-            }
-       
+
+        if(nome_palpites[np]=="valor_casa"){
+            vetorPalpitesCorretos="Valor Casa";
+        }
+        if(nome_palpites[np]=="valor_fora"){
+            vetorPalpitesCorretos="Valor Fora";
+        } 
+        if(nome_palpites[np]=="valor_empate"){
+            vetorPalpitesCorretos="Valor Empate";
+        } 
+        if(nome_palpites[np]=="valor_dupla"){
+            vetorPalpitesCorretos="Valor Dupla";
+        } 
+        if(nome_palpites[np]=="valor_1_2"){
+            vetorPalpitesCorretos="Valor Gol 1/2";
+        } 
+        if(nome_palpites[np]=="max_gol_2"){
+            vetorPalpitesCorretos="+2.5";
+        } 
+        if(nome_palpites[np]=="min_gol_3"){
+            vetorPalpitesCorretos="-2.5";
+        } 
+        if(nome_palpites[np]=="ambas_gol"){
+            vetorPalpitesCorretos="Ambas";
+        }
+
         return vetorPalpitesCorretos;       
     }
 

@@ -113,7 +113,7 @@ function printSomeTestText2() {
     window.DatecsPrinter.printText("{b}PALPITE: {/b}"+nomePapites(i)+"{b}  VALOR PALPITE: {/b}"+palpites[i]+"{br}",'ISO-8859-1',  function(){ });
   }
   window.DatecsPrinter.printText("{br}{br}{br}{br}{br}{br}",'ISO-8859-1', function(){} );
-
+  location.reload();
 
 }
 

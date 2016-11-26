@@ -102,8 +102,8 @@ function printSomeTestText2() {
   window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("{b}{w}COMPROVANTE{/w}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("------------------------------------------------{br}{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText("DATA: "+toData(jsonApostas.aposta.created_at)+" AS "+toHora(jsonApostas.aposta.created_at)"{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText("VALOR APOSTADO: {b}"+jsonApostas.aposta.valor_aposta+"{/b}{br}RETORNO POSSIVEL: {h}{b}"+auxiliar.toFixed(2);+"{/b}{/h}{br}",'ISO-8859-1',  function(){ });
+  window.DatecsPrinter.printText("DATA: "+toData(jsonApostas.aposta.created_at)+" AS "+toHora(jsonApostas.aposta.created_at)+"{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("VALOR APOSTADO: {b}"+jsonApostas.aposta.valor_aposta+"{/b}{br}RETORNO POSSIVEL: {h}{b}"+auxiliar+"{/b}{/h}{br}",'ISO-8859-1',  function(){ });
   window.DatecsPrinter.printText("NOME APOSTADOR: {b}"+jsonApostas.aposta.nome_apostador+"{/b}{br}CÓDIGO APOSTA: {h}{b}"+jsonApostas.aposta.codigo+"{/b}{/h}{br}",'ISO-8859-1', function(){} );
 
   for (var i in jogosIdAposta) {
@@ -111,7 +111,7 @@ function printSomeTestText2() {
     window.DatecsPrinter.printText("{b}JOGO: "+casa[i]+" VS "+ fora[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
     window.DatecsPrinter.printText("{b}PALPITE: {/b}"+nomePapites(nome_palpites[i])+"{b}  VALOR PALPITE: {/b}"+palpites[i]+"{br}",'ISO-8859-1',  function(){ });
   }
-  window.DatecsPrinter.printText("{br}{br}{br}{br}{br}{br}",'ISO-8859-1', function(){} );
+ window.DatecsPrinter.printText("{br}{br}{br}{br}{br}{br}",'ISO-8859-1', function(){} );
 
 
 }

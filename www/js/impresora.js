@@ -10,11 +10,11 @@ function imprimirTodosJogos()
     );
 }
 
-function imprimirAposta(data)
+function imprimirAposta()
 {
   window.DatecsPrinter.listBluetoothDevices(
     function (devices) {
-      window.DatecsPrinter.connect(devices[0].address,printSomeTestText2(data));
+      window.DatecsPrinter.connect(devices[0].address,printSomeTestText2);
     },
     function (error) {
       swal(JSON.stringify(error));
@@ -71,9 +71,9 @@ function printSomeTestText2(data) {
 
  window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
  window.DatecsPrinter.printText("{b}{w}COMPROVANTE{/w}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
- window.DatecsPrinter.printText("DATA: "+data.aposta.created_at+"{br}",'ISO-8859-1', function(){} );
- window.DatecsPrinter.printText("{b}VALOR APOSTADO: "+data.aposta.valor_aposta+"   RETORNO POSSIVEL: "+auxiliar+"{/b}{br}",'ISO-8859-1',  function(){ });
- window.DatecsPrinter.printText("NOME APOSTADOR: {b}"+data.aposta.nome_apostador+"{/b} CÓDIGO APOSTA: {b}"+data.aposta.codigo+"{/b}{br}",'ISO-8859-1', function(){} );
+ window.DatecsPrinter.printText("DATA: "+jsonApostas.aposta.created_at+"{br}",'ISO-8859-1', function(){} );
+ window.DatecsPrinter.printText("{b}VALOR APOSTADO: "+jsonApostas.aposta.valor_aposta+"   RETORNO POSSIVEL: "+auxiliar+"{/b}{br}",'ISO-8859-1',  function(){ });
+ window.DatecsPrinter.printText("NOME APOSTADOR: {b}"+jsonApostas.aposta.nome_apostador+"{/b} CÓDIGO APOSTA: {b}"+jsonApostas.aposta.codigo+"{/b}{br}",'ISO-8859-1', function(){} );
  
  for (var i in jogosIdAposta) {
   window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );

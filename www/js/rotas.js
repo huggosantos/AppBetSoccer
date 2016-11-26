@@ -40,7 +40,7 @@ var contador = 0; //Contador para gerenciar o indece do vetores ->>palpite,jogoI
 var tpapites = ["valor_casa", "valor_fora", "valor_empate", "valor_dupla", "valor_1_2", "max_gol_2", "min_gol_3", "ambas_gol"];
 var auxiliar=0; //recebe o valor da aposta para mostrar na view
 var testeA=0; //recebe o valor da aposta
-var copiaJsonAposta;
+var jsonApostas;
 
 app.controller('dadosCambista', function($scope, $http, $route, $location) { 
 
@@ -149,7 +149,8 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
         }).
         success(function(resposta) {
             Materialize.toast('Aposta realizada Com Sucesso', 4000);
-            imprimirAposta(resposta);
+            jsonApostas = resposta;
+            imprimirAposta();
             $location.path("/aposta");
             $location.reload();
         }).

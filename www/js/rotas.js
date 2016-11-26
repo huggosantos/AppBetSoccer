@@ -351,7 +351,7 @@ function CampEmJogosPorData(hora) {
     //percorre
     for (var k in jsonServidor.jogos) {
         //console.log("--------------------");
-        if (hora == jsonServidor.jogos[k].data) {
+        if (toData(hora) == toData(jsonServidor.jogos[k].data)) {
             //console.log("Json data -> "+response.data.jogos[k].data);
             if (!dadosCamp(aux, jsonServidor.jogos[k].campeonato.descricao_campeonato)) {
                 aux.push(jsonServidor.jogos[k].campeonato.descricao_campeonato);
@@ -361,8 +361,7 @@ function CampEmJogosPorData(hora) {
     }
     return aux;
 };
-
-
+ 
 app.elememt(document).ready(function() {
     alert("entrei");
     window.broadcaster.addEventListener("DatecsPrinter.connectionStatus", function(e) {

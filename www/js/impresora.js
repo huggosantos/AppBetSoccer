@@ -22,36 +22,36 @@ function imprimirAposta()
     );
 }
 
- function nomePapites(np){
-        var vetorPalpitesCorretos;
+function nomePapites(np){
+  var vetorPalpitesCorretos;
 
-        if(nome_palpites[np]=="valor_casa"){
-            vetorPalpitesCorretos="Valor Casa";
-        }
-        if(nome_palpites[np]=="valor_fora"){
-            vetorPalpitesCorretos="Valor Fora";
-        } 
-        if(nome_palpites[np]=="valor_empate"){
-            vetorPalpitesCorretos="Valor Empate";
-        } 
-        if(nome_palpites[np]=="valor_dupla"){
-            vetorPalpitesCorretos="Valor Dupla";
-        } 
-        if(nome_palpites[np]=="valor_1_2"){
-            vetorPalpitesCorretos="Valor Gol 1/2";
-        } 
-        if(nome_palpites[np]=="max_gol_2"){
-            vetorPalpitesCorretos="+2.5";
-        } 
-        if(nome_palpites[np]=="min_gol_3"){
-            vetorPalpitesCorretos="-2.5";
-        } 
-        if(nome_palpites[np]=="ambas_gol"){
-            vetorPalpitesCorretos="Ambas";
-        }
+  if(nome_palpites[np]=="valor_casa"){
+    vetorPalpitesCorretos="Valor Casa";
+  }
+  if(nome_palpites[np]=="valor_fora"){
+    vetorPalpitesCorretos="Valor Fora";
+  } 
+  if(nome_palpites[np]=="valor_empate"){
+    vetorPalpitesCorretos="Valor Empate";
+  } 
+  if(nome_palpites[np]=="valor_dupla"){
+    vetorPalpitesCorretos="Valor Dupla";
+  } 
+  if(nome_palpites[np]=="valor_1_2"){
+    vetorPalpitesCorretos="Valor Gol 1/2";
+  } 
+  if(nome_palpites[np]=="max_gol_2"){
+    vetorPalpitesCorretos="+2.5";
+  } 
+  if(nome_palpites[np]=="min_gol_3"){
+    vetorPalpitesCorretos="-2.5";
+  } 
+  if(nome_palpites[np]=="ambas_gol"){
+    vetorPalpitesCorretos="Ambas";
+  }
 
-        return vetorPalpitesCorretos;       
-    }
+  return vetorPalpitesCorretos;       
+}
 
 function toData(dateTime) {
 var dateTime = dateTime.split(" ");//dateTime[0] = date, dateTime[1] = time
@@ -84,8 +84,7 @@ function printSomeTestText() {
     if(jsonServidor.jogos[jg].campeonato.descricao_campeonato==vetor[camp] && jsonServidor.jogos[jg].data==vetorHora[datas]){
       window.DatecsPrinter.printText(toHora("{b}"+vetorHora[datas])+"  "+jsonServidor.jogos[jg].time[0].descricao_time+" VS "+ jsonServidor.jogos[jg].time[1].descricao_time+"{/b}{br}",'ISO-8859-1',  function(){ });
       window.DatecsPrinter.printText("{s}Casa  Empate  Fora  Dupla  Gol1/2  +2.5  -2.5  Ambas {/s}{br}",'ISO-8859-1', function(){});
-      window.DatecsPrinter.printText("{s}"+jsonServidor.jogos[jg].valor_casa+"   "+jsonServidor.jogos[jg].valor_empate+"    "+jsonServidor.jogos[jg].valor_fora+"    "+jsonServidor.jogos[jg].valor_dupla+"    "+jsonServidor.jogos[jg].valor_1_2+"    "+jsonServidor.jogos[jg].max_gol_2+"    "+jsonServidor.jogos[jg].min_gol_3+"    "+jsonServidor.jogos[jg].ambas_gol+"{/s}{br}",'ISO-8859-1', function(){});
-      
+      window.DatecsPrinter.printText("{s}"+jsonServidor.jogos[jg].valor_casa+"   "+jsonServidor.jogos[jg].valor_empate+"   "+jsonServidor.jogos[jg].valor_fora+"   "+jsonServidor.jogos[jg].valor_dupla+"   "+jsonServidor.jogos[jg].valor_1_2+"   "+jsonServidor.jogos[jg].max_gol_2+"   "+jsonServidor.jogos[jg].min_gol_3+"   "+jsonServidor.jogos[jg].ambas_gol+"{/s}{br}",'ISO-8859-1', function(){});
     }
 
   }
@@ -102,16 +101,17 @@ function printSomeTestText2() {
   window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("{b}{w}COMPROVANTE{/w}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("------------------------------------------------{br}{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText("DATA: "+toData(jsonApostas.aposta.created_at)+" AS "+toHora(jsonApostas.aposta.created_at)+"{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText("VALOR APOSTADO: {b}"+jsonApostas.aposta.valor_aposta+"{/b}{br}RETORNO POSSIVEL: {h}{b}"+auxiliar+"{/b}{/h}{br}",'ISO-8859-1',  function(){ });
+  window.DatecsPrinter.printText("CÓDIGO APOSTA: {h}{b}"+jsonApostas.aposta.codigo+"{/b}{/h}{right}{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("DATA: "+toData(jsonApostas.aposta.created_at)+" AS "+toHora(jsonApostas.aposta.created_at)+" HRS{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("VALOR APOSTADO: {b}R$"+jsonApostas.aposta.valor_aposta+"{/b}{br}RETORNO POSSIVEL: {w}{b}"+auxiliar.toFixed(2)+"{/b}{/w}{br}",'ISO-8859-1',  function(){ });
   window.DatecsPrinter.printText("NOME APOSTADOR: {b}"+jsonApostas.aposta.nome_apostador+"{/b}{br}CÓDIGO APOSTA: {h}{b}"+jsonApostas.aposta.codigo+"{/b}{/h}{br}",'ISO-8859-1', function(){} );
 
   for (var i in jogosIdAposta) {
     window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
     window.DatecsPrinter.printText("{b}JOGO: "+casa[i]+" VS "+ fora[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
-    window.DatecsPrinter.printText("{b}PALPITE: {/b}"+nomePapites(nome_palpites[i])+"{b}  VALOR PALPITE: {/b}"+palpites[i]+"{br}",'ISO-8859-1',  function(){ });
+    window.DatecsPrinter.printText("{b}PALPITE: {/b}"+nomePapites(i)+"{b}  VALOR PALPITE: {/b}"+palpites[i]+"{br}",'ISO-8859-1',  function(){ });
   }
- window.DatecsPrinter.printText("{br}{br}{br}{br}{br}{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("{br}{br}{br}{br}{br}{br}",'ISO-8859-1', function(){} );
 
 
 }

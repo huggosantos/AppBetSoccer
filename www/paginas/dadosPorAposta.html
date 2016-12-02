@@ -12,18 +12,18 @@
   <div class="row " style="margin-top:20px;">
     <div class="col s12 ">
       <ul class="tabs pinned width">
-        <li class="tab col s6 azul"><a href="#tApostas">T. Apostas</a></li>
-        <li class="tab col s6 vermelho"><a class="active" href="#ApostasVencedoras">Vencedoras</a></li>
+        <li class="tab col s6 azul"><a href="#tApostas"><b id="teste4">T. Apostas</b></a></li>
+        <li class="tab col s6 vermelho"><a class="active" href="#ApostasVencedoras"><b id="teste4">Vencedoras</b></a></li>
       </ul>
     </div>
     <div id="tApostas" class="col s12" style="margin-top:65px;">
-      <ul class="collapsible" data-collapsible="accordion" ng-controller="teste" style="active:border: green;" ng-repeat="d in dadosPorAposta.apostas">
+      <ul class="collapsible" data-collapsible="accordion" ng-controller="teste" ng-repeat="d in dadosPorAposta.apostas">
         <li >
-          <div class="collapsible-header">Código Aposta:&nbsp;<em id="texto4">{{d.aposta}}</em>&nbsp;&nbsp;Ganho:&nbsp;<em id="texto4">R$&nbsp;{{d.ganho}}</em></div>
+          <div class="collapsible-header">Código Aposta:&nbsp;<em id="texto4">{{d.aposta}}</em>&nbsp;&nbsp;Ganho:&nbsp;<em id="texto7">R$&nbsp;{{d.ganho}}</em></div>
           <div class="collapsible-body">
             <h6 id="textoNegrito" class="center">JOGOS APOSTADOS</h6><br>
             <div ng-repeat="j in d.jogos">
-             {{toData(j.data)}}&nbsp;{{toHora(j.data)}}&nbsp;<em id="texto3">{{j.times[0].descricao_time}}&nbsp;{{j.resultado.r_casa}}&nbsp;vs&nbsp;{{j.resultado.r_fora}}&nbsp;{{j.times[1].descricao_time}}</em>
+             {{toData(j.data)}}&nbsp;{{toHora(j.data)}}&nbsp;<em id="texto3">{{j.times[0].descricao_time}}&nbsp;<em id="texto7">{{j.resultado.r_casa}}</em>&nbsp;vs&nbsp;<em id="texto7">{{j.resultado.r_fora}}</em>&nbsp;{{j.times[1].descricao_time}}</em>
             </div>
           </div>   
         </li>

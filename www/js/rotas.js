@@ -57,18 +57,18 @@ app.controller('dadosPorAposta', function($scope, $http, $route, $location) {
     $scope.buscarDadosPorAposta = function() {
         $http.get('http://betsocceroficial.herokuapp.com/aposta/premiosApostas/'+$scope.password).then(function(response) {
           $scope.dadosPorAposta = response.data;
-     }).catch(function(err) {
-       if(err.status==400){
-        Materialize.toast('Código de Segurança Inexistente', 4000);
-    }else if(err.status==401){
-        Materialize.toast('Código de Segurança Inativo', 4000);
-    }else{
-        Materialize.toast('Erro !', 4000);
-    }
+      }).catch(function(err) {
+         if(err.status==400){
+            Materialize.toast('Código de Segurança Inexistente', 4000);
+        }else if(err.status==401){
+            Materialize.toast('Código de Segurança Inativo', 4000);
+        }else{
+            Materialize.toast('Erro !', 4000);
+        }
 
-});
- }
- $scope.toData = function(dateTime) {
+    });
+  }
+  $scope.toData = function(dateTime) {
 
                 var dateTime = dateTime.split(" "); //Cria um array com uma posição ["2016-07-10 12:40:10"]
                 var date = dateTime[0].split("-"); //Separa A string aprtir do "-" Cria um Array com tres posições ["2016", "17", "10"]
@@ -88,6 +88,11 @@ app.controller('dadosPorAposta', function($scope, $http, $route, $location) {
         }
         toTop();
         $(document).ready(function(){
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal').modal();
+        });
+
+        $(document).ready(function(){
             $('ul.tabs').tabs();
         });
 
@@ -100,18 +105,18 @@ app.controller('dadosCambista', function($scope, $http, $route, $location) {
     $scope.buscarDadosCambista = function() {
         $http.get('http://betsocceroficial.herokuapp.com/aposta/ganhosApostas/'+$scope.password).then(function(response) {
           $scope.dados = response.data;
-     }).catch(function(err) {
-       if(err.status==400){
-        Materialize.toast('Código de Segurança Inexistente', 4000);
-    }else if(err.status==401){
-        Materialize.toast('Código de Segurança Inativo', 4000);
-    }else{
-        Materialize.toast('Erro !', 4000);
-    }
-});
- }
- toTop();
- $(document).ready(function() {
+      }).catch(function(err) {
+         if(err.status==400){
+            Materialize.toast('Código de Segurança Inexistente', 4000);
+        }else if(err.status==401){
+            Materialize.toast('Código de Segurança Inativo', 4000);
+        }else{
+            Materialize.toast('Erro !', 4000);
+        }
+    });
+  }
+  toTop();
+  $(document).ready(function() {
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
         $('.modal').modal();
     });
@@ -367,18 +372,18 @@ app.controller('aposta', function($scope, $http, $routeParams, $location, $rootS
     $scope.jsonApostasDinamicas = function(){
         var arrayJson= new Array();
         for(var i in  nome_palpites){
-         var dadosAposta = JSON.stringify({
+           var dadosAposta = JSON.stringify({
             casa: $scope.timeCasa[i],
             fora: $scope.timeFora[i],
             valorPalpite: $scope.palpiteNumero[i],
         });
-         arrayJson.push(dadosAposta);
-         console.log(arrayJson);
-         console.log("dados Dina"+dadosAposta);
-     }
+           arrayJson.push(dadosAposta);
+           console.log(arrayJson);
+           console.log("dados Dina"+dadosAposta);
+       }
 
-     return arrayJson;
- }
+       return arrayJson;
+   }
     toTop();// Rola a pagina pra cima
 
     // Ativa a função do modal na rota, função do materialize

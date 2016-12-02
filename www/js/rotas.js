@@ -11,6 +11,10 @@ app.config(function($routeProvider) {
         templateUrl: 'paginas/dadosCambista.html',
         controller: 'dadosCambista'
     })
+    .when('/dadosPorAposta', {
+        templateUrl: 'paginas/dadosPorAposta.html',
+        controller: 'dadosPorAposta'
+    })
     .otherwise('/aposta', {
         templateUrl: 'paginas/aposta.html',
         controller: 'home'
@@ -43,20 +47,68 @@ var testeA=0; //recebe o valor da aposta
 var copiaJsonAposta;
 var jsonApostas;
 
+app.controller('teste', function($scope, $http, $route, $location) { 
+    $(document).ready(function(){
+        $('.collapsible').collapsible();
+    });
+});
+app.controller('dadosPorAposta', function($scope, $http, $route, $location) { 
+
+    $scope.buscarDadosPorAposta = function() {
+        $http.get('http://betsocceroficial.herokuapp.com/aposta/premiosApostas/'+$scope.password).then(function(response) {
+          $scope.dadosPorAposta = response.data;
+     }).catch(function(err) {
+       if(err.status==400){
+        Materialize.toast('Código de Segurança Inexistente', 4000);
+    }else if(err.status==401){
+        Materialize.toast('Código de Segurança Inativo', 4000);
+    }else{
+        Materialize.toast('Erro !', 4000);
+    }
+
+});
+ }
+ $scope.toData = function(dateTime) {
+
+                var dateTime = dateTime.split(" "); //Cria um array com uma posição ["2016-07-10 12:40:10"]
+                var date = dateTime[0].split("-"); //Separa A string aprtir do "-" Cria um Array com tres posições ["2016", "17", "10"]
+                var dataFinal = date[2] + "/" +
+                date[1] + "/" + date[0];
+                return dataFinal; //Retona a data No Padrao Brasileiro ["10/17/2016"]
+            }
+            //Metodo que faz um split em string DataTime e retonar apenas a Hora
+            $scope.toHora = function(dateTime) {
+            var dateTime = dateTime.split(" "); //Cria um array com uma posição ["2016-07-10 12:40:10"]
+
+            var time = dateTime[1].split(":"); //Separa a string aprtir do ":" Cria um Array com tres posições ["12", "40", "10"]
+            var timeFinal = time[0] + ":" + time[1];
+
+            return timeFinal; //Retona a hora descosiderando os segundos ["12:40"]
+
+        }
+        toTop();
+        $(document).ready(function(){
+            $('ul.tabs').tabs();
+        });
+
+        
+    });
+
+
 app.controller('dadosCambista', function($scope, $http, $route, $location) { 
 
     $scope.buscarDadosCambista = function() {
         $http.get('http://betsocceroficial.herokuapp.com/aposta/ganhosApostas/'+$scope.password).then(function(response) {
           $scope.dados = response.data;
-          if(response.data.status=="Inexistente"){
-             Materialize.toast('Código de Segurança Inexistente', 4000);
-         } else if(response.data.status=="Inativo"){
-             Materialize.toast('Código de Segurança Inativo', 4000);
-         }
      }).catch(function(err) {
-       Materialize.toast('Erro !', 4000);
-
-   });
+       if(err.status==400){
+        Materialize.toast('Código de Segurança Inexistente', 4000);
+    }else if(err.status==401){
+        Materialize.toast('Código de Segurança Inativo', 4000);
+    }else{
+        Materialize.toast('Erro !', 4000);
+    }
+});
  }
  toTop();
  $(document).ready(function() {
@@ -360,7 +412,7 @@ function CampEmJogosPorData(hora) {
     }
     return aux;
 };
- 
+
 app.elememt(document).ready(function() {
     alert("entrei");
     window.broadcaster.addEventListener("DatecsPrinter.connectionStatus", function(e) {

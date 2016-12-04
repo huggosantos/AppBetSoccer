@@ -33,18 +33,29 @@
      </li>
    </ul>
  </div>
- <a class="fixed-action-btn toolbar btn-floating btn-large green" data-target="modalDadosApostas"><i class="material-icons">add</i></a>
- <!-- Modal Structure -->
- <div id="modalDadosApostas" class="modal" width="100" style="width:300px;" style="z-index: 9999;">
+ 
+ <a class="fixed-action-btn toolbar btn-floating btn-large green" data-target="modalDadosApostas">
+  <i>
+    <svg style="margin-top:15%; position: relative;" fill="#FFFFFF" height="36" viewBox="0 0 24 24" width="36" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0h24v24H0z" fill="none"/>
+      <path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h1.9c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm0 12H6V10h12v10z"/>
+    </svg>
+  </i>
+</a>
+
+<!-- Modal Structure -->
+<div id="modalDadosApostas" class="modal" width="100" style="width:300px;" style="z-index: 9999;">
   <div class="modal-content">
-    <div class="input-field col s6 ">
-      <input id="password" type="password" ng-model="password" class="validate">
-      <label for="password">Cd. Segurança</label>
+    <div class="row">
+      <div class="input-field col s12 ">
+        <input id="password" type="password" ng-model="password" class="validate">
+        <label for="password">Cd. Segurança</label>
+      </div>
     </div>
   </div>
   <div class="modal-footer">
-  <a  ng-click="buscarDadosPorAposta()" class=" modal-action modal-close waves-effect waves-green btn-flat">BUSCAR</a>
+    <a  ng-click="buscarDadosPorAposta()" class=" modal-action modal-close waves-effect waves-green btn-flat">BUSCAR</a>
   </div>
-
 </div>
+
 </div>

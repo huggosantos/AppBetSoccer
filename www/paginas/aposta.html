@@ -1,6 +1,6 @@
 <br><br><br>
 <div class="row">
-	<table class="pinned" style="z-index: 999; top:57px;">
+	<table class="pinned" style="z-index: 998; top:57px;">
 		<thead>
 			<tr>
 				<th data-field="price" style="background-color:#8bc34a;" class="tabelaCenter">Casa</th>
@@ -65,76 +65,98 @@
 	<!-- butão fixo na tela -->
 	<div class="fixed-action-btn toolbar">
 		<a class="btn-floating btn-large green darken-3">
-			<i class="large material-icons">add</i>
+			<i>
+				<svg style="margin-top:15%;" fill="#FFFFFF" height="36" viewBox="0 0 24 24" width="36" xmlns="http://www.w3.org/2000/svg">
+					<path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+					<path d="M0 0h24v24H0z" fill="none"/>
+				</svg>	
+			</i>
 		</a>
 		<ul>
-			<li class="waves-effect waves-light"><a data-target="modal2" ><i class="material-icons">person_add</i></a></li> 
-			<li class="waves-effect waves-light"><a data-target="modal1"><i class="material-icons">send</i></a></li>
-		</ul>
-	</div>
+			<li class="waves-effect waves-light"><a data-target="modal2" >
+				<i>
+				<svg style="margin-top:5%;" fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+						<path d="M0 0h24v24H0z" fill="none"/>
+						<path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+					</svg>
+				</i>
+			</a>
+		</li> 
+		<li class="waves-effect waves-light">
+			<a data-target="modal1">
+				<i>
+					<svg style="margin-top:5%;" fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+						<path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+						<path d="M0 0h24v24H0z" fill="none"/>
+					</svg>
+				</i>
+			</a>
+		</li>
+	</ul>
+</div>
 
-	<!-- Modal Com listas de jogos, para começa o processo de aposta -->
-	<div id="modal1" class="modal bottom-sheet">
-		<div class="modal-content">
-			<h4 class="texto2">Lista dos jogos apostados</h4>
-			<p ng-controller="controlCollapseible"><i id="texto3">Apostator: </i><i id="texto6">&nbsp;{{nome}}&nbsp;</i><i id="texto3">&nbsp;Valor Pago: </i><i id="texto4">&nbsp;{{valor}}&nbsp;</i><i id="texto3">&nbsp;Retorno Possível: </i><i id="texto5">&nbsp;{{re()}}</i></p>
-			<table class="striped" >
-				<thead>
-					<tr>
-						<th data-field="name">CASA</th>
-						<th data-field="price">FORA</th>
-						<th data-field="price">PALPITE</th>
-						<th data-field="price">V.PALPITE</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="apostas in tamanhoVetor()">
-						<td >{{timeCasa[apostas]}}</td>
-						<td >{{timeFora[apostas]}}</td>
-						<td >{{nomePapites(apostas)}}</td>
-						<td >{{palpiteNumero[apostas]}}</td>
-					</tr>
-				</tbody>
-			</table>
+<!-- Modal Com listas de jogos, para começa o processo de aposta -->
+<div id="modal1" class="modal bottom-sheet">
+	<div class="modal-content">
+		<h4 class="texto2">Lista dos jogos apostados</h4>
+		<p ng-controller="controlCollapseible"><i id="texto3">Apostator: </i><i id="texto6">&nbsp;{{nome}}&nbsp;</i><i id="texto3">&nbsp;Valor Pago: </i><i id="texto4">&nbsp;{{valor}}&nbsp;</i><i id="texto3">&nbsp;Retorno Possível: </i><i id="texto5">&nbsp;{{re()}}</i></p>
+		<table class="striped" >
+			<thead>
+				<tr>
+					<th data-field="name">CASA</th>
+					<th data-field="price">FORA</th>
+					<th data-field="price">PALPITE</th>
+					<th data-field="price">V.PALPITE</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="apostas in tamanhoVetor()">
+					<td >{{timeCasa[apostas]}}</td>
+					<td >{{timeFora[apostas]}}</td>
+					<td >{{nomePapites(apostas)}}</td>
+					<td >{{palpiteNumero[apostas]}}</td>
+				</tr>
+			</tbody>
+		</table>
 
-			<div class="modal-footer">
-				<a href="#aposta" data-target="modal4" class=" modal-action modal-close waves-effect waves-green btn-flat">CONFIRMAR</a>
-			</div>
-		</div>
-	</div>
-	<!-- Modal para adicionar os dados do apostador, nome e valor da aposta -->
-	<div id="modal2" class="modal bottom-sheet" >
-		<div class="modal-content">
-			<h4>Adicionar Apostador</h4>
-			<div class="input-field col s6" >
-				<i class="material-icons prefix">account_circle</i>
-				<input id="icon_prefix" ng-model="nome" type="text" class="validate">
-				<label for="icon_prefix">Nome do Apostador</label>
-			</div>
-			<div class="input-field col s6" >
-				<i class="material-icons prefix">attach_money</i>
-				<input id="icon_telephone" ng-model="valor" type="number" class="validate">
-				<label for="icon_telephone">Valor Aposta</label>
-			</div>
-		</div>
 		<div class="modal-footer">
-			<a href="#aposta" ng-click="enviarValor()" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+			<a href="#aposta" data-target="modal4" class=" modal-action modal-close waves-effect waves-green btn-flat">CONFIRMAR</a>
 		</div>
 	</div>
+</div>
+<!-- Modal para adicionar os dados do apostador, nome e valor da aposta -->
+<div id="modal2" class="modal bottom-sheet" >
+	<div class="modal-content">
+		<h4>Adicionar Apostador</h4>
+		<div class="input-field col s6" >
+			<i class="material-icons prefix">account_circle</i>
+			<input id="icon_prefix" ng-model="nome" type="text" class="validate">
+			<label for="icon_prefix">Apostador</label>
+		</div>
+		<div class="input-field col s6" >
+			<i class="material-icons prefix">attach_money</i>
+			<input id="icon_telephone" ng-model="valor" type="number" class="validate">
+			<label for="icon_telephone">Valor</label>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a href="#aposta" ng-click="enviarValor()" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+	</div>
+</div>
 
-	<!-- Modal para adicionar a senha do cambista e finalizar a aposta -->
-	<div id="modal4" class="modal" width="100" style="width:300px;" style="z-index: 9999;">
-		<div class="modal-content">
-			<div class="row">
-				<div class="input-field">
-					<input id="password" ng-model="password" type="password" class="validate">
-					<label for="password">Password</label>
-				</div>
+<!-- Modal para adicionar a senha do cambista e finalizar a aposta -->
+<div id="modal4" class="modal" width="100" style="width:300px;" style="z-index: 9999;">
+	<div class="modal-content">
+		<div class="row">
+			<div class="input-field">
+				<input id="password" ng-model="password" type="password" class="validate">
+				<label for="password">Password</label>
 			</div>
 		</div>
-		<div class="modal-footer">
-			<a ng-controller="controlCollapseible" ng-click="enviar()" class=" modal-action modal-close waves-effect waves-green btn-flat">APOSTAR</a>
-		</div>
 	</div>
+	<div class="modal-footer">
+		<a ng-controller="controlCollapseible" ng-click="enviar()" class=" modal-action modal-close waves-effect waves-green btn-flat">APOSTAR</a>
+	</div>
+</div>
 
 </div>

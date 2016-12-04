@@ -40,10 +40,10 @@ function nomePapites(np){
   if(nome_palpites[np]=="valor_1_2"){
     vetorPalpitesCorretos="Gol 1/2";
   } 
-  if(nome_palpites[np]=="max_gol_2"){
+  if(nome_palpites[np]=="min_gol_3"){
     vetorPalpitesCorretos="+2.5";
   } 
-  if(nome_palpites[np]=="min_gol_3"){
+  if(nome_palpites[np]=="max_gol_2"){
     vetorPalpitesCorretos="-2.5";
   } 
   if(nome_palpites[np]=="ambas_gol"){

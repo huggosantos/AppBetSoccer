@@ -26,19 +26,19 @@ function nomePapites(np){
   var vetorPalpitesCorretos;
 
   if(nome_palpites[np]=="valor_casa"){
-    vetorPalpitesCorretos="Valor Casa";
+    vetorPalpitesCorretos="Casa";
   }
   if(nome_palpites[np]=="valor_fora"){
-    vetorPalpitesCorretos="Valor Fora";
+    vetorPalpitesCorretos="Fora";
   } 
   if(nome_palpites[np]=="valor_empate"){
-    vetorPalpitesCorretos="Valor Empate";
+    vetorPalpitesCorretos="Empate";
   } 
   if(nome_palpites[np]=="valor_dupla"){
-    vetorPalpitesCorretos="Valor Dupla";
+    vetorPalpitesCorretos="Dupla";
   } 
   if(nome_palpites[np]=="valor_1_2"){
-    vetorPalpitesCorretos="Valor Gol 1/2";
+    vetorPalpitesCorretos="Gol 1/2";
   } 
   if(nome_palpites[np]=="max_gol_2"){
     vetorPalpitesCorretos="+2.5";
@@ -105,12 +105,12 @@ function printSomeTestText2() {
   window.DatecsPrinter.printText("CÓDIGO APOSTA: {w}{b}"+jsonApostas.aposta.codigo+"{/b}{/w}{br}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("DATA: "+toData(jsonApostas.aposta.created_at)+" AS "+toHora(jsonApostas.aposta.created_at)+" HRS{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("NOME APOSTADOR: {b}"+jsonApostas.aposta.nome_apostador+"{/b}{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText("VALOR APOSTADO: {b}R$ "+jsonApostas.aposta.valor_aposta+"{/b}{br}RETORNO POSSIVEL: {w}{b}R$"+auxiliar.toFixed(2)+"{/b}{/w}{br}",'ISO-8859-1',  function(){ });
+  window.DatecsPrinter.printText("VALOR APOSTADO: {b}R$ "+jsonApostas.aposta.valor_aposta.toFixed(2)+"{/b}{br}RETORNO POSSIVEL: {w}{b}R$"+auxiliar.toFixed(2)+"{/b}{/w}{br}",'ISO-8859-1',  function(){ });
 
   for (var i in jogosIdAposta) {
     window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
     window.DatecsPrinter.printText("{b}JOGO: "+casa[i]+" VS "+ fora[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
-    window.DatecsPrinter.printText("{b}PALPITE: {/b}"+nomePapites(i)+"{b}  VALOR PALPITE: {/b}"+palpites[i]+"{br}",'ISO-8859-1',  function(){ });
+    window.DatecsPrinter.printText("{b}PALPITE: {/b}"+nomePapites(i)+"{b}  VALOR PALPITE: {/b}"+palpites[i].toFixed(2)+"{br}",'ISO-8859-1',  function(){ });
   }
   window.DatecsPrinter.printText("{br}{br}{br}{br}{br}{br}",'ISO-8859-1', function(){} );
   location.reload();

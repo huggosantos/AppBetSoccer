@@ -83,7 +83,7 @@ app.controller('dadosPorAposta', function($scope, $http, $route, $location) {
                 var dateTime = dateTime.split(" "); //Cria um array com uma posição ["2016-07-10 12:40:10"]
                 var date = dateTime[0].split("-"); //Separa A string aprtir do "-" Cria um Array com tres posições ["2016", "17", "10"]
                 var dataFinal = date[2] + "/" +
-                date[1] + "/" + date[0];
+                date[1];
                 return dataFinal; //Retona a data No Padrao Brasileiro ["10/17/2016"]
             }
             //Metodo que faz um split em string DataTime e retonar apenas a Hora
@@ -332,6 +332,13 @@ app.controller('aposta', function($scope, $http, $routeParams, $location, $rootS
             return aux;
         };
 
+        $scope.jogosContem = function(){
+            if(response.data.jogos[0]==null ||response.data.jogos[0]== undefined){
+                return true;
+            }else{ a
+                return false;
+            }
+        }
         $scope.campeonatos = vetor;
         $scope.horas = vetorHora;
         $scope.aposta = response.data;

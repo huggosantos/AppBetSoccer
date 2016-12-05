@@ -2,39 +2,40 @@
   <div class="row " style="margin-top:55px;">
     <div class="col s12 ">
       <ul class="tabs pinned width">
-        <li class="tab col s6 azul"><a href="#tApostas"><b id="teste4">T. Apostas</b></a></li>
-        <li class="tab col s6 vermelho"><a class="active" href="#ApostasVencedoras"><b id="teste4">Vencedoras</b></a></li>
+        <li class="tab col s6 azul"><a href="#tApostas" class="active"><b id="teste4">T. Apostas</b></a></li>
+        <li class="tab col s6 vermelho"><a href="#ApostasVencedoras"><b id="teste4">Vencedoras</b></a></li>
       </ul>
     </div>
 
-    <div id="tApostas" class="col s12" style="margin-top:65px;">
-      <ul class="collapsible" data-collapsible="accordion" ng-controller="teste" ng-repeat="d in dadosPorAposta.apostas">
-        <li >
-          <div class="collapsible-header">Código Aposta:&nbsp;<em id="texto4">{{d.aposta}}</em>&nbsp;&nbsp;Ganho:&nbsp;<em id="texto7">R$&nbsp;{{d.ganho}}</em></div>
-          <div class="collapsible-body">
-            <h6 id="textoNegrito" class="center">JOGOS APOSTADOS</h6><br>
-            <div ng-repeat="j in d.jogos">
-             {{toData(j.data)}}&nbsp;{{toHora(j.data)}}&nbsp;<em id="texto3">{{j.times[0].descricao_time}}&nbsp;<em id="texto7">{{j.resultado.r_casa}}</em>&nbsp;vs&nbsp;<em id="texto7">{{j.resultado.r_fora}}</em>&nbsp;{{j.times[1].descricao_time}}</em>
-           </div>
-         </div>   
-       </li>
-     </ul>
-   </div>
-   <div id="ApostasVencedoras" class="col s12" style="margin-top:65px;"">
-    <ul class="collapsible" data-collapsible="accordion" ng-controller="teste" ng-repeat="d in dadosPorAposta.apostas_vencedoras">
-      <li >
-        <div class="collapsible-header">Código Aposta:&nbsp;<em id="texto4">{{d.aposta}}</em>&nbsp;&nbsp;Ganho:&nbsp;<em id="texto4">R$&nbsp;{{d.ganho}}</em></div>
-        <div class="collapsible-body">
-          <h6 id="textoNegrito" class="center">JOGOS APOSTADOS</h6><br>
-          <div ng-repeat="j in d.jogos">
-           {{toData(j.data)}}&nbsp;{{toHora(j.data)}}&nbsp;<em id="texto3">{{j.times[0].descricao_time}}&nbsp;{{j.resultado.r_casa}}&nbsp;vs&nbsp;{{j.resultado.r_fora}}&nbsp;{{j.times[1].descricao_time}}</em>
-         </div>
-       </div>   
-     </li>
-   </ul>
- </div>
- 
- <a class="fixed-action-btn toolbar btn-floating btn-large green" data-target="modalDadosApostas">
+
+<div id="tApostas" class="col s12" style="margin-top:65px;" ng-if="aux">
+  <ul class="collapsible" data-collapsible="accordion" ng-controller="teste" ng-repeat="d in dadosPorAposta.apostas">
+    <li >
+      <div class="collapsible-header">Código Aposta:&nbsp;<em id="texto4">{{d.aposta}}</em>&nbsp;&nbsp;Ganho:&nbsp;<em id="texto7">R$&nbsp;{{d.ganho}}</em></div>
+      <div class="collapsible-body">
+        <h6 id="textoNegrito" class="center">JOGOS APOSTADOS</h6><br>
+        <div ng-repeat="j in d.jogos">
+         {{toData(j.data)}}&nbsp;{{toHora(j.data)}}&nbsp;<em id="texto3">{{j.times[0].descricao_time}}&nbsp;<em id="texto7">{{j.resultado.r_casa}}</em>&nbsp;vs&nbsp;<em id="texto7">{{j.resultado.r_fora}}</em>&nbsp;{{j.times[1].descricao_time}}</em>
+       </div>
+     </div>   
+   </li>
+ </ul>
+</div>
+<div id="ApostasVencedoras" class="col s12" style="margin-top:65px;" ng-if="aux">
+  <ul class="collapsible" data-collapsible="accordion" ng-controller="teste" ng-repeat="d in dadosPorAposta.apostas_vencedoras">
+    <li >
+      <div class="collapsible-header">Código Aposta:&nbsp;<em id="texto4">{{d.codigo}}&nbsp;&nbsp;</em>Apostador:&nbsp;<em id="texto4">{{d.apostador}}</em>&nbsp;&nbsp;Ganho:&nbsp;<em id="texto7">R$&nbsp;{{d.premio}}</em></div>
+      <div class="collapsible-body">
+        <h6 id="textoNegrito" class="center">JOGOS APOSTADOS</h6><br>
+        <div ng-repeat="j in d.jogos">
+         &nbsp;{{toData(j.data)}}&nbsp;{{toHora(j.data)}}&nbsp;<em id="texto3">{{j.times[0].descricao_time}}&nbsp;{{j.resultado.r_casa}}&nbsp;vs&nbsp;{{j.resultado.r_fora}}&nbsp;{{j.times[1].descricao_time}}</em>
+       </div>
+     </div>   
+   </li>
+ </ul>
+</div>
+   
+<a class="fixed-action-btn toolbar btn-floating btn-large green" data-target="modalDadosApostas">
   <i>
     <svg style="margin-top:15%; position: relative;" fill="#FFFFFF" height="36" viewBox="0 0 24 24" width="36" xmlns="http://www.w3.org/2000/svg">
       <path d="M0 0h24v24H0z" fill="none"/>
@@ -54,8 +55,22 @@
     </div>
   </div>
   <div class="modal-footer">
-    <a  ng-click="buscarDadosPorAposta()" class=" modal-action modal-close waves-effect waves-green btn-flat">BUSCAR</a>
+    <a  ng-click="buscarDadosPorAposta();mostrarLoader();" class=" modal-action modal-close waves-effect waves-green btn-flat">BUSCAR</a>
   </div>
 </div>
 
+</div>
+
+ <div class="center" style="margin-top:100px;">
+      <div class="preloader-wrapper big active" ng-if=aux2>
+        <div class="spinner-layer spinner-blue-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
 </div>

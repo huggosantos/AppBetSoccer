@@ -1,5 +1,6 @@
 <br><br><br>
 <div class="row">
+
 	<table class="pinned" style="z-index: 998; top:57px;">
 		<thead>
 			<tr>
@@ -15,9 +16,11 @@
 		</thead>
 
 	</table>
-
-	<br><br><br>
-	<div>
+	<div class="pinned white row" > 
+		<h4 class="texto2" style="z-index: 998; margin-top:60px; margin-left:5%; margin-right:5%;" ng-controller="controlCollapseible" ng-show="(re()>15000)" >Retorno Possílvel Utrapassou o limite</h4>
+	</div>
+	<br><br><br><br>
+	<div class="row">
 		<h2 ng-show="jogosContem()" class="texto2">NÃO HÁ JOGOS</h2>
 	</div>
 	<div ng-repeat="hora in horas " class="clear">
@@ -83,7 +86,7 @@
 				</i>
 			</a>
 		</li> 
-		<li class="waves-effect waves-light" ng-if="valor && nome">
+		<li class="waves-effect waves-light"  ng-controller="controlCollapseible" ng-if="valor && nome" ng-show="(re()<=15000)">
 			<a data-target="modal1" ng-if="valor || nome">
 				<i>
 					<svg style="margin-top:15px;" fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">

@@ -53,32 +53,32 @@ app.controller('teste', function($scope, $http, $route, $location) {
     });
 });
 app.controller('dadosPorAposta', function($scope, $http, $route, $location) { 
-     $scope.mostrarLoader = function(){
-        if($scope.aux==null || $scope.aux==false || $scope.aux==true){
-         $scope.aux=false;   
-         $scope.aux2=true;
-        }
+ $scope.mostrarLoader = function(){
+    if($scope.aux==null || $scope.aux==false || $scope.aux==true){
+     $scope.aux=false;   
+     $scope.aux2=true;
+ }
+}
+
+$scope.buscarDadosPorAposta = function() {
+    $http.get('http://betsocceroficial.herokuapp.com/aposta/premiosApostas/'+$scope.password).then(function(response) {
+      $scope.dadosPorAposta = response.data;
+      $scope.aux2=false;
+      $scope.aux=true;
+  }).catch(function(err) {
+      $scope.aux2=false;
+      $scope.aux=true;
+      if(err.status==400){
+        Materialize.toast('Código de Segurança Inexistente', 4000);
+    }else if(err.status==401){
+        Materialize.toast('Código de Segurança Inativo', 4000);
+    }else{
+        Materialize.toast('Erro !', 4000);
     }
 
-    $scope.buscarDadosPorAposta = function() {
-        $http.get('http://betsocceroficial.herokuapp.com/aposta/premiosApostas/'+$scope.password).then(function(response) {
-          $scope.dadosPorAposta = response.data;
-          $scope.aux2=false;
-          $scope.aux=true;
-      }).catch(function(err) {
-          $scope.aux2=false;
-          $scope.aux=true;
-         if(err.status==400){
-            Materialize.toast('Código de Segurança Inexistente', 4000);
-        }else if(err.status==401){
-            Materialize.toast('Código de Segurança Inativo', 4000);
-        }else{
-            Materialize.toast('Erro !', 4000);
-        }
-
-    });
-  }
-  $scope.toData = function(dateTime) {
+});
+}
+$scope.toData = function(dateTime) {
 
                 var dateTime = dateTime.split(" "); //Cria um array com uma posição ["2016-07-10 12:40:10"]
                 var date = dateTime[0].split("-"); //Separa A string aprtir do "-" Cria um Array com tres posições ["2016", "17", "10"]
@@ -100,7 +100,7 @@ app.controller('dadosPorAposta', function($scope, $http, $route, $location) {
         $(document).ready(function(){
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
         $('.modal').modal();
-        });
+    });
 
         $(document).ready(function(){
             $('ul.tabs').tabs();
@@ -115,27 +115,27 @@ app.controller('dadosCambista', function($scope, $http, $route, $location) {
         if($scope.teste==null || $scope.teste==false || $scope.teste==true){
          $scope.teste=false;   
          $scope.teste2=true;
-        }
+     }
+ }
+ $scope.buscarDadosCambista = function() {   
+    $http.get('http://betsocceroficial.herokuapp.com/aposta/ganhosApostas/'+$scope.password).then(function(response) {
+      $scope.dados = response.data;
+      $scope.teste2=false;
+      $scope.teste=true;
+  }).catch(function(err) {
+     $scope.teste=false;
+     $scope.teste2=false;
+     if(err.status==400){
+        Materialize.toast('Código de Segurança Inexistente', 4000);
+    }else if(err.status==401){
+        Materialize.toast('Código de Segurança Inativo', 4000);
+    }else{
+        Materialize.toast('Erro !', 4000);
     }
-    $scope.buscarDadosCambista = function() {   
-        $http.get('http://betsocceroficial.herokuapp.com/aposta/ganhosApostas/'+$scope.password).then(function(response) {
-          $scope.dados = response.data;
-          $scope.teste2=false;
-          $scope.teste=true;
-      }).catch(function(err) {
-         $scope.teste=false;
-         $scope.teste2=false;
-         if(err.status==400){
-            Materialize.toast('Código de Segurança Inexistente', 4000);
-        }else if(err.status==401){
-            Materialize.toast('Código de Segurança Inativo', 4000);
-        }else{
-            Materialize.toast('Erro !', 4000);
-        }
-    });
-  }
-  toTop();
-  $(document).ready(function() {
+});
+}
+toTop();
+$(document).ready(function() {
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
         $('.modal').modal();
     });
@@ -177,7 +177,6 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
             contador--; //Decremento o contator usando em todos o arrays
             this.checked = false; //Seta o input.checked para false  
             allRadios[$(this).attr('name')] = null;
-
             //Seta a posição atual do input para null
         } else {
             //var var_name = $("input[name='radio_name']:checked").val();
@@ -190,9 +189,9 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
             nome_palpites[contador] = nomePapite(j, p);
             contador++;
             allRadios[$(this).attr('name')] = this;
-
         }
     }
+
 
     /*Metodo que controla o Json que será enviado ao servidor
       parametros -> j = id_jogos | p = palpite double | t = tipo de palpite string 
@@ -237,7 +236,7 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
         });
 
     }
-
+ var contAux;
     $scope.re = function retornoPossivel(){
         auxiliar=testeA;
         for (var k in palpites) {
@@ -245,6 +244,8 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
         }
         return auxiliar.toFixed(2);
     }
+
+
 });
 
 

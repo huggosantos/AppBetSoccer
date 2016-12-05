@@ -101,11 +101,20 @@ app.controller('dadosPorAposta', function($scope, $http, $route, $location) {
 
 
 app.controller('dadosCambista', function($scope, $http, $route, $location) { 
-
-    $scope.buscarDadosCambista = function() {
+    $scope.mostrarLoader = function(){
+        if($scope.teste==null || $scope.teste==false || $scope.teste==true){
+         $scope.teste=false;   
+         $scope.teste2=true;
+        }
+    }
+    $scope.buscarDadosCambista = function() {   
         $http.get('http://betsocceroficial.herokuapp.com/aposta/ganhosApostas/'+$scope.password).then(function(response) {
           $scope.dados = response.data;
+          $scope.teste2=false;
+          $scope.teste=true;
       }).catch(function(err) {
+         $scope.teste=false;
+         $scope.teste2=false;
          if(err.status==400){
             Materialize.toast('Código de Segurança Inexistente', 4000);
         }else if(err.status==401){
@@ -121,6 +130,7 @@ app.controller('dadosCambista', function($scope, $http, $route, $location) {
         $('.modal').modal();
     });
 });
+
 
 
 app.controller('controlCollapseible', function($scope, $http, $route, $location, $rootScope) {

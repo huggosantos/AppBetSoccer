@@ -115,10 +115,10 @@ function printSomeTestText2() {
   }
   window.DatecsPrinter.printText("________________________________________________{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("{w}AVISOS{/w}{CENTER}{br}",'ISO-8859-1', function(){});
-  window.DatecsPrinter.printText("* Não pagaremos jogos já realizados que por     falha quais quer que sejam continuem no sistema;{br}",'ISO-8859-1', function(){});
-  window.DatecsPrinter.printText("* Ticked válido por 8 dias;{br}",'ISO-8859-1', function(){});
-  window.DatecsPrinter.printText("* Ticked será pago em até 72 horas;{br}",'ISO-8859-1', function(){});
-  window.DatecsPrinter.printText("* Se o jogo não acontecer no prazo de 24 horas  da data e hora marcada ele será retirado e  as  apostas serão recalculadas.{br}",'ISO-8859-1', function(){});
+  window.DatecsPrinter.printText("* Não pagaremos jogos já realizados que por     falha quaisquer que sejam continuem no sistema;{br}",'ISO-8859-1', function(){});
+  window.DatecsPrinter.printText("* Ticket válido por 8 dias;{br}",'ISO-8859-1', function(){});
+  window.DatecsPrinter.printText("* Ticket será pago em até 72 horas;{br}",'ISO-8859-1', function(){});
+  window.DatecsPrinter.printText("* Se o jogo não acontecer no prazo de 24 horas  da data e hora marcada ele será retirado e as   apostas serão recalculadas.{br}",'ISO-8859-1', function(){});
   window.DatecsPrinter.printText("{br}{br}{br}{br}{br}{br}",'ISO-8859-1', function(){});
   location.reload();
 

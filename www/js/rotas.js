@@ -46,7 +46,7 @@ var auxiliar=0; //recebe o valor da aposta para mostrar na view
 var testeA=0; //recebe o valor da aposta
 var copiaJsonAposta;
 var jsonApostas;
-
+var datasJogos = new Array();// vetor que guarda as datas dos jogos das apostas;
 app.controller('teste', function($scope, $http, $route, $location) { 
     $(document).ready(function(){
         $('.collapsible').collapsible();
@@ -169,6 +169,7 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
         if (allRadios[$(this).attr('name')] != null) {
             var indice = jogosIdAposta.indexOf(j.id);
             //Pega o indice do jogo atual
+            datasJogos.splice(indice, 1);
             jogosIdAposta.splice(indice, 1); //Remove id do jogo na possição indice
             palpites.splice(indice, 1); //Remove palpite do jogo na possição indice
             nome_palpites.splice(indice, 1); //Remove Tpalpite do jogo na possição indice
@@ -182,6 +183,7 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
             //var var_name = $("input[name='radio_name']:checked").val();
             //Adiciona os Atributos id palpite casa fora nome_palpito
             //Todos na mesma posição (contador);
+            datasJogos[contador]= j.data;
             jogosIdAposta[contador] = j.id;
             palpites[contador] = p;
             casa[contador] = j.time[0].descricao_time;

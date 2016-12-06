@@ -105,20 +105,20 @@ function printSomeTestText2() {
   window.DatecsPrinter.printText("AGENTE: "+jsonApostas.cambista+"{br}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("CÓDIGO APOSTA: {w}{b}"+jsonApostas.aposta.codigo+"{/b}{/w}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("DATA: "+toData(jsonApostas.aposta.created_at)+" AS "+toHora(jsonApostas.aposta.created_at)+" HRS{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText("AGENTE: "+jsonApostas.cambista+"{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("NOME APOSTADOR: {b}"+jsonApostas.aposta.nome_apostador+"{/b}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("VALOR APOSTADO: {b}R$ "+jsonApostas.aposta.valor_aposta.toFixed(2)+"{/b}{br}RETORNO POSSIVEL: {w}{b}R$"+auxiliar.toFixed(2)+"{/b}{/w}{br}",'ISO-8859-1',  function(){ });
 
   for (var i in jogosIdAposta) {
     window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
-    window.DatecsPrinter.printText("{b}JOGO: "+casa[i]+" VS "+ fora[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
+    window.DatecsPrinter.printText(toData(datasJogos[i])+" "toHora(datasJogos[i])+" {b} "+casa[i]+" VS "+ fora[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
     window.DatecsPrinter.printText("PALPITE: "+nomePapites(i)+"  VALOR PALPITE: "+palpites[i].toFixed(2)+"{br}",'ISO-8859-1',  function(){ });
   }
-  window.DatecsPrinter.printText("_________________________________________________{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("________________________________________________{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("{w}AVISOS{/w}{CENTER}{br}",'ISO-8859-1', function(){});
-  window.DatecsPrinter.printText("Não pagaremos jogos já realizados que por falha {br}continuem no sistema.{br}",'ISO-8859-1', function(){});
-  window.DatecsPrinter.printText("Ticked válido por 8 dias, Ticked será pago em até {br}72 horas.{br}",'ISO-8859-1', function(){});
-  window.DatecsPrinter.printText("Se o jogo não acontecer no prazo de 24 horas da {br}data e hora marcada ele será retirado e as apostas recalculadas.{br}",'ISO-8859-1', function(){});
+  window.DatecsPrinter.printText("* Não pagaremos jogos já realizados que por falha {br}continuem no sistema;{br}",'ISO-8859-1', function(){});
+  window.DatecsPrinter.printText("* Ticked válido por 8 dias;{br}",'ISO-8859-1', function(){});
+  window.DatecsPrinter.printText("* Ticked será pago em até 72 horas;{br}",'ISO-8859-1', function(){});
+  window.DatecsPrinter.printText("* Se o jogo não acontecer no prazo de 24 horas da {br}data e hora marcada ele será retirado e  apostas serão recalculadas.{br}",'ISO-8859-1', function(){});
   window.DatecsPrinter.printText("{br}{br}{br}{br}{br}{br}",'ISO-8859-1', function(){});
   location.reload();
 

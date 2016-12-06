@@ -110,7 +110,7 @@ function printSomeTestText2() {
 
   for (var i in jogosIdAposta) {
     window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
-    window.DatecsPrinter.printText(toData(datasJogos[i])+" "toHora(datasJogos[i])+" {b} "+casa[i]+" VS "+ fora[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
+    window.DatecsPrinter.printText(toData(datasJogos[i])+" "+toHora(datasJogos[i])+" {b} "+casa[i]+" VS "+ fora[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
     window.DatecsPrinter.printText("PALPITE: "+nomePapites(i)+"  VALOR PALPITE: "+palpites[i].toFixed(2)+"{br}",'ISO-8859-1',  function(){ });
   }
   window.DatecsPrinter.printText("________________________________________________{br}",'ISO-8859-1', function(){} );

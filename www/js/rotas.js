@@ -53,15 +53,15 @@ app.controller('teste', function($scope, $http, $route, $location) {
     });
 });
 app.controller('dadosPorAposta', function($scope, $http, $route, $location) { 
- $scope.mostrarLoader = function(){
+   $scope.mostrarLoader = function(){
     if($scope.aux==null || $scope.aux==false || $scope.aux==true){
-     $scope.aux=false;   
-     $scope.aux2=true;
- }
+       $scope.aux=false;   
+       $scope.aux2=true;
+   }
 }
 
 $scope.buscarDadosPorAposta = function() {
-    $http.get('http://betsocceroficial.herokuapp.com/aposta/premiosApostas/'+$scope.password).then(function(response) {
+    $http.get('http://betsoccer.club/public/aposta/premiosApostas/'+$scope.password).then(function(response) {
       $scope.dadosPorAposta = response.data;
       $scope.aux2=false;
       $scope.aux=true;
@@ -113,25 +113,25 @@ $scope.toData = function(dateTime) {
 app.controller('dadosCambista', function($scope, $http, $route, $location) { 
     $scope.mostrarLoader = function(){
         if($scope.teste==null || $scope.teste==false || $scope.teste==true){
-         $scope.teste=false;   
-         $scope.teste2=true;
-     }
- }
- $scope.buscarDadosCambista = function() {   
-    $http.get('http://betsocceroficial.herokuapp.com/aposta/ganhosApostas/'+$scope.password).then(function(response) {
+           $scope.teste=false;   
+           $scope.teste2=true;
+       }
+   }
+   $scope.buscarDadosCambista = function() {   
+    $http.get('http://betsoccer.club/public/aposta/ganhosApostas/'+$scope.password).then(function(response) {
       $scope.dados = response.data;
       $scope.teste2=false;
       $scope.teste=true;
   }).catch(function(err) {
-     $scope.teste=false;
-     $scope.teste2=false;
-     if(err.status==400){
-        Materialize.toast('Código de Segurança Inexistente', 4000);
-    }else if(err.status==401){
-        Materialize.toast('Código de Segurança Inativo', 4000);
-    }else{
-        Materialize.toast('Erro !', 4000);
-    }
+   $scope.teste=false;
+   $scope.teste2=false;
+   if(err.status==400){
+    Materialize.toast('Código de Segurança Inexistente', 4000);
+}else if(err.status==401){
+    Materialize.toast('Código de Segurança Inativo', 4000);
+}else{
+    Materialize.toast('Erro !', 4000);
+}
 });
 }
 toTop();
@@ -160,6 +160,13 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
             }
         }
     }
+     $scope.jogosContem = function(){
+            if(response.data.jogos[0]==null ||response.data.jogos[0]== undefined){
+                return true;
+            }else{ a
+                return false;
+            }
+        }
 
       // Função para deschecar um radio
     // Adicionar ou remover dados das aposta dos arrays de acordo com os radios.
@@ -217,7 +224,7 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
     $scope.enviar = function() {
         var json = $scope.montarJsonServidor(jogosIdAposta, palpites, nome_palpites);
         $http({
-            url: 'http://betsocceroficial.herokuapp.com/aposta/apostar',
+            url: 'http://betsoccer.club/public/aposta/apostar',
             method: 'POST',
             data: json,
             headers: {
@@ -238,7 +245,7 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
         });
 
     }
- var contAux;
+    var contAux;
     $scope.re = function retornoPossivel(){
         auxiliar=testeA;
         for (var k in palpites) {
@@ -262,7 +269,7 @@ app.controller('aposta', function($scope, $http, $routeParams, $location, $rootS
 
 
     $scope.buscar = function() {
-        $http.get('http://betsocceroficial.herokuapp.com/aposta').then(function(response) {
+        $http.get('http://betsoccer.club/public/aposta').then(function(response) {
         // var json = JSON.stringify(response.data)
         // var json = JSON.parse(jso); 
         // window.localStorage.setItem("ArquivoServidor",response.data); 
@@ -335,13 +342,6 @@ app.controller('aposta', function($scope, $http, $routeParams, $location, $rootS
             return aux;
         };
 
-        $scope.jogosContem = function(){
-            if(response.data.jogos[0]==null ||response.data.jogos[0]== undefined){
-                return true;
-            }else{ a
-                return false;
-            }
-        }
         $scope.campeonatos = vetor;
         $scope.horas = vetorHora;
         $scope.aposta = response.data;
@@ -401,18 +401,18 @@ app.controller('aposta', function($scope, $http, $routeParams, $location, $rootS
     $scope.jsonApostasDinamicas = function(){
         var arrayJson= new Array();
         for(var i in  nome_palpites){
-           var dadosAposta = JSON.stringify({
+         var dadosAposta = JSON.stringify({
             casa: $scope.timeCasa[i],
             fora: $scope.timeFora[i],
             valorPalpite: $scope.palpiteNumero[i],
         });
-           arrayJson.push(dadosAposta);
-           console.log(arrayJson);
-           console.log("dados Dina"+dadosAposta);
-       }
+         arrayJson.push(dadosAposta);
+         console.log(arrayJson);
+         console.log("dados Dina"+dadosAposta);
+     }
 
-       return arrayJson;
-   }
+     return arrayJson;
+ }
     toTop();// Rola a pagina pra cima
 
     // Ativa a função do modal na rota, função do materialize

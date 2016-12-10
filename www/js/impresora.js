@@ -84,7 +84,7 @@ function printSomeTestText() {
     if(jsonServidor.jogos[jg].campeonato.descricao_campeonato==vetor[camp] && toData(jsonServidor.jogos[jg].data)==toData(vetorHora[datas])){
       window.DatecsPrinter.printText(toHora("{b}"+vetorHora[datas])+"{/b}  {b}"+jsonServidor.jogos[jg].time[0].descricao_time+" VS {/b}{b}"+ jsonServidor.jogos[jg].time[1].descricao_time+"{/b}{br}",'ISO-8859-1',  function(){ });
       window.DatecsPrinter.printText("{s}Casa  Empate  Fora  Dupla  Gol1/2  +2.5  -2.5  Ambas {/s}{br}",'ISO-8859-1', function(){});
-      window.DatecsPrinter.printText("{s}"+jsonServidor.jogos[jg].valor_casa.toFixed(2)+"   "+jsonServidor.jogos[jg].valor_empate.toFixed(2)+"   "+jsonServidor.jogos[jg].valor_fora.toFixed(2)+"   "+jsonServidor.jogos[jg].valor_dupla.toFixed(2)+"   "+jsonServidor.jogos[jg].valor_1_2.toFixed(2)+"   "+jsonServidor.jogos[jg].max_gol_2.toFixed(2)+"   "+jsonServidor.jogos[jg].min_gol_3.toFixed(2)+"   "+jsonServidor.jogos[jg].ambas_gol.toFixed(2)+"{/s}{br}",'ISO-8859-1', function(){});
+      window.DatecsPrinter.printText("{s}"+jsonServidor.jogos[jg].valor_casa+"   "+jsonServidor.jogos[jg].valor_empate+"   "+jsonServidor.jogos[jg].valor_fora+"   "+jsonServidor.jogos[jg].valor_dupla+"   "+jsonServidor.jogos[jg].valor_1_2+"   "+jsonServidor.jogos[jg].max_gol_2+"   "+jsonServidor.jogos[jg].min_gol_3+"   "+jsonServidor.jogos[jg].ambas_gol+"{/s}{br}",'ISO-8859-1', function(){});
 
     }
 
@@ -106,12 +106,12 @@ function printSomeTestText2() {
   window.DatecsPrinter.printText("CÓDIGO APOSTA: {w}{b}"+jsonApostas.aposta.codigo+"{/b}{/w}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("DATA: "+toData(jsonApostas.aposta.created_at)+" AS "+toHora(jsonApostas.aposta.created_at)+" HRS{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("NOME APOSTADOR: {b}"+jsonApostas.aposta.nome_apostador+"{/b}{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText("VALOR APOSTADO: {b}R$ "+jsonApostas.aposta.valor_aposta.toFixed(2)+"{/b}{br}RETORNO POSSIVEL: {w}{b}R$"+auxiliar.toFixed(2)+"{/b}{/w}{br}",'ISO-8859-1',  function(){ });
+  window.DatecsPrinter.printText("VALOR APOSTADO: {b}R$ "+jsonApostas.aposta.valor_aposta+"{/b}{br}RETORNO POSSIVEL: {w}{b}R$"+auxiliar.toFixed(2)+"{/b}{/w}{br}",'ISO-8859-1',  function(){ });
 
   for (var i in jogosIdAposta) {
     window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
     window.DatecsPrinter.printText(toData(datasJogos[i])+" "+toHora(datasJogos[i])+" {b} "+casa[i]+" VS "+ fora[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
-    window.DatecsPrinter.printText("PALPITE: "+nomePapites(i)+"  VALOR PALPITE: "+palpites[i].toFixed(2)+"{br}",'ISO-8859-1',  function(){ });
+    window.DatecsPrinter.printText("PALPITE: "+nomePapites(i)+"  VALOR PALPITE: "+palpites[i]+"{br}",'ISO-8859-1',  function(){ });
   }
   window.DatecsPrinter.printText("________________________________________________{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("{w}AVISOS{/w}{CENTER}{br}",'ISO-8859-1', function(){});

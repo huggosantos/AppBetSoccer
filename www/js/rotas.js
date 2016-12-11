@@ -364,25 +364,25 @@ app.controller('aposta', function($scope, $http, $routeParams, $location, $rootS
         var vetorPalpitesCorretos;
 
         if(nome_palpites[np]=="valor_casa"){
-            vetorPalpitesCorretos="Valor Casa";
+            vetorPalpitesCorretos="Casa";
         }
         if(nome_palpites[np]=="valor_fora"){
-            vetorPalpitesCorretos="Valor Fora";
+            vetorPalpitesCorretos="Fora";
         } 
         if(nome_palpites[np]=="valor_empate"){
-            vetorPalpitesCorretos="Valor Empate";
+            vetorPalpitesCorretos="Empate";
         } 
         if(nome_palpites[np]=="valor_dupla"){
-            vetorPalpitesCorretos="Valor Dupla";
+            vetorPalpitesCorretos="Dupla";
         } 
         if(nome_palpites[np]=="valor_1_2"){
-            vetorPalpitesCorretos="Valor Gol 1/2";
+            vetorPalpitesCorretos="Gol 1/2";
         } 
         if(nome_palpites[np]=="max_gol_2"){
-            vetorPalpitesCorretos="+2.5";
+            vetorPalpitesCorretos="-2.5";
         } 
         if(nome_palpites[np]=="min_gol_3"){
-            vetorPalpitesCorretos="-2.5";
+            vetorPalpitesCorretos="+2.5";
         } 
         if(nome_palpites[np]=="ambas_gol"){
             vetorPalpitesCorretos="Ambas";

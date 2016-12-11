@@ -40,7 +40,7 @@
 									<input type="radio" ng-model="checked" ng-click="check(x,x.valor_empate)" id="valor_empate{{x.id}}" name="{{x.id}}" value="{{x.valor_empate}}" /><label for="valor_empate{{x.id}}"><i id="textoNegrito">{{x.valor_empate}}</i></label>
 								</li>
 								<li style="background-color:#3498DB;">
-									<input type="radio" ng-model="checked" ng-click="check(x,x.valor_fora)" id="valor_fora{{x.id}}" name="{{x.id}}" value="{{x.valor_fora}}" /><label for="valor_fora{{x.id}}"> <i id="textoNegrito">{{x.valor_fora}}</i> </label>
+									<input type="radio" ng-model="checked" ng-click="check(x,x.valor_fora)" id="valor_fora{{x.id}}" name="{{x.id}}" value="{{x.valor_fora}}" /><label for="valor_fora{{x.id}}"> <i id="textoNegrito">{{x.valor_fora}}</i></label>
 								</li>
 								<li style="background-color:#fff">
 									<input type="radio" ng-model="checked" ng-click="check(x,x.valor_dupla)" id="valor_dupla{{x.id}}" name="{{x.id}}" value="{{x.valor_dupla}}" /><label for="valor_dupla{{x.id}}"><i id="textoNegrito">{{x.valor_dupla}}</i> </label>
@@ -77,7 +77,7 @@
 			</i>
 		</a>
 		<ul>
-			<li class="waves-effect waves-light"><a data-target="modal2">
+			<li class="waves-effect waves-green darken-1"><a data-target="modal2">
 				<i>
 					<svg style="margin-top:15px;" fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 						<path d="M0 0h24v24H0z" fill="none"/>
@@ -86,7 +86,7 @@
 				</i>
 			</a>
 		</li> 
-		<li class="waves-effect waves-light"  ng-controller="controlCollapseible" ng-if="valor && nome" ng-show="(re()<=15000)">
+		<li class="waves-effect waves-green darken-1"  ng-controller="controlCollapseible" ng-if="valor && nome" ng-show="(re()<=15000)">
 			<a data-target="modal1" ng-if="valor || nome">
 				<i>
 					<svg style="margin-top:15px;" fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -103,7 +103,7 @@
 <div id="modal1" class="modal bottom-sheet">
 	<div class="modal-content">
 		<h4 class="texto2">Lista dos jogos apostados</h4>
-		<p ng-controller="controlCollapseible"><i id="texto3">Apostator: </i><i id="texto6">&nbsp;{{nome}}&nbsp;</i><i id="texto3">&nbsp;Valor Pago: </i><i id="texto4">&nbsp;{{valor}}&nbsp;</i><i id="texto3">&nbsp;Retorno Possível: </i><i id="texto5">&nbsp;{{re()}}</i></p>
+		<p ng-controller="controlCollapseible"><i id="texto3">Apostator: </i><i id="texto6">&nbsp;{{nome}}&nbsp;</i><i id="texto3">&nbsp;Valor Pago: </i><i id="texto4">&nbsp;{{valor.toFixed(2)}}&nbsp;</i><i id="texto3">&nbsp;Retorno Possível: </i><i id="texto5">&nbsp;{{re()}}</i></p>
 		<table class="striped" >
 			<thead>
 				<tr>

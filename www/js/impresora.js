@@ -144,7 +144,7 @@ function printSomeTestText3() {
   window.DatecsPrinter.printText("------------------------------------------------{br}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("AGENTE: "+ultimaAposta.cambista+"{br}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("CÓDIGO APOSTA: {w}{b}"+ultimaAposta.aposta.codigo+"{/b}{/w}{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText("DATA: "+toData(ultimaAposta.aposta.data.date)+" AS "+toHora(jsonApostas.aposta.created_at)+" HRS{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("DATA: "+toData(ultimaAposta.aposta.data.date)+" AS "+toHora(ultimaAposta.aposta.data.date)+" HRS{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("NOME APOSTADOR: {b}"+ultimaAposta.aposta.apostador+"{/b}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("VALOR APOSTADO: {b}R$ "+ultimaAposta.aposta.valor_apostado+"{/b}{br}RETORNO POSSIVEL: {w}{b}R$"+ultimaAposta.aposta.possivel_premio.toFixed(2)+"{/b}{/w}{br}",'ISO-8859-1',  function(){ });
 

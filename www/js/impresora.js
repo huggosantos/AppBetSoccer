@@ -22,6 +22,18 @@ function imprimirAposta()
     );
 }
 
+function imprimirUltimaApostaCambista()
+{
+  window.DatecsPrinter.listBluetoothDevices(
+    function (devices) {
+      window.DatecsPrinter.connect(devices[0].address,printSomeTestText3);
+    },
+    function (error) {
+      swal(JSON.stringify(error));
+    }
+    );
+}
+
 function nomePapites(np){
   var vetorPalpitesCorretos;
 
@@ -121,6 +133,35 @@ function printSomeTestText2() {
   window.DatecsPrinter.printText("* Se o jogo não acontecer no prazo de 24 horas  da data e hora marcada ele será retirado e as   apostas serão recalculadas.{br}",'ISO-8859-1', function(){});
   window.DatecsPrinter.printText("{br}{br}{br}{br}{br}{br}",'ISO-8859-1', function(){});
   location.reload();
+
+}
+
+function printSomeTestText3() {
+  window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("{b}{w}{h}BETSOCCER{/h}{/w}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("{b}{w}COMPROVANTE{/w}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("------------------------------------------------{br}{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("AGENTE: "+ultimaAposta.cambista+"{br}{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("CÓDIGO APOSTA: {w}{b}"+ultimaAposta.aposta.codigo+"{/b}{/w}{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("DATA: "+toData(ultimaAposta.aposta.data.date)+" AS "+toHora(jsonApostas.aposta.created_at)+" HRS{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("NOME APOSTADOR: {b}"+ultimaAposta.aposta.apostador+"{/b}{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("VALOR APOSTADO: {b}R$ "+ultimaAposta.aposta.valor_apostado+"{/b}{br}RETORNO POSSIVEL: {w}{b}R$"+ultimaAposta.aposta.possivel_premio.toFixed(2)+"{/b}{/w}{br}",'ISO-8859-1',  function(){ });
+
+  for (var i in ultimaAposta.aposta) {
+    window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
+    window.DatecsPrinter.printText(toData(ultimaAposta.aposta.jogos.data)+" "+toHora(ultimaAposta.aposta.jogos.data)+" {b} "+ultimaAposta.aposta.jogos.times.descricao_time[i]+" VS "+ ultimaAposta.aposta.jogos.times.descricao_time[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
+    window.DatecsPrinter.printText("PALPITE: "+ultimaAposta.aposta.jogos.palpites[i].tpalpite+"  VALOR PALPITE: "+ultimaAposta.aposta.jogos.palpites[i].palpite+"{br}",'ISO-8859-1',  function(){ });
+  }
+  window.DatecsPrinter.printText("________________________________________________{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("{w}AVISOS{/w}{CENTER}{br}",'ISO-8859-1', function(){});
+  window.DatecsPrinter.printText("* Não pagaremos jogos já realizados que por     falha quaisquer que sejam continuem no sistema;{br}",'ISO-8859-1', function(){});
+  window.DatecsPrinter.printText("* Ticket válido por 8 dias;{br}",'ISO-8859-1', function(){});
+  window.DatecsPrinter.printText("* Ticket será pago em até 72 horas;{br}",'ISO-8859-1', function(){});
+  window.DatecsPrinter.printText("* Se o jogo não acontecer no prazo de 24 horas  da data e hora marcada ele será retirado e as   apostas serão recalculadas.{br}",'ISO-8859-1', function(){});
+  window.DatecsPrinter.printText("{br}{br}{br}{br}{br}{br}",'ISO-8859-1', function(){});
+  location.reload();
+  Materialize.toast('Segubda via impressa', 4000);
 
 }
 

@@ -1,34 +1,38 @@
-var app = angular.module('MyApp', ['ngRoute']);
+    var app = angular.module('MyApp', ['ngRoute']);
 
-app.config(function($routeProvider) {
-    /*ROTAS*/
-    $routeProvider
-    .when('/aposta', {
-        templateUrl: 'paginas/aposta.html',
-        controller: 'aposta'
-    })
-    .when('/dadosCambista', {
-        templateUrl: 'paginas/dadosCambista.html',
-        controller: 'dadosCambista'
-    })
-    .when('/dadosPorAposta', {
-        templateUrl: 'paginas/dadosPorAposta.html',
-        controller: 'dadosPorAposta'
-    })
-    .otherwise('/aposta', {
-        templateUrl: 'paginas/aposta.html',
-        controller: 'home'
-    });
-}).run(function() {
+    app.config(function($routeProvider) {
+        /*ROTAS*/
+        $routeProvider
+        .when('/aposta', {
+            templateUrl: 'paginas/aposta.html',
+            controller: 'aposta'
+        })
+        .when('/dadosCambista', {
+            templateUrl: 'paginas/dadosCambista.html',
+            controller: 'dadosCambista'
+        })
+        .when('/dadosPorAposta', {
+            templateUrl: 'paginas/dadosPorAposta.html',
+            controller: 'dadosPorAposta'
+        })
+        .when('/imprimirUltima', {
+            templateUrl: 'paginas/imprimirUltima.html',
+            controller: 'imprimirUltima'
+        })
+        .otherwise('/aposta', {
+            templateUrl: 'paginas/aposta.html',
+            controller: 'home'
+        });
+    }).run(function() {
     //remove 300ms delay touch
     //FastClick.attach(document.body);
 });
 
-function toTop() {
-    $('html, body').animate({
-        scrollTop: 0
-    }, 800, 'linear');
-}
+    function toTop() {
+        $('html, body').animate({
+            scrollTop: 0
+        }, 800, 'linear');
+    }
 
 var vetor = new Array(); //Vetor de Campeonatos Total
 var vetorHora = new Array(); //Vetor com as datas Dos jogos
@@ -47,6 +51,37 @@ var testeA=0; //recebe o valor da aposta
 var copiaJsonAposta;
 var jsonApostas;
 var datasJogos = new Array();// vetor que guarda as datas dos jogos das apostas;
+var ultimaAposta;//variavel q guarda a ultima aposta do cambista;
+app.controller('imprimirUltima', function($scope, $http, $route, $location) { 
+ $scope.mostrarLoader = function(){
+    if($scope.aux==null || $scope.aux==false || $scope.aux==true){
+     $scope.aux=false;   
+     $scope.aux2=true;
+ }
+}
+$scope.imprimirUltimaAposta = function() {
+    $http.get('http://betsoccer.club/public/aposta/ultima/'+$scope.password).then(function(response) {
+      $scope.ultimaAposta = response.data;
+      ultimaAposta=response.data;
+      imprimirUltimaApostaCambista();
+      $scope.aux2=false;
+      $scope.aux=true;
+  }).catch(function(err) {
+      $scope.aux2=false;
+      $scope.aux=true;
+      if(err.status==400){
+        Materialize.toast('Código de Segurança Inexistente', 4000);
+    }else if(err.status==401){
+        Materialize.toast('Código de Segurança Inativo', 4000);
+    }else{
+        Materialize.toast('Erro !', 4000);
+    }
+
+});
+}
+
+});
+
 app.controller('teste', function($scope, $http, $route, $location) { 
     $(document).ready(function(){
         $('.collapsible').collapsible();
@@ -59,6 +94,7 @@ app.controller('dadosPorAposta', function($scope, $http, $route, $location) {
        $scope.aux2=true;
    }
 }
+
 
 $scope.buscarDadosPorAposta = function() {
     $http.get('http://betsoccer.club/public/aposta/premiosApostas/'+$scope.password).then(function(response) {
@@ -160,13 +196,13 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
             }
         }
     }
-     $scope.jogosContem = function(){
-            if(response.data.jogos[0]==null ||response.data.jogos[0]== undefined){
-                return true;
-            }else{ a
-                return false;
-            }
+    $scope.jogosContem = function(){
+        if(response.data.jogos[0]==null ||response.data.jogos[0]== undefined){
+            return true;
+        }else{ a
+            return false;
         }
+    }
 
       // Função para deschecar um radio
     // Adicionar ou remover dados das aposta dos arrays de acordo com os radios.
@@ -259,7 +295,7 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
 
 
 
-app.controller('aposta', function($scope, $http, $routeParams, $location, $rootScope) {
+    app.controller('aposta', function($scope, $http, $routeParams, $location, $rootScope) {
 
     //recebe o valor da aposta
     $scope.enviarValor = function(){
@@ -422,17 +458,17 @@ app.controller('aposta', function($scope, $http, $routeParams, $location, $rootS
     });
 });
 
-function dadosCamp(vetor, valor) {
-    for (var i in vetor) {
-        if (vetor[i] == valor) {
-            return true;
+    function dadosCamp(vetor, valor) {
+        for (var i in vetor) {
+            if (vetor[i] == valor) {
+                return true;
+            }
         }
+        return false;
     }
-    return false;
-}
 
-function CampEmJogosPorData(hora) {
-    aux = new Array();
+    function CampEmJogosPorData(hora) {
+        aux = new Array();
     //percorre
     for (var k in jsonServidor.jogos) {
         //console.log("--------------------");

@@ -151,7 +151,7 @@ function printSomeTestText3() {
   for (var i in ultimaAposta.aposta.jogos) {
     window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
     window.DatecsPrinter.printText(toData(ultimaAposta.aposta.jogos[i].data)+" "+toHora(ultimaAposta.aposta.jogos[i].data)+" {b} "+ultimaAposta.aposta.jogos[i].times[0].descricao_time+" VS "+ ultimaAposta.aposta.jogos[i].times[1].descricao_time+"{/b}{br}",'ISO-8859-1',  function(){ });
-    window.DatecsPrinter.printText("PALPITE: "+ultimaAposta.palpites[i].tpalpite+"  VALOR PALPITE: "+ultimaAposta.palpites[i].palpite+"{br}",'ISO-8859-1',  function(){ });
+    window.DatecsPrinter.printText("PALPITE: "+legendaPalpites(ultimaAposta.palpites[i].tpalpite)+"  VALOR PALPITE: "+ultimaAposta.palpites[i].palpite+"{br}",'ISO-8859-1',  function(){ });
   }
   window.DatecsPrinter.printText("________________________________________________{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("{w}AVISOS{/w}{CENTER}{br}",'ISO-8859-1', function(){});
@@ -165,7 +165,35 @@ function printSomeTestText3() {
 
 }
 
+function legendaPalpites(np){
+  var PalpitesCorretos;
 
+  if(np=="valor_casa"){
+    PalpitesCorretos="Casa";
+  }
+  if(np=="valor_fora"){
+    PalpitesCorretos="Fora";
+  } 
+  if(np=="valor_empate"){
+    PalpitesCorretos="Empate";
+  } 
+  if(np=="valor_dupla"){
+    PalpitesCorretos="Dupla";
+  } 
+  if(np=="valor_1_2"){
+    PalpitesCorretos="Gol 1/2";
+  } 
+  if(np=="min_gol_3"){
+    PalpitesCorretos="+2.5";
+  } 
+  if(np=="max_gol_2"){
+    PalpitesCorretos="-2.5";
+  } 
+  if(np=="ambas_gol"){
+    PalpitesCorretos="Ambas";
+  }
+  return PalpitesCorretos;       
+}
 
 function imprimirImagenDePrueba() 
 {

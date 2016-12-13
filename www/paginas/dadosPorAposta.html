@@ -10,21 +10,22 @@
     <div id="tApostas" class="col s12" style="margin-top:65px;" ng-show="aux">
       <ul class="collapsible" data-collapsible="accordion" ng-controller="teste" ng-repeat="d in dadosPorAposta.apostas">
         <li >
-        <div class="collapsible-header">Código Aposta:&nbsp;<em id="texto4">{{d.aposta}}</em>&nbsp;&nbsp;Comissão:&nbsp;<em id="texto7">R$&nbsp;{{d.ganho.toFixed(2)}}</em></div>
+        <div class="collapsible-header">Código Aposta:&nbsp;<em id="texto4">{{d.codigo}}</em>&nbsp;Apostador:&nbsp;<em id="texto4">{{d.apostador}}</em>&nbsp;Comissão:&nbsp;<em id="texto7">R$&nbsp;{{d.ganho.toFixed(2)}}</em></div>
           <div class="collapsible-body">
             <h6 id="textoNegrito" class="center">JOGOS APOSTADOS</h6><br>
             <div ng-repeat="j in d.jogos">
              &nbsp;&nbsp;{{toData(j.data)}}&nbsp;{{toHora(j.data)}}&nbsp;<em id="texto3">{{j.times[0].descricao_time}}&nbsp;<em id="texto7">{{j.resultado.r_casa}}</em>&nbsp;vs&nbsp;<em id="texto7">{{j.resultado.r_fora}}</em>&nbsp;{{j.times[1].descricao_time}}</em>
            </div>
-         </div>   
+          <p>Valor Apostado :&nbsp;<em id="texto4">{{d.valor_apostado}}</em>&nbsp;Retorno Possível: <em id="texto4">{{d.retorno_possivel}}</em></p>
+         </div>  
        </li>
      </ul>
    </div>
-
+<br><br><br>
    <div id="ApostasVencedoras" class="col s12" style="margin-top:65px;" ng-show="aux">
     <ul class="collapsible" data-collapsible="accordion" ng-controller="teste" ng-repeat="d in dadosPorAposta.apostas_vencedoras">
       <li >
-        <div class="collapsible-header">Código Aposta:&nbsp;<em id="texto4">{{d.codigo}}&nbsp;&nbsp;</em>Apostador:&nbsp;<em id="texto4">{{d.apostador}}</em>&nbsp;&nbsp;Prêmio:&nbsp;<em id="texto7">R$&nbsp;{{d.premio.toFixed(2)}}</em></div>
+        <div class="collapsible-header">Código Aposta:&nbsp;<em id="texto4">{{d.codigo}}&nbsp;&nbsp;</em>Apostador:&nbsp;&nbsp;<em id="texto4">{{d.apostador}}</em>&nbsp;&nbsp;Prêmio:&nbsp;<em id="texto7">R$&nbsp;{{d.premio}}</em></div>
         <div class="collapsible-body">
           <h6 id="textoNegrito" class="center">JOGOS APOSTADOS</h6><br>
           <div ng-repeat="j in d.jogos">
@@ -34,7 +35,7 @@
      </li>
    </ul>
  </div>
-
+<br><br><br>
  <a class="fixed-action-btn toolbar btn-floating btn-large green" data-target="modalDadosApostas">
   <i>
     <svg style="margin-top:15%; position: relative;" fill="#FFFFFF" height="36" viewBox="0 0 24 24" width="36" xmlns="http://www.w3.org/2000/svg">

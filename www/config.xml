@@ -41,7 +41,7 @@
     <plugin name="cordova-plugin-datecs-printer" source="npm"  spec="~0.4.4"/>
     <plugin name="cordova-plugin-broadcaster" source="npm" />
     <plugin name="cordova-plugin-crosswalk-webview" spec="~2.1.0" source="npm" />
-    <icon src="icon.png" />
+    <icon src="bet.png" />
     <platform name="android">
         <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="www/res/icon/android/drawable-mdpi-icon.png" />

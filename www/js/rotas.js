@@ -73,8 +73,7 @@ $scope.imprimirUltimaAposta = function() {
           console.log(ultimaAposta.palpites[i].tpalpite); 
           console.log(ultimaAposta.palpites[i].palpite);
       }
-     */
-     imprimirUltimaApostaCambista();
+     */imprimirUltimaApostaCambista();
       $scope.aux2=false;
       $scope.aux=true;
   }).catch(function(err) {

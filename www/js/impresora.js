@@ -148,7 +148,7 @@ function printSomeTestText3() {
   window.DatecsPrinter.printText("NOME APOSTADOR: {b}"+ultimaAposta.aposta.apostador+"{/b}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("VALOR APOSTADO: {b}R$ "+ultimaAposta.aposta.valor_apostado+"{/b}{br}RETORNO POSSIVEL: {w}{b}R$"+ultimaAposta.aposta.possivel_premio+"{/b}{/w}{br}",'ISO-8859-1',  function(){ });
 
-  for (var i in ultimaAposta.aposta) {
+  for (var i in ultimaAposta) {
     window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
     window.DatecsPrinter.printText(toData(ultimaAposta.aposta.jogos.data)+" "+toHora(ultimaAposta.aposta.jogos.data)+" {b} "+ultimaAposta.aposta.jogos.times[i].descricao_time+" VS "+ ultimaAposta.aposta.jogos.times[i].descricao_time+"{/b}{br}",'ISO-8859-1',  function(){ });
     window.DatecsPrinter.printText("PALPITE: "+ultimaAposta.aposta.jogos.palpites[i].tpalpite+"  VALOR PALPITE: "+ultimaAposta.aposta.jogos.palpites[i].palpite+"{br}",'ISO-8859-1',  function(){ });

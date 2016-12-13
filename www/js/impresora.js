@@ -146,11 +146,11 @@ function printSomeTestText3() {
   window.DatecsPrinter.printText("CÓDIGO APOSTA: {w}{b}"+ultimaAposta.aposta.codigo+"{/b}{/w}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("DATA: "+toData(ultimaAposta.aposta.data.date)+" AS "+toHora(ultimaAposta.aposta.data.date)+" HRS{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("NOME APOSTADOR: {b}"+ultimaAposta.aposta.apostador+"{/b}{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText("VALOR APOSTADO: {b}R$ "+ultimaAposta.aposta.valor_apostado+"{/b}{br}RETORNO POSSIVEL: {w}{b}R$"+ultimaAposta.aposta.possivel_premio.toFixed(2)+"{/b}{/w}{br}",'ISO-8859-1',  function(){ });
+  window.DatecsPrinter.printText("VALOR APOSTADO: {b}R$ "+ultimaAposta.aposta.valor_apostado+"{/b}{br}RETORNO POSSIVEL: {w}{b}R$"+ultimaAposta.aposta.possivel_premio+"{/b}{/w}{br}",'ISO-8859-1',  function(){ });
 
   for (var i in ultimaAposta.aposta) {
     window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
-    window.DatecsPrinter.printText(toData(ultimaAposta.aposta.jogos.data)+" "+toHora(ultimaAposta.aposta.jogos.data)+" {b} "+ultimaAposta.aposta.jogos.times.descricao_time[i]+" VS "+ ultimaAposta.aposta.jogos.times.descricao_time[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
+    window.DatecsPrinter.printText(toData(ultimaAposta.aposta.jogos.data)+" "+toHora(ultimaAposta.aposta.jogos.data)+" {b} "+ultimaAposta.aposta.jogos.times[i].descricao_time+" VS "+ ultimaAposta.aposta.jogos.times[i].descricao_time+"{/b}{br}",'ISO-8859-1',  function(){ });
     window.DatecsPrinter.printText("PALPITE: "+ultimaAposta.aposta.jogos.palpites[i].tpalpite+"  VALOR PALPITE: "+ultimaAposta.aposta.jogos.palpites[i].palpite+"{br}",'ISO-8859-1',  function(){ });
   }
   window.DatecsPrinter.printText("________________________________________________{br}",'ISO-8859-1', function(){} );

@@ -10,7 +10,7 @@
     <div id="tApostas" class="col s12" style="margin-top:65px;" ng-show="aux">
       <ul class="collapsible" data-collapsible="accordion" ng-controller="teste" ng-repeat="d in dadosPorAposta.apostas">
         <li >
-        <div class="collapsible-header">Código Aposta:&nbsp;<em id="texto4">{{d.codigo}}</em>&nbsp;Apostador:&nbsp;<em id="texto4">{{d.apostador}}</em>&nbsp;Comissão:&nbsp;<em id="texto7">R$&nbsp;{{d.ganho.toFixed(2)}}</em></div>
+        <div class="collapsible-header">Código Aposta:&nbsp;<em id="texto4">{{d.codigo}}</em>&nbsp;Apostador:&nbsp;<em id="texto4">{{d.apostador}}</em>&nbsp;Comissão:&nbsp;<em id="texto7">R$&nbsp;{{d.ganho}}</em></div>
           <div class="collapsible-body">
             <h6 id="textoNegrito" class="center">JOGOS APOSTADOS</h6><br>
             <div ng-repeat="j in d.jogos">

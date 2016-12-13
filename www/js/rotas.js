@@ -63,18 +63,18 @@ $scope.imprimirUltimaAposta = function() {
     $http.get('http://betsoccer.club/public/aposta/ultima/'+$scope.password).then(function(response) {
       $scope.ultimaAposta = response.data;
       ultimaAposta=response.data;
-      for (var i in ultimaAposta) {
-
-          console.log(toData(ultimaAposta.aposta.jogos.data));
-          console.log(toHora(ultimaAposta.aposta.jogos.data));
-          console.log( ultimaAposta.aposta.jogos[i].times.descricao_time);
-          console.log(ultimaAposta.aposta.jogos[i].times.descricao_time);
-          console.log(ultimaAposta.aposta.palpites.tpalpite); 
-          console.log(ultimaAposta.aposta.palpites.palpite);
-
-
+      /*for (var i in ultimaAposta.aposta.jogos) {
+        console.log(i)
+          console.log(ultimaAposta.cambista);
+          console.log(ultimaAposta.aposta.jogos[i].data);
+          console.log(ultimaAposta.aposta.jogos[i].data);
+          console.log(ultimaAposta.aposta.jogos[i].times[0].descricao_time);
+          console.log(ultimaAposta.aposta.jogos[i].times[1].descricao_time);
+          console.log(ultimaAposta.palpites[i].tpalpite); 
+          console.log(ultimaAposta.palpites[i].palpite);
       }
-      imprimirUltimaApostaCambista();
+     */
+     imprimirUltimaApostaCambista();
       $scope.aux2=false;
       $scope.aux=true;
   }).catch(function(err) {

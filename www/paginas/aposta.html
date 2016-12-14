@@ -25,7 +25,7 @@
 	</div>
 	<div ng-repeat="hora in horas " class="clear">
 		<h3 class="texto2">{{toData(hora)}}</h3>
-		<div ng-repeat="campeonato in CampEmJogos(hora)">
+		<div ng-repeat="campeonato in CampEmJogos(hora) | orderBy: descricao_campeonato">
 			<h5 class="texto2">{{campeonato}}</h5>
 			<ul class="collapsible popout" data-collapsible="accordion" ng-controller="controlCollapseible" ng-repeat="x in aposta.jogos | orderBy: -data" ng-if="x.campeonato.descricao_campeonato == campeonato && toData(hora)==toData(x.data)">
 				<li>

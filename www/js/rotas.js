@@ -19,6 +19,10 @@
             templateUrl: 'paginas/imprimirUltima.html',
             controller: 'imprimirUltima'
         })
+         .when('/acertoCambista', {
+            templateUrl: 'paginas/acertoCambista.html',
+            controller: 'acertoCambista'
+        })
         .otherwise('/aposta', {
             templateUrl: 'paginas/aposta.html',
             controller: 'home'
@@ -52,6 +56,38 @@ var copiaJsonAposta;
 var jsonApostas;
 var datasJogos = new Array();// vetor que guarda as datas dos jogos das apostas;
 var ultimaAposta;//variavel q guarda a ultima aposta do cambista;
+
+//Controller para realizar o acerto com os agentes, pra consumir o servico é necessario o cod. Seguranca do cambista e do ADM.
+app.controller('acertoCambista', function($scope, $http, $route, $location) { 
+       $scope.mostrarLoader = function(){
+    if($scope.aux==null || $scope.aux==false || $scope.aux==true){
+       $scope.aux=false;   
+       $scope.aux2=true;
+   }
+}
+$scope.acertar = function() {
+    $http.get('http://betsoccer.club/public/cambista/acerto/'+$scope.codCambista+'/'+$scope.codAdm).then(function(response) {
+      $scope.aux2=false;
+      $scope.aux=true;
+      Materialize.toast('Acerto realizado Com Sucesso', 6000);
+  }).catch(function(err) {
+      $scope.aux2=false;
+      $scope.aux=true;
+      if(err.status==400){
+        Materialize.toast('Código de Segurança Inexistente', 4000);
+    }else if(err.status==401){
+        Materialize.toast('Código de Segurança Inativo', 4000);
+    }else{
+        Materialize.toast('Erro na comunicação!', 4000);
+    }
+
+});
+}
+   
+});
+//---------------------------------------------------FIM ACERTO-----------------------------------------------------------------
+
+// Controller para fazer a impressão da ultima aposta realizada pelo agente
 app.controller('imprimirUltima', function($scope, $http, $route, $location) { 
    $scope.mostrarLoader = function(){
     if($scope.aux==null || $scope.aux==false || $scope.aux==true){
@@ -84,14 +120,16 @@ $scope.imprimirUltimaAposta = function() {
     }else if(err.status==401){
         Materialize.toast('Código de Segurança Inativo', 4000);
     }else{
-        Materialize.toast('Erro !', 4000);
+        Materialize.toast('Erro na comunicação!', 4000);
     }
 
 });
 }
 
 });
+//----------------------------------------------FIM ULTIMA APOSTA-------------------------------------------------------------------------
 
+// Controllers para pegar os dados por aposta dos cambistas
 app.controller('teste', function($scope, $http, $route, $location) { 
     $(document).ready(function(){
         $('.collapsible').collapsible();
@@ -104,7 +142,6 @@ app.controller('dadosPorAposta', function($scope, $http, $route, $location) {
      $scope.aux2=true;
  }
 }
-
 
 $scope.buscarDadosPorAposta = function() {
     $http.get('http://betsoccer.club/public/aposta/premiosApostas/'+$scope.password).then(function(response) {
@@ -119,7 +156,7 @@ $scope.buscarDadosPorAposta = function() {
     }else if(err.status==401){
         Materialize.toast('Código de Segurança Inativo', 4000);
     }else{
-        Materialize.toast('Erro !', 4000);
+        Materialize.toast('Erro na comunicação!', 4000);
     }
 
 });
@@ -154,8 +191,9 @@ $scope.toData = function(dateTime) {
 
         
     });
+//------------------------------------------FIM DADOS POR APOSTA------------------------------------------------------------------------
 
-
+// controller para pegar os dados do agente 
 app.controller('dadosCambista', function($scope, $http, $route, $location) { 
     $scope.mostrarLoader = function(){
         if($scope.teste==null || $scope.teste==false || $scope.teste==true){
@@ -176,7 +214,7 @@ app.controller('dadosCambista', function($scope, $http, $route, $location) {
     }else if(err.status==401){
         Materialize.toast('Código de Segurança Inativo', 4000);
     }else{
-        Materialize.toast('Erro !', 4000);
+        Materialize.toast('Erro na comunicação!', 4000);
     }
 });
 }
@@ -186,7 +224,7 @@ $(document).ready(function() {
         $('.modal').modal();
     });
 });
-
+//----------------------------------------------------FIM DADOS AGENTE---------------------------------------------------
 
 app.controller('controlCollapseible', function($scope, $http, $route, $location, $rootScope) {
     $(document).ready(function() {
@@ -285,7 +323,7 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
             $location.path("/aposta");
         }).
         error(function(data) {
-            console.log("Deu Ruim" + data);
+            Materialize.toast('Erro na comunicação!', 4000);
             $scope.error = true;
 
         });
@@ -397,7 +435,8 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
         //window.localStorage.setItem("todasDatas",vetorHora);
 
     }, function(err) {
-        console.log(err);
+        Materialize.toast('Erro na comunicação!', 4000);
+        //console.log(err);
     });
     }
 

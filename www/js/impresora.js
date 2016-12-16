@@ -5,6 +5,7 @@ function imprimirTodosJogos()
       window.DatecsPrinter.connect(devices[0].address,printSomeTestText);
     },
     function (error) {
+      alert("Erro na conmunicação com a impressora!");
       swal(JSON.stringify(error));
     }
     );
@@ -17,6 +18,7 @@ function imprimirAposta()
       window.DatecsPrinter.connect(devices[0].address,printSomeTestText2);
     },
     function (error) {
+      alert("Erro na conmunicação com a impressora!");
       location.reload();
       swal(JSON.stringify(error));
     }
@@ -30,6 +32,7 @@ function imprimirUltimaApostaCambista()
       window.DatecsPrinter.connect(devices[0].address,printSomeTestText3);
     },
     function (error) {
+      alert("Erro na conmunicação com a impressora!");
       location.reload();
       swal(JSON.stringify(error));
     }

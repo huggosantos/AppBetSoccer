@@ -19,7 +19,7 @@
             templateUrl: 'paginas/imprimirUltima.html',
             controller: 'imprimirUltima'
         })
-         .when('/acertoCambista', {
+        .when('/acertoCambista', {
             templateUrl: 'paginas/acertoCambista.html',
             controller: 'acertoCambista'
         })
@@ -59,11 +59,11 @@ var ultimaAposta;//variavel q guarda a ultima aposta do cambista;
 
 //Controller para realizar o acerto com os agentes, pra consumir o servico é necessario o cod. Seguranca do cambista e do ADM.
 app.controller('acertoCambista', function($scope, $http, $route, $location) { 
-       $scope.mostrarLoader = function(){
+ $scope.mostrarLoader = function(){
     if($scope.aux==null || $scope.aux==false || $scope.aux==true){
-       $scope.aux=false;   
-       $scope.aux2=true;
-   }
+     $scope.aux=false;   
+     $scope.aux2=true;
+ }
 }
 $scope.acertar = function() {
     $http.get('http://betsoccer.club/public/cambista/acerto/'+$scope.codCambista+'/'+$scope.codAdm).then(function(response) {
@@ -83,17 +83,17 @@ $scope.acertar = function() {
 
 });
 }
-   
+
 });
 //---------------------------------------------------FIM ACERTO-----------------------------------------------------------------
 
 // Controller para fazer a impressão da ultima aposta realizada pelo agente
 app.controller('imprimirUltima', function($scope, $http, $route, $location) { 
-   $scope.mostrarLoader = function(){
+ $scope.mostrarLoader = function(){
     if($scope.aux==null || $scope.aux==false || $scope.aux==true){
-       $scope.aux=false;   
-       $scope.aux2=true;
-   }
+     $scope.aux=false;   
+     $scope.aux2=true;
+ }
 }
 $scope.imprimirUltimaAposta = function() {
     $http.get('http://betsoccer.club/public/aposta/ultima/'+$scope.password).then(function(response) {
@@ -109,7 +109,7 @@ $scope.imprimirUltimaAposta = function() {
           console.log(ultimaAposta.palpites[i].tpalpite); 
           console.log(ultimaAposta.palpites[i].palpite);
       }
-     */imprimirUltimaApostaCambista();
+      */imprimirUltimaApostaCambista();
       $scope.aux2=false;
       $scope.aux=true;
   }).catch(function(err) {
@@ -136,11 +136,11 @@ app.controller('teste', function($scope, $http, $route, $location) {
     });
 });
 app.controller('dadosPorAposta', function($scope, $http, $route, $location) { 
- $scope.mostrarLoader = function(){
+   $scope.mostrarLoader = function(){
     if($scope.aux==null || $scope.aux==false || $scope.aux==true){
-     $scope.aux=false;   
-     $scope.aux2=true;
- }
+       $scope.aux=false;   
+       $scope.aux2=true;
+   }
 }
 
 $scope.buscarDadosPorAposta = function() {
@@ -197,25 +197,25 @@ $scope.toData = function(dateTime) {
 app.controller('dadosCambista', function($scope, $http, $route, $location) { 
     $scope.mostrarLoader = function(){
         if($scope.teste==null || $scope.teste==false || $scope.teste==true){
-         $scope.teste=false;   
-         $scope.teste2=true;
-     }
- }
- $scope.buscarDadosCambista = function() {   
+           $scope.teste=false;   
+           $scope.teste2=true;
+       }
+   }
+   $scope.buscarDadosCambista = function() {   
     $http.get('http://betsoccer.club/public/aposta/ganhosApostas/'+$scope.password).then(function(response) {
       $scope.dados = response.data;
       $scope.teste2=false;
       $scope.teste=true;
   }).catch(function(err) {
-     $scope.teste=false;
-     $scope.teste2=false;
-     if(err.status==400){
-        Materialize.toast('Código de Segurança Inexistente', 4000);
-    }else if(err.status==401){
-        Materialize.toast('Código de Segurança Inativo', 4000);
-    }else{
-        Materialize.toast('Erro na comunicação!', 4000);
-    }
+   $scope.teste=false;
+   $scope.teste2=false;
+   if(err.status==400){
+    Materialize.toast('Código de Segurança Inexistente', 4000);
+}else if(err.status==401){
+    Materialize.toast('Código de Segurança Inativo', 4000);
+}else{
+    Materialize.toast('Erro na comunicação!', 4000);
+}
 });
 }
 toTop();
@@ -247,7 +247,7 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
     $scope.jogosContem = function(){
         if(response.data.jogos[0]==null ||response.data.jogos[0]== undefined){
             return true;
-        }else{ a
+        }else{ 
             return false;
         }
     }
@@ -285,6 +285,23 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
         }
     }
 
+    //Verifica palpites com valor padrao escolhoido para desabilitar
+    $scope.verificaPalpite = function(valor){
+        if(valor==0.00){
+            return true;
+        }else{ 
+            return false;
+        }
+    }
+    // verifica se o valor é o padrao escolhido pelo servidor  e coloca traço
+      $scope.PalpiteColocarTraco = function(valor){
+        if(valor==0.00){
+            var traco="-----";
+            return traco;
+        }else{ 
+            return valor;
+        }
+    }
 
     /*Metodo que controla o Json que será enviado ao servidor
       parametros -> j = id_jogos | p = palpite double | t = tipo de palpite string 
@@ -486,18 +503,18 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
     $scope.jsonApostasDinamicas = function(){
         var arrayJson= new Array();
         for(var i in  nome_palpites){
-           var dadosAposta = JSON.stringify({
+         var dadosAposta = JSON.stringify({
             casa: $scope.timeCasa[i],
             fora: $scope.timeFora[i],
             valorPalpite: $scope.palpiteNumero[i],
         });
-           arrayJson.push(dadosAposta);
-           console.log(arrayJson);
-           console.log("dados Dina"+dadosAposta);
-       }
+         arrayJson.push(dadosAposta);
+         console.log(arrayJson);
+         console.log("dados Dina"+dadosAposta);
+     }
 
-       return arrayJson;
-   }
+     return arrayJson;
+ }
     toTop();// Rola a pagina pra cima
 
     // Ativa a função do modal na rota, função do materialize

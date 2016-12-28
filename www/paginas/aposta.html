@@ -23,7 +23,7 @@
 	<div class="row">
 		<h2 ng-show="jogosContem()" class="texto2">NÃO HÁ JOGOS</h2>
 	</div>
-	<div ng-repeat="hora in horas " class="clear">
+	<div ng-repeat="hora in horas | orderBy: -hora" class="clear">
 		<h3 class="texto2">{{toData(hora)}}</h3>
 		<div ng-repeat="campeonato in CampEmJogos(hora) | orderBy: descricao_campeonato">
 			<h5 class="texto2">{{campeonato}}</h5>

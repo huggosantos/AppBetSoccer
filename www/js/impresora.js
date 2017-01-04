@@ -84,11 +84,12 @@ var timeFinal = time[0]+":"+time[1];
 return timeFinal;    
 }
 
+
 function printSomeTestText() {
  window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
  window.DatecsPrinter.printText("{b}{w}{h}BETSOCCER{/h}{/w}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
  var vetor;
- for(var datas in vetorHora){
+ for(var datas in vetorHora.sort()){
   window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("{b}"+toData(vetorHora[datas])+"{CENTER}{/b}{br}",'ISO-8859-1', function(){});
   window.DatecsPrinter.printText("HORA  JOGO{br}",'ISO-8859-1', function(){});

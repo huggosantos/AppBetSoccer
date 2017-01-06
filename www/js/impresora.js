@@ -16,6 +16,8 @@ function imprimirAposta()
   window.DatecsPrinter.listBluetoothDevices(
     function (devices) {
       window.DatecsPrinter.connect(devices[0].address,printSomeTestText2);
+      alert("Erro na conmunicação com a impressora!");
+      location.reload();
     },
     function (error) {
       alert("Erro na conmunicação com a impressora!");
@@ -166,7 +168,7 @@ function printSomeTestText3() {
   window.DatecsPrinter.printText("* Ticket será pago em até 72 horas;{br}",'ISO-8859-1', function(){});
   window.DatecsPrinter.printText("* Se o jogo não acontecer no prazo de 24 horas  da data e hora marcada ele será retirado e as   apostas serão recalculadas.{br}",'ISO-8859-1', function(){});
   window.DatecsPrinter.printText("{br}{br}{br}{br}{br}{br}",'ISO-8859-1', function(){});
-  Materialize.toast('Segubda via impressa', 4000);
+  Materialize.toast('Segunda via impressa', 4000);
   location.reload();
   
 

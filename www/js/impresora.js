@@ -32,6 +32,8 @@ function imprimirUltimaApostaCambista()
   window.DatecsPrinter.listBluetoothDevices(
     function (devices) {
       window.DatecsPrinter.connect(devices[0].address,printSomeTestText3);
+       alert("Erro na conmunicação com a impressora!");
+      location.reload();
     },
     function (error) {
       alert("Erro na conmunicação com a impressora!");

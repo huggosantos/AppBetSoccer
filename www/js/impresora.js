@@ -2,7 +2,7 @@ function imprimirTodosJogos()
 {
   window.DatecsPrinter.listBluetoothDevices(
     function (devices) {
-      window.DatecsPrinter.connect(devices[0].address,printSomeTestText);
+      window.DatecsPrinter.connect(devices[0].address,printSomeTestText,erroImpressao);
     },
     function (error) {
       alert("Erro na conmunicação com a impressora!");
@@ -15,9 +15,7 @@ function imprimirAposta()
 {
   window.DatecsPrinter.listBluetoothDevices(
     function (devices) {
-      window.DatecsPrinter.connect(devices[0].address,printSomeTestText2);
-      alert("Erro na conmunicação com a impressora!");
-      location.reload();
+      window.DatecsPrinter.connect(devices[0].address,printSomeTestText2,erroImpressao);
     },
     function (error) {
       alert("Erro na conmunicação com a impressora!");
@@ -31,9 +29,7 @@ function imprimirUltimaApostaCambista()
 {
   window.DatecsPrinter.listBluetoothDevices(
     function (devices) {
-      window.DatecsPrinter.connect(devices[0].address,printSomeTestText3);
-       alert("Erro na conmunicação com a impressora!");
-      location.reload();
+      window.DatecsPrinter.connect(devices[0].address,printSomeTestText3,erroImpressao);
     },
     function (error) {
       alert("Erro na conmunicação com a impressora!");
@@ -42,6 +38,11 @@ function imprimirUltimaApostaCambista()
     }
     );
 }
+function erroImpressao() {
+   alert("Erro na conmunicação com a impressora!");
+   location.reload();
+}
+
 
 function nomePapites(np){
   var vetorPalpitesCorretos;

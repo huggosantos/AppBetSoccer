@@ -141,7 +141,7 @@ app.controller('dadosPorAposta', function($scope, $http, $route, $location) {
        $scope.aux=false;   
        $scope.aux2=true;
    }
-}
+} 
 
 $scope.buscarDadosPorAposta = function() {
     $http.get('http://betsoccer.club/public/aposta/premiosApostas/'+$scope.password).then(function(response) {
@@ -202,7 +202,7 @@ app.controller('dadosCambista', function($scope, $http, $route, $location) {
        }
    }
    $scope.buscarDadosCambista = function() {   
-    $http.get('http://betsoccer.club/public/aposta/ganhosApostas/'+$scope.password).then(function(response) {
+    $http.get('http://localhost/betsoccer/public/aposta/ganhosApostas/'+$scope.password).then(function(response) {
       $scope.dados = response.data;
       $scope.teste2=false;
       $scope.teste=true;
@@ -258,12 +258,27 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
 
       // Função para deschecar um radio
     // Adicionar ou remover dados das aposta dos arrays de acordo com os radios.
-    $scope.check = function(j, p) {
-        // Verifica se a possição do input atual está null
-        // caso verdadeiro seta pra nullo o radio autal ou o anterior.
-        if (allRadios[$(this).attr('name')] != null) {
+    $scope.check = function(event,j, p) {
+        
+        //Pega a classe do inpunt clicado
+        var classe = event.currentTarget.className;
+        //Pega todos inputs da mesma classe do input clicado
+        var elems = document.getElementsByClassName(event.currentTarget.className);
+        //salva o estado atual do input passado
+        var currentState = event.currentTarget.checked;        
+        var elemsLength = elems.length;
+
+        for(i=0; i<elemsLength; i++)
+        {
+            if(elems[i].type === "checkbox")
+            {
+                elems[i].checked = false;   
+            }
+        }
+        if (currentState == false) {
             var indice = jogosIdAposta.indexOf(j.id);
             //Pega o indice do jogo atual
+            allRadios.splice(indice,1);
             datasJogos.splice(indice, 1);
             jogosIdAposta.splice(indice, 1); //Remove id do jogo na possição indice
             palpites.splice(indice, 1); //Remove palpite do jogo na possição indice
@@ -271,27 +286,30 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
             casa.splice(indice, 1); //Remove o time da casa na possição indice
             fora.splice(indice, 1); //Remove o time visitante do jogo na possição indice 
             contador--; //Decremento o contator usando em todos o arrays
-            this.checked = false; //Seta o input.checked para false  
-            allRadios[$(this).attr('name')] = null;
-            //Seta a posição atual do input para null
-        } else {
-            //var var_name = $("input[name='radio_name']:checked").val();
-            //Adiciona os Atributos id palpite casa fora nome_palpito
-            //Todos na mesma posição (contador);
+        } else if(allRadios.indexOf(classe) == -1) {
+            console.log("2---"+allRadios.indexOf(classe));            
             datasJogos[contador]= j.data;
             jogosIdAposta[contador] = j.id;
             palpites[contador] = p;
             casa[contador] = j.time[0].descricao_time;
             fora[contador] = j.time[1].descricao_time;
             nome_palpites[contador] = nomePapite(j, p);
+            allRadios[contador] = classe;
             contador++;
-            allRadios[$(this).attr('name')] = this;
+        }else if(allRadios.indexOf(classe) != -1){            
+            var indice = jogosIdAposta.indexOf(j.id);
+            datasJogos[indice]= j.data;
+            jogosIdAposta[indice] = j.id;
+            palpites[indice] = p;
+            casa[indice] = j.time[0].descricao_time;
+            fora[indice] = j.time[1].descricao_time;
+            nome_palpites[indice] = nomePapite(j, p);
         }
+        event.currentTarget.checked = currentState;
     }
-
     //Verifica palpites com valor padrao escolhoido para desabilitar
     $scope.verificaPalpite = function(valor){
-        if(valor==0.00){
+        if(valor<=1){
             return true;
         }else{ 
             return false;
@@ -299,19 +317,18 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
     }
     // verifica se o valor é o padrao escolhido pelo servidor  e coloca traço
       $scope.PalpiteColocarTraco = function(valor){
-        if(valor==0.00){
+        if(valor<=1){
             var traco="-----";
             return traco;
         }else{ 
             return valor;
         }
     }
-
     /*Metodo que controla o Json que será enviado ao servidor
       parametros -> j = id_jogos | p = palpite double | t = tipo de palpite string 
       parametros -> c = descrição_time visitante  String | f = descricao_time visitante String
-      */
-      $scope.montarJsonServidor = function(j, p, t) {
+    */
+    $scope.montarJsonServidor = function(j, p, t) {
         var dadosAposta = JSON.stringify({
             codigo_seguranca: $scope.password,
             valor_aposta: $scope.valor,

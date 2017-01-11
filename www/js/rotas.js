@@ -150,7 +150,7 @@ $scope.buscarDadosPorAposta = function() {
       $scope.aux=true;
   }).catch(function(err) {
       $scope.aux2=false;
-      $scope.aux=true;
+      $scope.aux=false;
       if(err.status==400){
         Materialize.toast('Código de Segurança Inexistente', 4000);
     }else if(err.status==401){
@@ -219,10 +219,14 @@ app.controller('dadosCambista', function($scope, $http, $route, $location) {
 });
 }
 toTop();
-$(document).ready(function() {
+$(document).ready(function(){
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
         $('.modal').modal();
     });
+
+        $(document).ready(function(){
+            $('ul.tabs').tabs();
+        });
 });
 //----------------------------------------------------FIM DADOS AGENTE---------------------------------------------------
 

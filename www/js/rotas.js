@@ -202,7 +202,7 @@ app.controller('dadosCambista', function($scope, $http, $route, $location) {
        }
    }
    $scope.buscarDadosCambista = function() {   
-    $http.get('http://localhost/betsoccer/public/aposta/ganhosApostas/'+$scope.password).then(function(response) {
+    $http.get('http://betsoccer.club/public/aposta/ganhosApostas/'+$scope.password).then(function(response) {
       $scope.dados = response.data;
       $scope.teste2=false;
       $scope.teste=true;

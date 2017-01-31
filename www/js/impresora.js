@@ -38,6 +38,7 @@ function imprimirUltimaApostaCambista()
     }
     );
 }
+
 function erroImpressao() {
    alert("Erro na conmunicação com a impressora!");
    location.reload();

@@ -63,20 +63,8 @@ var ultimaAposta;//variavel q guarda a ultima aposta do cambista;
 
 //----------Controller que faz a validação das apostas feitas pelo app cliente.------------------------------
 app.controller('validarAposta', function($scope, $http, $route, $location) { 
-
-  $(document).ready(function(){
-    $scope.rodar = function(){
-      html2canvas($('#print'),{
-        onrendered: function(canvas) {
-          var img = canvas.toDataURL();
-          //window.open(img);
-          window.plugins.socialsharing.shareViaWhatsApp(' Teste envio de Mensagem e Img via WhatsApp',img, null , function () {alert( 'share ok')}, function ( errormsg) {alert (errormsg)});
-        }
-      });
-
-    }   
-  });
-
+     
+ 
   $(document).ready(function(){
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
         $('.modal').modal();

@@ -459,7 +459,7 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
             fora.splice(indice, 1); //Remove o time visitante do jogo na possição indice 
             contador--; //Decremento o contator usando em todos o arrays
           } else if(allRadios.indexOf(classe) == -1) {
-            console.log("2---"+allRadios.indexOf(classe)+" np "+np[0]);            
+            //console.log("2---"+allRadios.indexOf(classe));            
             datasJogos[contador]= j.data;
             jogosIdAposta[contador] = j.id;
             palpites[contador] = p;
@@ -468,8 +468,7 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
             nome_palpites[contador] = np[0];
             allRadios[contador] = classe;
             contador++;
-          }else if(allRadios.indexOf(classe) != -1){ 
-            console.log("2---"+allRadios.indexOf(classe)+" np "+np[0]);             
+          }else if(allRadios.indexOf(classe) != -1){            
             var indice = jogosIdAposta.indexOf(j.id);
             datasJogos[indice]= j.data;
             jogosIdAposta[indice] = j.id;

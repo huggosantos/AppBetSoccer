@@ -18,6 +18,7 @@
     <preference name="cdvMinSdkVersion" value="19" />
     <preference name="cdvBuildMultipleApks" value="true" />
 
+    <plugin name="cordova-plugin-x-socialsharing" source="npm" />
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1" />
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />

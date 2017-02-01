@@ -532,7 +532,7 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
         jsonApostas = resposta;
         imprimirAposta();
         $location.path("/aposta");
-        Materialize.toast('Aposta realizada Com Sucesso', 4000);
+       // Materialize.toast('Aposta realizada Com Sucesso', 4000);
       }).
       error(function(data) {
         Materialize.toast('Erro na comunicação!', 4000);

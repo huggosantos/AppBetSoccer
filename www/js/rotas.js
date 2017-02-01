@@ -429,6 +429,9 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
     // Adicionar ou remover dados das aposta dos arrays de acordo com os radios.
     $scope.check = function(event,j, p) {
 
+        var teste = event.currentTarget.id;
+        var np = teste.split("@");
+        //console.log(teste2[0]+" "+teste2[1]+" "+teste);
         //Pega a classe do inpunt clicado
         var classe = event.currentTarget.className;
         //Pega todos inputs da mesma classe do input clicado
@@ -456,23 +459,24 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
             fora.splice(indice, 1); //Remove o time visitante do jogo na possição indice 
             contador--; //Decremento o contator usando em todos o arrays
           } else if(allRadios.indexOf(classe) == -1) {
-            console.log("2---"+allRadios.indexOf(classe));            
+            console.log("2---"+allRadios.indexOf(classe)+" np "+np[0]);            
             datasJogos[contador]= j.data;
             jogosIdAposta[contador] = j.id;
             palpites[contador] = p;
             casa[contador] = j.time[0].descricao_time;
             fora[contador] = j.time[1].descricao_time;
-            nome_palpites[contador] = nomePapite(j, p);
+            nome_palpites[contador] = np[0];
             allRadios[contador] = classe;
             contador++;
-          }else if(allRadios.indexOf(classe) != -1){            
+          }else if(allRadios.indexOf(classe) != -1){ 
+            console.log("2---"+allRadios.indexOf(classe)+" np "+np[0]);             
             var indice = jogosIdAposta.indexOf(j.id);
             datasJogos[indice]= j.data;
             jogosIdAposta[indice] = j.id;
             palpites[indice] = p;
             casa[indice] = j.time[0].descricao_time;
             fora[indice] = j.time[1].descricao_time;
-            nome_palpites[indice] = nomePapite(j, p);
+            nome_palpites[indice] = np[0];
           }
           event.currentTarget.checked = currentState;
         }

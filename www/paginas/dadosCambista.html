@@ -1,82 +1,42 @@
 
 <div class="row">
-  <div class="row " style="margin-top:55px;">
+  <div class="row " style="margin-top:55px;z-index:99999;">
     <div class="col s12 ">
       <ul class="tabs pinned width">
-      <li class="tab col s6 azul"><a href="#dadosGerais" class="active"><b id="teste4">Valores Gerais</b></a></li>
+        <li class="tab col s6 azul"><a href="#dadosGerais" class="active"><b id="teste4">Valores Gerais</b></a></li>
         <li class="tab col s6 vermelho"><a href="#dadosParciais"><b id="teste4">Valores a Acerta</b></a></li>
       </ul>
     </div>
 
-    <div id="dadosGerais" class="col s12" style="margin-top:65px;" ng-show="teste">
-      <table class="responsive-table"  ng-if="teste">
-        <thead>
-          <tr>
-            <th data-field="name">Nome</th>
-            <th data-field="price">Apostas</th>
-            <th data-field="price">Qtd. Jogos</th>
-            <th data-field="price">Comissão (2 jogos)</th>
-            <th data-field="price">Comissão (3 +)</th>
-            <th data-field="price">Comissão (5 +)</th>
-            <th data-field="price">Comissão Total</th>
-            <th data-field="price">Valor Total Apostado</th>
-            <th data-field="price">Total Premiação</th>
-            <th data-field="price">Líquido</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr >
-            <td>{{dados.com_abertas.cambista}}</td>
-            <td>{{dados.com_abertas.qtd_apostas}}</td>
-            <td>{{dados.com_abertas.qtd_jogos}}</td>
-            <td>{{dados.com_abertas.comissao_simples}}</td>
-            <td>{{dados.com_abertas.comissao_mediana}}</td>
-            <td>{{dados.com_abertas.comissao_maxima}}</td>
-            <td>{{dados.com_abertas.comissao_total}}</td>
-            <td>{{dados.com_abertas.total_apostado}}</td>
-            <td>{{dados.com_abertas.total_premiacao}}</td>
-            <td>{{dados.com_abertas.liquido}}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div id="dadosGerais" class="col s12" style="margin-top:65px; z-index:7777;" ng-show="teste">
+      <ul ng-if="teste">
+        <li><em id="texto3">&nbsp;Nome :&nbsp;</em>{{dados.com_abertas.cambista}}</li><br>
+        <li><em id="texto3">&nbsp;Apostas :&nbsp;</em>{{dados.com_abertas.qtd_apostas}}</li><br>
+        <li><em id="texto3">&nbsp;Qtd. Jogos :&nbsp;</em>{{dados.com_abertas.qtd_jogos}}</li><br>
+        <li><em id="texto3">&nbsp;Comissão (2 jogos) :&nbsp;</em>{{dados.com_abertas.comissao_simples}}</li><br>
+        <li><em id="texto3">&nbsp;Comissão (3 +) :&nbsp;</em>{{dados.com_abertas.comissao_mediana}}</li><br>
+        <li><em id="texto3">&nbsp;Comissão (5 +) :&nbsp;</em>{{dados.com_abertas.comissao_maxima}}</li><br>
+        <li><em id="texto3">&nbsp;Comissão Total :&nbsp;</em>{{dados.com_abertas.comissao_total}}</li><br>
+        <li><em id="texto3">&nbsp;Valor Total Apostado :&nbsp;</em>{{dados.com_abertas.total_apostado}}</li><br>
+        <li><em id="texto3">&nbsp;Total Premiação :&nbsp;</em>{{dados.com_abertas.total_premiacao}}</li><br>
+        <li><em id="texto3">&nbsp;Líquido :&nbsp;</em>{{dados.com_abertas.liquido}}</li><br>
+      </ul>
     </div>
 
-    
 
-    <div id="dadosParciais" class="col s12" style="margin-top:65px;" ng-show="teste">
-      <table class="responsive-table"  ng-if="teste">
-        <thead>
-          <tr>
-            <th data-field="name">Nome</th>
-            <th data-field="price">Apostas</th>
-            <th data-field="price">Qtd. Jogos</th>
-            <th data-field="price">Comissão (2 jogos)</th>
-            <th data-field="price">Comissão (3 +)</th>
-            <th data-field="price">Comissão (5 +)</th>
-            <th data-field="price">Comissão Total</th>
-            <th data-field="price">Valor Total Apostado</th>
-            <th data-field="price">Total Premiação</th>
-            <th data-field="price">Líquido</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr >
-            <td>{{dados.sem_abertas.cambista}}</td>
-            <td>{{dados.sem_abertas.qtd_apostas}}</td>
-            <td>{{dados.sem_abertas.qtd_jogos}}</td>
-            <td>{{dados.sem_abertas.comissao_simples}}</td>
-            <td>{{dados.sem_abertas.comissao_mediana}}</td>
-            <td>{{dados.sem_abertas.comissao_maxima}}</td>
-            <td>{{dados.sem_abertas.comissao_total}}</td>
-            <td>{{dados.sem_abertas.total_apostado}}</td>
-            <td>{{dados.sem_abertas.total_premiacao}}</td>
-            <td>{{dados.sem_abertas.liquido}}</td>
-          </tr>
-        </tbody>
-      </table>
-
-
-
+    <div id="dadosParciais" class="col s12" style="margin-top:65px; z-index:7777;" ng-show="teste">
+      <ul ng-if="teste">
+        <li><em id="texto3">&nbsp;Nome :&nbsp;</em>{{dados.sem_abertas.cambista}}</li><br>
+        <li><em id="texto3">&nbsp;Apostas :&nbsp;</em>{{dados.sem_abertas.qtd_apostas}}</li><br>
+        <li><em id="texto3">&nbsp;Qtd. Jogos :&nbsp;</em>{{dados.sem_abertas.qtd_jogos}}</li><br>
+        <li><em id="texto3">&nbsp;Comissão (2 jogos) :&nbsp;</em>{{dados.sem_abertas.comissao_simples}}</li><br>
+        <li><em id="texto3">&nbsp;Comissão (3 +) :&nbsp;</em>{{dados.sem_abertas.comissao_mediana}}</li><br>
+        <li><em id="texto3">&nbsp;Comissão (5 +) :&nbsp;</em>{{dados.sem_abertas.comissao_maxima}}</li><br>
+        <li><em id="texto3">&nbsp;Comissão Total :&nbsp;</em>{{dados.sem_abertas.comissao_total}}</li><br>
+        <li><em id="texto3">&nbsp;Valor Total Apostado :&nbsp;</em>{{dados.sem_abertas.total_apostado}}</li><br>
+        <li><em id="texto3">&nbsp;Total Premiação :&nbsp;</em>{{dados.sem_abertas.total_premiacao}}</li><br>
+        <li><em id="texto3">&nbsp;Líquido :&nbsp;</em>{{dados.sem_abertas.liquido}}</li><br>
+        </ul>
     </div>
     <br><br><br>
     <a class="fixed-action-btn toolbar btn-floating btn-large green" data-target="modalDadosAgente">
@@ -99,7 +59,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <a  ng-click="buscarDadosCambista(); mostrarLoader();" class=" modal-action modal-close waves-effect waves-green btn-flat">BUSCAR</a>
+        <a  ng-click="buscarDadosCambista(); mostrarLoader(); rodar();" class=" modal-action modal-close waves-effect waves-green btn-flat">BUSCAR</a>
       </div>
     </div>
 
@@ -116,7 +76,6 @@
     </div>
   </div>
 </div>
-
 </div>
 
 

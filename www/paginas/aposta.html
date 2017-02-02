@@ -34,28 +34,28 @@
 						<div id="lista">		
 							<ul>
 								<li style="background-color:#8bc34a;">
-									<input type="checkbox" class="{{x.id}}" ng-click="check($event,x,x.valor_casa)" id="valor_casa@{{x.id}}" value="{{x.valor_casa}}" ng-disabled="verificaPalpite(x.valor_casa)" /><label style="text-align:center;" for="valor_casa@{{x.id}}"><i id="textoNegrito">{{PalpiteColocarTraco(x.valor_casa)}}</i></label>
+									<input type="checkbox" class="{{x.id}}" ng-click="check($event,x,x.valor_casa)" id="valor_casa{{x.id}}" value="{{x.valor_casa}}" ng-disabled="verificaPalpite(x.valor_casa)" /><label style="text-align:center;" for="valor_casa{{x.id}}"><i id="textoNegrito">{{PalpiteColocarTraco(x.valor_casa)}}</i></label>
 								</li>
 								<li style="background-color:#D1D5D8;">
-									<input type="checkbox" class="{{x.id}}" ng-click="check($event,x,x.valor_empate)" id="valor_empate@{{x.id}}" value="{{x.valor_empate}}" ng-disabled="verificaPalpite(x.valor_empate)" /><label for="valor_empate@{{x.id}}"><i id="textoNegrito">{{PalpiteColocarTraco(x.valor_empate)}}</i></label>
+									<input type="checkbox" class="{{x.id}}" ng-click="check($event,x,x.valor_empate)" id="valor_empate{{x.id}}" value="{{x.valor_empate}}" ng-disabled="verificaPalpite(x.valor_empate)" /><label for="valor_empate{{x.id}}"><i id="textoNegrito">{{PalpiteColocarTraco(x.valor_empate)}}</i></label>
 								</li>
 								<li style="background-color:#3498DB;">
-									<input type="checkbox" class="{{x.id}}" ng-click="check($event,x,x.valor_fora)" id="valor_fora@{{x.id}}" value="{{x.valor_fora}}" ng-disabled="verificaPalpite(x.valor_fora)" /><label for="valor_fora@{{x.id}}"> <i id="textoNegrito">{{PalpiteColocarTraco(x.valor_fora)}}</i></label>
+									<input type="checkbox" class="{{x.id}}" ng-click="check($event,x,x.valor_fora)" id="valor_fora{{x.id}}" value="{{x.valor_fora}}" ng-disabled="verificaPalpite(x.valor_fora)" /><label for="valor_fora{{x.id}}"> <i id="textoNegrito">{{PalpiteColocarTraco(x.valor_fora)}}</i></label>
 								</li>
 								<li style="background-color:#fff">
-									<input type="checkbox" class="{{x.id}}" ng-click="check($event,x,x.valor_dupla)" id="valor_dupla@{{x.id}}" value="{{x.valor_dupla}}" ng-disabled="verificaPalpite(x.valor_dupla)" /><label for="valor_dupla@{{x.id}}"><i id="textoNegrito">{{PalpiteColocarTraco(x.valor_dupla)}}</i> </label>
+									<input type="checkbox" class="{{x.id}}" ng-click="check($event,x,x.valor_dupla)" id="valor_dupla{{x.id}}" value="{{x.valor_dupla}}" ng-disabled="verificaPalpite(x.valor_dupla)" /><label for="valor_dupla{{x.id}}"><i id="textoNegrito">{{PalpiteColocarTraco(x.valor_dupla)}}</i> </label>
 								</li>
 								<li style="background-color:#ffeb3b;">
-									<input type="checkbox" class="{{x.id}}" ng-click="check($event,x,x.valor_1_2)" id="valor_1_2@{{x.id}}" value="{{x.valor_1_2}}" ng-disabled="verificaPalpite(x.valor_1_2)" /><label for="valor_1_2@{{x.id}}"><i id="textoNegrito">{{PalpiteColocarTraco(x.valor_1_2)}}</i> </label>
+									<input type="checkbox" class="{{x.id}}" ng-click="check($event,x,x.valor_1_2)" id="valor_1_2{{x.id}}" value="{{x.valor_1_2}}" ng-disabled="verificaPalpite(x.valor_1_2)" /><label for="valor_1_2{{x.id}}"><i id="textoNegrito">{{PalpiteColocarTraco(x.valor_1_2)}}</i> </label>
 								</li>
 								<li style="background-color:#e3f2fd;">
-									<input type="checkbox" class="{{x.id}}" ng-click="check($event,x,x.min_gol_3)" id="min_gol_3@{{x.id}}" value="{{x.min_gol_3}}" ng-disabled="verificaPalpite(x.min_gol_3)" /><label for="min_gol_3@{{x.id}}"> <i id="textoNegrito">{{PalpiteColocarTraco(x.min_gol_3)}}</i></label>
+									<input type="checkbox" class="{{x.id}}" ng-click="check($event,x,x.min_gol_3)" id="min_gol_3{{x.id}}" value="{{x.min_gol_3}}" ng-disabled="verificaPalpite(x.min_gol_3)" /><label for="min_gol_3{{x.id}}"> <i id="textoNegrito">{{PalpiteColocarTraco(x.min_gol_3)}}</i></label>
 								</li>
 								<li style="background-color:#ce93d8">
-									<input type="checkbox" class="{{x.id}}" ng-click="check($event,x,x.max_gol_2)" id="max_gol_2@{{x.id}}" value="{{x.max_gol_2}}" ng-disabled="verificaPalpite(x.max_gol_2)" /><label for="max_gol_2@{{x.id}}"><i id="textoNegrito">{{PalpiteColocarTraco(x.max_gol_2)}}</i> </label>
+									<input type="checkbox" class="{{x.id}}" ng-click="check($event,x,x.max_gol_2)" id="max_gol_2{{x.id}}" value="{{x.max_gol_2}}" ng-disabled="verificaPalpite(x.max_gol_2)" /><label for="max_gol_2{{x.id}}"><i id="textoNegrito">{{PalpiteColocarTraco(x.max_gol_2)}}</i> </label>
 								</li>
 								<li style="background-color:#dcedc8;" >
-									<input type="checkbox" class="{{x.id}}" ng-click="check($event,x,x.ambas_gol)" id="ambas_gol@{{x.id}}" value="{{x.ambas_gol}}" ng-disabled="verificaPalpite(x.ambas_gol)"/><label   for="ambas_gol@{{x.id}}""><i id="textoNegrito">{{PalpiteColocarTraco(x.ambas_gol)}}</i></label>
+									<input type="checkbox" class="{{x.id}}" ng-click="check($event,x,x.ambas_gol)" id="ambas_gol{{x.id}}" value="{{x.ambas_gol}}" ng-disabled="verificaPalpite(x.ambas_gol)"/><label   for="ambas_gol{{x.id}}""><i id="textoNegrito">{{PalpiteColocarTraco(x.ambas_gol)}}</i></label>
 								</li>
 							</ul> 
 						</div>                 

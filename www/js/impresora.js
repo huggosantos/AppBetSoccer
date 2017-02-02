@@ -15,7 +15,7 @@ function imprimirAposta()
 {
   window.DatecsPrinter.listBluetoothDevices(
     function (devices) {
-      window.DatecsPrinter.connect(devices[0].address,printSomeTestText2,erroImpressao);
+      window.DatecsPrinter.connect(devices[0].address,printSomeTestText3,erroImpressao);
     },
     function (error) {
       alert("Erro ");
@@ -125,16 +125,16 @@ function printSomeTestText2() {
   window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("{b}{w}COMPROVANTE{/w}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("------------------------------------------------{br}{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText("AGENTE: "+ultimaAposta.cambista+"{br}{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText("CODIGO APOSTA: {w}{b}"+ultimaAposta.aposta.codigo+"{/b}{/w}{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText("DATA: "+toData(ultimaAposta.aposta.data.date)+" AS "+toHora(ultimaAposta.aposta.data.date)+" HRS{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText("NOME APOSTADOR: {b}"+ultimaAposta.aposta.apostador+"{/b}{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText("VALOR APOSTADO: {b}R$ "+ultimaAposta.aposta.valor_apostado+"{/b}{br}RETORNO POSSIVEL: {w}{b}R$"+ultimaAposta.possivel_premio+"{/b}{/w}{br}",'ISO-8859-1',  function(){ });
+  window.DatecsPrinter.printText("AGENTE: "+jsonApostas.cambista+"{br}{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("CÓDIGO APOSTA: {w}{b}"+jsonApostas.aposta.codigo+"{/b}{/w}{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("DATA: "+toData(jsonApostas.aposta.created_at)+" AS "+toHora(jsonApostas.aposta.created_at)+" HRS{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("NOME APOSTADOR: {b}"+jsonApostas.aposta.nome_apostador+"{/b}{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("VALOR APOSTADO: {b}R$ "+jsonApostas.aposta.valor_aposta+"{/b}{br}RETORNO POSSIVEL: {w}{b}R$"+auxiliar.toFixed(2)+"{/b}{/w}{br}",'ISO-8859-1',  function(){});
 
-  for (var i in ultimaAposta.aposta.jogos) {
+  for (var i in jogosIdAposta) {
     window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
-    window.DatecsPrinter.printText(toData(ultimaAposta.aposta.jogos[i].data)+" "+toHora(ultimaAposta.aposta.jogos[i].data)+" {b} "+ultimaAposta.aposta.jogos[i].times[0].descricao_time+" VS "+ ultimaAposta.aposta.jogos[i].times[1].descricao_time+"{/b}{br}",'ISO-8859-1',  function(){ });
-    window.DatecsPrinter.printText("PALPITE: "+legendaPalpites(ultimaAposta.palpites[i].tpalpite)+"  VALOR PALPITE: "+ultimaAposta.palpites[i].palpite+"{br}",'ISO-8859-1',  function(){ });
+    window.DatecsPrinter.printText(toData(datasJogos[i])+" "+toHora(datasJogos[i])+" {b} "+casa[i]+" VS "+ fora[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
+    window.DatecsPrinter.printText("PALPITE: "+nomePapites(i)+"  VALOR PALPITE: "+palpites[i]+"{br}",'ISO-8859-1',  function(){ });
   }
   window.DatecsPrinter.printText("________________________________________________{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("{w}AVISOS{/w}{CENTER}{br}",'ISO-8859-1', function(){});
@@ -143,9 +143,7 @@ function printSomeTestText2() {
   window.DatecsPrinter.printText("* Ticket será pago em até 72 horas;{br}",'ISO-8859-1', function(){});
   window.DatecsPrinter.printText("* Se o jogo não acontecer no prazo de 24 horas  da data e hora marcada ele será retirado e as   apostas serão recalculadas.{br}",'ISO-8859-1', function(){});
   window.DatecsPrinter.printText("{br}{br}{br}{br}{br}{br}",'ISO-8859-1', function(){});
-  Materialize.toast('Segunda via impressa', 4000);
   location.reload();
-  
 
 }
 

@@ -15,7 +15,7 @@ function imprimirAposta()
 {
   window.DatecsPrinter.listBluetoothDevices(
     function (devices) {
-      window.DatecsPrinter.connect(devices[0].address,printSomeTestText3,erroImpressao);
+      window.DatecsPrinter.connect(devices[0].address,printSomeTestText2,erroImpressao);
     },
     function (error) {
       alert("Erro ");

@@ -497,8 +497,8 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
         }
       }).
       success(function(resposta) {
-        Materialize.toast('Aposta realizada Com Sucesso', 4000);
         jsonApostas = resposta;
+        Materialize.toast('Aposta realizada Com Sucesso', 4000);
         imprimirAposta();
        // $location.path("/aposta");
       }).

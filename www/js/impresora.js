@@ -18,7 +18,7 @@ function imprimirAposta()
       window.DatecsPrinter.connect(devices[0].address,printSomeTestText2,erroImpressao);
     },
     function (error) {
-      alert("Erro na conmunicação com a impressora!");
+      alert("Erro ");
       location.reload();
       swal(JSON.stringify(error));
     }
@@ -120,6 +120,7 @@ window.DatecsPrinter.printText("{br}{br}{br}{br}{br}{br}",'ISO-8859-1', function
 
 
 function printSomeTestText2() {
+  alert("imprimindo");
   window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("{b}{w}{h}BETSOCCER{/h}{/w}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );

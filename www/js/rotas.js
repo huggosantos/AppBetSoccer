@@ -27,6 +27,10 @@
         templateUrl: 'paginas/validarAposta.html',
         controller: 'validarAposta'
       })
+      .when('/comprovante', {
+        templateUrl: 'paginas/comprovante.html',
+        controller: 'comprovante'
+      })
       .otherwise('/aposta', {
         templateUrl: 'paginas/aposta.html',
         controller: 'aposta'
@@ -58,23 +62,13 @@ var auxiliar=0; //recebe o valor da aposta para mostrar na view
 var testeA=0; //recebe o valor da aposta
 var copiaJsonAposta;
 var jsonApostas;
+
 var datasJogos = new Array();// vetor que guarda as datas dos jogos das apostas;
 var ultimaAposta;//variavel q guarda a ultima aposta do cambista;
 
 //----------Controller que faz a validação das apostas feitas pelo app cliente.------------------------------
 app.controller('validarAposta', function($scope, $http, $route, $location) { 
-    
-    $scope.rodar = function(){
-      html2canvas($('#print'),{
-        onrendered: function(canvas) {
-          var img = canvas.toDataURL();
-          //window.open(img);
-          window.plugins.socialsharing.shareViaWhatsApp(' Teste envio de Mensagem e Img via WhatsApp',img, null , function () {alert( 'share ok')}, function ( errormsg) {alert (errormsg)});
-        }
-      });
 
-    }   
- 
   $(document).ready(function(){
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
         $('.modal').modal();
@@ -359,43 +353,6 @@ $scope.toData = function(dateTime) {
         });
 //------------------------------------------FIM DADOS POR APOSTA------------------------------------------------------------------------
 
-// controller para pegar os dados do agente 
-app.controller('dadosCambista', function($scope, $http, $route, $location) { 
-  $scope.mostrarLoader = function(){
-    if($scope.teste==null || $scope.teste==false || $scope.teste==true){
-     $scope.teste=false;   
-     $scope.teste2=true;
-   }
- }
-
- $scope.buscarDadosCambista = function() {   
-  $http.get('http://betsoccer.club/public/aposta/ganhosApostas/'+$scope.password).then(function(response) {
-    $scope.dados = response.data;
-    $scope.teste2=false;
-    $scope.teste=true;
-  }).catch(function(err) {
-   $scope.teste=false;
-   $scope.teste2=false;
-   if(err.status==400){
-    Materialize.toast('Código de Segurança Inexistente', 4000);
-  }else if(err.status==401){
-    Materialize.toast('Código de Segurança Inativo', 4000);
-  }else{
-    Materialize.toast('Erro na comunicação!', 4000);
-  }
-});
-}
-toTop();
-$(document).ready(function(){
-        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-        $('.modal').modal();
-      });
-
-$(document).ready(function(){
-  $('ul.tabs').tabs();
-});
-});
-//----------------------------------------------------FIM DADOS AGENTE---------------------------------------------------
 
 app.controller('controlCollapseible', function($scope, $http, $route, $location, $rootScope) {
   $(document).ready(function() {
@@ -427,8 +384,8 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
     // Adicionar ou remover dados das aposta dos arrays de acordo com os radios.
     $scope.check = function(event,j, p) {
 
-        var teste = event.currentTarget.id;
-        var np = teste.split("@");
+      var teste = event.currentTarget.id;
+      var np = teste.split("@");
         //console.log(teste2[0]+" "+teste2[1]+" "+teste);
         //Pega a classe do inpunt clicado
         var classe = event.currentTarget.className;
@@ -516,7 +473,7 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
     $scope.enviar = function() {
       var json = $scope.montarJsonServidor(jogosIdAposta, palpites, nome_palpites);
       $http({
-        url: 'http://betsoccer.club/public/aposta/apostar',
+        url: 'http://betsocceroficial.herokuapp.com/aposta/apostar',
         method: 'POST',
         data: json,
         headers: {
@@ -527,10 +484,11 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
       success(function(resposta) {
         Materialize.toast('Aposta realizada Com Sucesso', 4000);
         jsonApostas = resposta;
-        imprimirAposta();
-        $location.path("/aposta");
+        console.log(jsonApostas);
+        //imprimirAposta();
+        $location.path("/comprovante");
        // Materialize.toast('Aposta realizada Com Sucesso', 4000);
-      }).
+     }).
       error(function(data) {
         Materialize.toast('Erro na comunicação!', 4000);
         $scope.error = true;
@@ -741,11 +699,13 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
         return aux;
       };
 
-      app.elememt(document).ready(function() {
-        alert("entrei");
-        window.broadcaster.addEventListener("DatecsPrinter.connectionStatus", function(e) {
-          if (e.isConnected) {
-            alert('connect impress');
-          }
-        });
-      });
+
+
+app.elememt(document).ready(function() {
+  alert("entrei");
+  window.broadcaster.addEventListener("DatecsPrinter.connectionStatus", function(e) {
+    if (e.isConnected) {
+      alert('connect impress');
+    }
+  });
+});

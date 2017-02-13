@@ -27,6 +27,10 @@
         templateUrl: 'paginas/validarAposta.html',
         controller: 'validarAposta'
       })
+      .when('/comprovante', {
+        templateUrl: 'paginas/comprovante.html',
+        controller: 'comprovante'
+      })
       .otherwise('/aposta', {
         templateUrl: 'paginas/aposta.html',
         controller: 'aposta'
@@ -63,18 +67,18 @@ var ultimaAposta;//variavel q guarda a ultima aposta do cambista;
 
 //----------Controller que faz a validação das apostas feitas pelo app cliente.------------------------------
 app.controller('validarAposta', function($scope, $http, $route, $location) { 
-    
-    $scope.rodar = function(){
-      html2canvas($('#print'),{
-        onrendered: function(canvas) {
-          var img = canvas.toDataURL();
+
+  $scope.rodar = function(){
+    html2canvas($('#print'),{
+      onrendered: function(canvas) {
+        var img = canvas.toDataURL();
           //window.open(img);
           window.plugins.socialsharing.shareViaWhatsApp(' Teste envio de Mensagem e Img via WhatsApp',img, null , function () {alert( 'share ok')}, function ( errormsg) {alert (errormsg)});
         }
       });
 
-    }   
- 
+  }   
+
   $(document).ready(function(){
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
         $('.modal').modal();
@@ -427,8 +431,8 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
     // Adicionar ou remover dados das aposta dos arrays de acordo com os radios.
     $scope.check = function(event,j, p) {
 
-        var teste = event.currentTarget.id;
-        var np = teste.split("@");
+      var teste = event.currentTarget.id;
+      var np = teste.split("@");
         //console.log(teste2[0]+" "+teste2[1]+" "+teste);
         //Pega a classe do inpunt clicado
         var classe = event.currentTarget.className;
@@ -525,12 +529,13 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
         }
       }).
       success(function(resposta) {
-        Materialize.toast('Aposta realizada Com Sucesso', 4000);
-        jsonApostas = resposta;
-        imprimirAposta();
-        $location.path("/aposta");
        // Materialize.toast('Aposta realizada Com Sucesso', 4000);
-      }).
+        jsonApostas = resposta;
+        console.log(jsonApostas);
+        //imprimirAposta();
+        $location.path("/comprovante");
+        Materialize.toast('Aposta realizada Com Sucesso', 4000);
+     }).
       error(function(data) {
         Materialize.toast('Erro na comunicação!', 4000);
         $scope.error = true;

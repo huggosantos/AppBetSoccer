@@ -27,10 +27,6 @@
         templateUrl: 'paginas/validarAposta.html',
         controller: 'validarAposta'
       })
-      .when('/comprovante', {
-        templateUrl: 'paginas/comprovante.html',
-        controller: 'comprovante'
-      })
       .otherwise('/aposta', {
         templateUrl: 'paginas/aposta.html',
         controller: 'aposta'
@@ -62,11 +58,344 @@ var auxiliar=0; //recebe o valor da aposta para mostrar na view
 var testeA=0; //recebe o valor da aposta
 var copiaJsonAposta;
 var jsonApostas;
-
 var datasJogos = new Array();// vetor que guarda as datas dos jogos das apostas;
 var ultimaAposta;//variavel q guarda a ultima aposta do cambista;
 
+//----------Controller que faz a validação das apostas feitas pelo app cliente.------------------------------
+app.controller('validarAposta', function($scope, $http, $route, $location) { 
+    
+    $scope.rodar = function(){
+      html2canvas($('#print'),{
+        onrendered: function(canvas) {
+          var img = canvas.toDataURL();
+          //window.open(img);
+          window.plugins.socialsharing.shareViaWhatsApp(' Teste envio de Mensagem e Img via WhatsApp',img, null , function () {alert( 'share ok')}, function ( errormsg) {alert (errormsg)});
+        }
+      });
 
+    }   
+ 
+  $(document).ready(function(){
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal').modal();
+      });
+
+  $scope.toData = function(dateTime) {  
+  var dateTime = dateTime.split(" "); //Cria um array com uma posição ["2016-07-10 12:40:10"]
+  var date = dateTime[0].split("-"); //Separa A string aprtir do "-" Cria um Array com tres posições ["2016", "17", "10"]
+  var dataFinal = date[2] + "/" +
+  date[1];
+  return dataFinal; //Retona a data No Padrao Brasileiro ["10/17/2016"]
+}
+ //Metodo que faz um split em string DataTime e retonar apenas a Hora
+ $scope.toHora = function(dateTime) {
+  var dateTime = dateTime.split(" "); //Cria um array com uma posição ["2016-07-10 12:40:10"]
+  var time = dateTime[1].split(":"); //Separa a string aprtir do ":" Cria um Array com tres posições ["12", "40", "10"]
+  var timeFinal = time[0] + ":" + time[1];
+  return timeFinal; //Retona a hora descosiderando os segundos ["12:40"]
+}
+
+$scope.mostrarLoader = function(){
+  if($scope.aux==null || $scope.aux==false || $scope.aux==true){
+   $scope.aux=false;   
+   $scope.aux2=true;
+ }
+}
+
+$scope.validar = function() {
+  var dadosAposta = JSON.stringify({
+    codigo_aposta: $scope.codAposta,
+    codigo_seguranca: $scope.codSeguranca
+  });
+  $http({
+    url: 'http://betsocceroficial.herokuapp.com/aposta/validar',
+    method: 'PUT',
+    data: dadosAposta,
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  }).
+  success(function(resposta) {
+    $scope.aux2=false;
+    $scope.aux=false;
+    Materialize.toast('Aposta foi validada com Sucesso', 6000);
+  }).
+  error(function(err) {
+    $scope.aux2=false;
+    $scope.aux=false;
+    if(err.status==400){
+      Materialize.toast('Usuário Inexistente', 4000);
+    }else if(err.status==401){
+     Materialize.toast('Usuário inátivo', 4000);
+   }else if(err.status==403){
+    Materialize.toast('Código da Aposta não encontrado', 4000);
+  }else if(err.status==406){
+   Materialize.toast('Aposta Já Ativa', 4000);
+ }else{
+  Materialize.toast('Erro na comunicação!', 4000);
+}
+
+});
+}
+
+var aptStatus;
+$scope.BuscarAposta = function() {
+  $http.get('http://betsoccer.club/public/aposta/consultar/'+$scope.codAposta).then(function(response) {
+    $scope.aux2=false;
+    $scope.aux=true;
+    $scope.ApostaStatus = response.data;
+    aptStatus = response.data;
+  }).catch(function(err) {
+    $scope.aux2=false;
+    $scope.aux=false;
+    if(err.status==403){
+      Materialize.toast('Código não encontrado', 4000);
+    }else{
+      Materialize.toast('Erro na comunicação!', 4000);
+    }
+
+  });
+}
+
+
+$scope.verificaStatusAposta = function(statusAposta){
+  if(statusAposta==true){
+    return "Valida";
+  }else{
+    return "Aguardando Validação";
+  }
+}
+
+$scope.apostaVencedora = function(statusAposta){
+  if(statusAposta==true){
+    return "Sim";
+  }else{
+    return "Não";
+  }
+}
+
+
+$scope.retornaValorPalpite = function(ob){
+  for(var i in aptStatus.palpites){
+    if(ob==aptStatus.palpites[i].jogos_id){
+      var x = aptStatus.palpites[i].palpite;
+      return x;
+    }
+  }
+}
+
+$scope.retornaPalpite = function (ob){
+
+  for(var i in aptStatus.palpites){
+    if(ob==aptStatus.palpites[i].jogos_id){
+      var x;
+      if(aptStatus.palpites[i].tpalpite=="valor_casa"){
+        x="Casa";
+        return x;
+      }else if(aptStatus.palpites[i].tpalpite=="valor_fora"){
+        x="Fora";
+        return x;
+      } else if(aptStatus.palpites[i].tpalpite=="valor_empate"){
+        x="Empate";
+        return x;
+      } else if(aptStatus.palpites[i].tpalpite=="valor_dupla"){
+        x="Dupla";
+        return x;
+      } else if(aptStatus.palpites[i].tpalpite=="valor_1_2"){
+        x="Gol 1/2";
+        return x;
+      } else if(aptStatus.palpites[i].tpalpite=="min_gol_3"){
+        x="+2.5";
+        return x;
+      } else if(aptStatus.palpites[i].tpalpite=="max_gol_2"){
+        x="-2.5";
+        return x;
+      } else if(aptStatus.palpites[i].tpalpite=="ambas_gol"){
+        x="Ambas";
+        return x;
+      }
+    }
+  }
+}
+toTop();
+
+});
+//--------------------------FIM VALIDAÇÂO DE CODIGO DE APOSTA DO APP CLIENT-------------------------------------------------
+
+//Controller para realizar o acerto com os agentes, pra consumir o servico é necessario o cod. Seguranca do cambista e do ADM.
+app.controller('acertoCambista', function($scope, $http, $route, $location) { 
+ $scope.mostrarLoader = function(){
+  if($scope.aux==null || $scope.aux==false || $scope.aux==true){
+   $scope.aux=false;   
+   $scope.aux2=true;
+ }
+}
+$scope.acertar = function() {
+  $http.get('http://betsoccer.club/public/cambista/acerto/'+$scope.codCambista+'/'+$scope.codAdm).then(function(response) {
+    $scope.aux2=false;
+    $scope.aux=true;
+    Materialize.toast('Acerto realizado Com Sucesso', 6000);
+  }).catch(function(err) {
+    $scope.aux2=false;
+    $scope.aux=false;
+    if(err.status==400){
+      Materialize.toast('Código de Segurança Inexistente', 4000);
+    }else if(err.status==401){
+      Materialize.toast('Código de Segurança Inativo', 4000);
+    }else{
+      Materialize.toast('Erro na comunicação!', 4000);
+    }
+
+  });
+}
+
+});
+//---------------------------------------------------FIM ACERTO-----------------------------------------------------------------
+
+// Controller para fazer a impressão da ultima aposta realizada pelo agente
+app.controller('imprimirUltima', function($scope, $http, $route, $location) { 
+ $scope.mostrarLoader = function(){
+  if($scope.aux==null || $scope.aux==false || $scope.aux==true){
+   $scope.aux=false;   
+   $scope.aux2=true;
+ }
+}
+$scope.imprimirUltimaAposta = function() {
+  $http.get('http://betsoccer.club/public/aposta/ultima/'+$scope.password).then(function(response) {
+    $scope.ultimaAposta = response.data;
+    ultimaAposta=response.data;
+      /*for (var i in ultimaAposta.aposta.jogos) {
+        console.log(i)
+          console.log(ultimaAposta.cambista);
+          console.log(ultimaAposta.aposta.jogos[i].data);
+          console.log(ultimaAposta.aposta.jogos[i].data);
+          console.log(ultimaAposta.aposta.jogos[i].times[0].descricao_time);
+          console.log(ultimaAposta.aposta.jogos[i].times[1].descricao_time);
+          console.log(ultimaAposta.palpites[i].tpalpite); 
+          console.log(ultimaAposta.palpites[i].palpite);
+      }
+      */imprimirUltimaApostaCambista();
+      $scope.aux2=false;
+      $scope.aux=true;
+    }).catch(function(err) {
+      $scope.aux2=false;
+      $scope.aux=true;
+      if(err.status==400){
+        Materialize.toast('Código de Segurança Inexistente', 4000);
+      }else if(err.status==401){
+        Materialize.toast('Código de Segurança Inativo', 4000);
+      }else{
+        Materialize.toast('Erro na comunicação!', 4000);
+      }
+
+    });
+  }
+
+});
+//----------------------------------------------FIM ULTIMA APOSTA-------------------------------------------------------------------------
+
+// Controllers para pegar os dados por aposta dos cambistas
+app.controller('teste', function($scope, $http, $route, $location) { 
+  $(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+});
+app.controller('dadosPorAposta', function($scope, $http, $route, $location) { 
+ $scope.mostrarLoader = function(){
+  if($scope.aux==null || $scope.aux==false || $scope.aux==true){
+   $scope.aux=false;   
+   $scope.aux2=true;
+ }
+} 
+
+$scope.buscarDadosPorAposta = function() {
+  $http.get('http://betsoccer.club/public/aposta/premiosApostas/'+$scope.password).then(function(response) {
+    $scope.dadosPorAposta = response.data;
+    $scope.aux2=false;
+    $scope.aux=true;
+  }).catch(function(err) {
+    $scope.aux2=false;
+    $scope.aux=false;
+    if(err.status==400){
+      Materialize.toast('Código de Segurança Inexistente', 4000);
+    }else if(err.status==401){
+      Materialize.toast('Código de Segurança Inativo', 4000);
+    }else{
+      Materialize.toast('Erro na comunicação!', 4000);
+    }
+
+  });
+}
+$scope.toData = function(dateTime) {
+
+                var dateTime = dateTime.split(" "); //Cria um array com uma posição ["2016-07-10 12:40:10"]
+                var date = dateTime[0].split("-"); //Separa A string aprtir do "-" Cria um Array com tres posições ["2016", "17", "10"]
+                var dataFinal = date[2] + "/" +
+                date[1];
+                return dataFinal; //Retona a data No Padrao Brasileiro ["10/17/2016"]
+              }
+            //Metodo que faz um split em string DataTime e retonar apenas a Hora
+            $scope.toHora = function(dateTime) {
+            var dateTime = dateTime.split(" "); //Cria um array com uma posição ["2016-07-10 12:40:10"]
+
+            var time = dateTime[1].split(":"); //Separa a string aprtir do ":" Cria um Array com tres posições ["12", "40", "10"]
+            var timeFinal = time[0] + ":" + time[1];
+
+            return timeFinal; //Retona a hora descosiderando os segundos ["12:40"]
+
+          }
+          toTop();
+          $(document).ready(function(){
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal').modal();
+      });
+
+          $(document).ready(function(){
+            $('ul.tabs').tabs();
+          });
+
+
+        });
+//------------------------------------------FIM DADOS POR APOSTA------------------------------------------------------------------------
+
+// controller para pegar os dados do agente 
+app.controller('dadosCambista', function($scope, $http, $route, $location) { 
+  $scope.mostrarLoader = function(){
+    if($scope.teste==null || $scope.teste==false || $scope.teste==true){
+     $scope.teste=false;   
+     $scope.teste2=true;
+   }
+ }
+
+ $scope.buscarDadosCambista = function() {   
+  $http.get('http://betsoccer.club/public/aposta/ganhosApostas/'+$scope.password).then(function(response) {
+    $scope.dados = response.data;
+    $scope.teste2=false;
+    $scope.teste=true;
+  }).catch(function(err) {
+   $scope.teste=false;
+   $scope.teste2=false;
+   if(err.status==400){
+    Materialize.toast('Código de Segurança Inexistente', 4000);
+  }else if(err.status==401){
+    Materialize.toast('Código de Segurança Inativo', 4000);
+  }else{
+    Materialize.toast('Erro na comunicação!', 4000);
+  }
+});
+}
+toTop();
+$(document).ready(function(){
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal').modal();
+      });
+
+$(document).ready(function(){
+  $('ul.tabs').tabs();
+});
+});
+//----------------------------------------------------FIM DADOS AGENTE---------------------------------------------------
 
 app.controller('controlCollapseible', function($scope, $http, $route, $location, $rootScope) {
   $(document).ready(function() {
@@ -98,8 +427,8 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
     // Adicionar ou remover dados das aposta dos arrays de acordo com os radios.
     $scope.check = function(event,j, p) {
 
-      var teste = event.currentTarget.id;
-      var np = teste.split("@");
+        var teste = event.currentTarget.id;
+        var np = teste.split("@");
         //console.log(teste2[0]+" "+teste2[1]+" "+teste);
         //Pega a classe do inpunt clicado
         var classe = event.currentTarget.className;
@@ -187,7 +516,7 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
     $scope.enviar = function() {
       var json = $scope.montarJsonServidor(jogosIdAposta, palpites, nome_palpites);
       $http({
-        url: 'http://betsocceroficial.herokuapp.com/aposta/apostar',
+        url: 'http://betsoccer.club/public/aposta/apostar',
         method: 'POST',
         data: json,
         headers: {
@@ -196,12 +525,11 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
         }
       }).
       success(function(resposta) {
-       // Materialize.toast('Aposta realizada Com Sucesso', 4000);
-       jsonApostas = resposta;
-        //console.log(jsonApostas);
-        //imprimirAposta();
-        $location.path("/comprovante");
         Materialize.toast('Aposta realizada Com Sucesso', 4000);
+        jsonApostas = resposta;
+        imprimirAposta();
+        $location.path("/aposta");
+       // Materialize.toast('Aposta realizada Com Sucesso', 4000);
       }).
       error(function(data) {
         Materialize.toast('Erro na comunicação!', 4000);
@@ -219,11 +547,174 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
       return auxiliar.toFixed(2);
     }
 
+
   });
 
 
 
-   
+    app.controller('aposta', function($scope, $http, $routeParams, $location, $rootScope) {
+
+    //recebe o valor da aposta
+    $scope.enviarValor = function(){
+      usarNaApostas =
+      testeA = $scope.valor;
+    }
+
+
+    $scope.buscar = function() {
+      $http.get('http://betsoccer.club/public/aposta').then(function(response) {
+        // var json = JSON.stringify(response.data)
+        // var json = JSON.parse(jso); 
+        // window.localStorage.setItem("ArquivoServidor",response.data); 
+
+        for (var k in response.data.jogos) {
+          if (k == 0) {
+            vetor.push(response.data.jogos[k].campeonato.descricao_campeonato);
+          } else {
+            if (!dadosCamp(vetor, response.data.jogos[k].campeonato.descricao_campeonato)) {
+              vetor.push(response.data.jogos[k].campeonato.descricao_campeonato);
+            }
+          }
+          if (k == 0) {
+            vetorHora.push(response.data.jogos[k].data);
+          } else {
+            if (!dadosHora(vetorHora, toData(response.data.jogos[k].data))) {
+              vetorHora.push(response.data.jogos[k].data);
+            }
+          }      
+        }
+
+        //Metodo que faz um split em string DataTime e retonar apenas a Data
+        $scope.toData = function(dateTime) {
+
+                var dateTime = dateTime.split(" "); //Cria um array com uma posição ["2016-07-10 12:40:10"]
+                var date = dateTime[0].split("-"); //Separa A string aprtir do "-" Cria um Array com tres posições ["2016", "17", "10"]
+                var dataFinal = date[2] + "/" +
+                date[1] + "/" + date[0];
+                return dataFinal; //Retona a data No Padrao Brasileiro ["10/17/2016"]
+              }
+            //Metodo que faz um split em string DataTime e retonar apenas a Hora
+            $scope.toHora = function(dateTime) {
+            var dateTime = dateTime.split(" "); //Cria um array com uma posição ["2016-07-10 12:40:10"]
+
+            var time = dateTime[1].split(":"); //Separa a string aprtir do ":" Cria um Array com tres posições ["12", "40", "10"]
+            var timeFinal = time[0] + ":" + time[1];
+
+            return timeFinal; //Retona a hora descosiderando os segundos ["12:40"]
+
+          }
+
+        //Metodo para verifica se a data passada ja exite no vertorHora
+        function dadosHora(vetorHora, dataTime) {
+          for (var i in vetorHora) {
+            if (toData(vetorHora[i]) == dataTime) {
+              return true;
+            }
+          }
+          return false;
+        }
+        /*
+          Metodo que que recebe uma hora->DataTime e retornar um vetor com os campeonatos
+          que tenha relação com algum jogo e a hora passada
+          */
+          $scope.CampEmJogos = function(hora) {
+            aux = new Array();
+            //Inteira pelos jogos quem vem do Web service
+            for (var k in response.data.jogos) {
+                //verifica se alum jogo.data e igual a data passada por paramentro
+                if ($scope.toData(hora) == $scope.toData(response.data.jogos[k].data)) {
+                    //vefica se esse se o campeonato não ja foi inserido no vertor
+                    if (!dadosCamp(aux, response.data.jogos[k].campeonato.descricao_campeonato)) {
+                        //Por fim insere no array o campeonato
+                        aux.push(response.data.jogos[k].campeonato.descricao_campeonato);
+                      }
+
+                    }
+                  }
+
+                  return aux;
+                };
+
+                $scope.campeonatos = vetor;
+                $scope.horas = vetorHora;
+                $scope.aposta = response.data;
+                jsonServidor = response.data;
+        //window.localStorage.setItem("jsonServidor",response.data);
+        //window.localStorage.setItem("todosCampeonatos",aux);
+        //window.localStorage.setItem("todasDatas",vetorHora);
+
+      }, function(err) {
+        Materialize.toast('Erro na comunicação!', 4000);
+        //console.log(err);
+      });
+    }
+
+    $scope.buscar();// busca todos os dados dos jogos no servidor
+    $scope.timeCasa=casa;
+    $scope.timeFora=fora;
+    $scope.palpiteNumero=palpites;
+
+    $scope.nomePapites= function(np){
+      var vetorPalpitesCorretos;
+
+      if(nome_palpites[np]=="valor_casa"){
+        vetorPalpitesCorretos="Casa";
+      }
+      if(nome_palpites[np]=="valor_fora"){
+        vetorPalpitesCorretos="Fora";
+      } 
+      if(nome_palpites[np]=="valor_empate"){
+        vetorPalpitesCorretos="Empate";
+      } 
+      if(nome_palpites[np]=="valor_dupla"){
+        vetorPalpitesCorretos="Dupla";
+      } 
+      if(nome_palpites[np]=="valor_1_2"){
+        vetorPalpitesCorretos="Gol 1/2";
+      } 
+      if(nome_palpites[np]=="max_gol_2"){
+        vetorPalpitesCorretos="-2.5";
+      } 
+      if(nome_palpites[np]=="min_gol_3"){
+        vetorPalpitesCorretos="+2.5";
+      } 
+      if(nome_palpites[np]=="ambas_gol"){
+        vetorPalpitesCorretos="Ambas";
+      }
+
+      return vetorPalpitesCorretos;       
+    }
+
+    $scope.tamanhoVetor = function(){
+      var array = new Array();
+      for(var i in  nome_palpites){
+        array.push(i);
+      }
+      return array;
+    }
+    $scope.jsonApostasDinamicas = function(){
+      var arrayJson= new Array();
+      for(var i in  nome_palpites){
+       var dadosAposta = JSON.stringify({
+        casa: $scope.timeCasa[i],
+        fora: $scope.timeFora[i],
+        valorPalpite: $scope.palpiteNumero[i],
+      });
+       arrayJson.push(dadosAposta);
+       console.log(arrayJson);
+       console.log("dados Dina"+dadosAposta);
+     }
+
+     return arrayJson;
+   }
+    toTop();// Rola a pagina pra cima
+
+    // Ativa a função do modal na rota, função do materialize
+    $(document).ready(function() {
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal').modal();
+      });
+  });
 
     function dadosCamp(vetor, valor) {
       for (var i in vetor) {
@@ -249,8 +740,6 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
         }
         return aux;
       };
-
-
 
       app.elememt(document).ready(function() {
         alert("entrei");

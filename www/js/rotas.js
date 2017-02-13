@@ -27,10 +27,6 @@
         templateUrl: 'paginas/validarAposta.html',
         controller: 'validarAposta'
       })
-      .when('/comprovante', {
-        templateUrl: 'paginas/comprovante.html',
-        controller: 'comprovante'
-      })
       .otherwise('/aposta', {
         templateUrl: 'paginas/aposta.html',
         controller: 'aposta'
@@ -65,25 +61,48 @@ var jsonApostas;
 var datasJogos = new Array();// vetor que guarda as datas dos jogos das apostas;
 var ultimaAposta;//variavel q guarda a ultima aposta do cambista;
 
-
-
 //----------Controller que faz a validação das apostas feitas pelo app cliente.------------------------------
 app.controller('validarAposta', function($scope, $http, $route, $location) { 
+    
+    $scope.rodar = function(){
+      html2canvas($('#print'),{
+        onrendered: function(canvas) {
+          var img = canvas.toDataURL();
+          //window.open(img);
+          window.plugins.socialsharing.shareViaWhatsApp(' Teste envio de Mensagem e Img via WhatsApp',img, null , function () {alert( 'share ok')}, function ( errormsg) {alert (errormsg)});
+        }
+      });
 
+    }   
+ 
   $(document).ready(function(){
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
         $('.modal').modal();
       });
 
+  $scope.toData = function(dateTime) {  
+  var dateTime = dateTime.split(" "); //Cria um array com uma posição ["2016-07-10 12:40:10"]
+  var date = dateTime[0].split("-"); //Separa A string aprtir do "-" Cria um Array com tres posições ["2016", "17", "10"]
+  var dataFinal = date[2] + "/" +
+  date[1];
+  return dataFinal; //Retona a data No Padrao Brasileiro ["10/17/2016"]
+}
+ //Metodo que faz um split em string DataTime e retonar apenas a Hora
+ $scope.toHora = function(dateTime) {
+  var dateTime = dateTime.split(" "); //Cria um array com uma posição ["2016-07-10 12:40:10"]
+  var time = dateTime[1].split(":"); //Separa a string aprtir do ":" Cria um Array com tres posições ["12", "40", "10"]
+  var timeFinal = time[0] + ":" + time[1];
+  return timeFinal; //Retona a hora descosiderando os segundos ["12:40"]
+}
 
-  $scope.mostrarLoader = function(){
-    if($scope.aux==null || $scope.aux==false || $scope.aux==true){
-     $scope.aux=false;   
-     $scope.aux2=true;
-   }
+$scope.mostrarLoader = function(){
+  if($scope.aux==null || $scope.aux==false || $scope.aux==true){
+   $scope.aux=false;   
+   $scope.aux2=true;
  }
+}
 
- $scope.validar = function() {
+$scope.validar = function() {
   var dadosAposta = JSON.stringify({
     codigo_aposta: $scope.codAposta,
     codigo_seguranca: $scope.codSeguranca
@@ -165,7 +184,9 @@ $scope.retornaValorPalpite = function(ob){
     }
   }
 }
+
 $scope.retornaPalpite = function (ob){
+
   for(var i in aptStatus.palpites){
     if(ob==aptStatus.palpites[i].jogos_id){
       var x;
@@ -199,25 +220,7 @@ $scope.retornaPalpite = function (ob){
 }
 toTop();
 
-$scope.toData = function(dateTime) {  
-  var dateTime = dateTime.split(" "); //Cria um array com uma posição ["2016-07-10 12:40:10"]
-  var date = dateTime[0].split("-"); //Separa A string aprtir do "-" Cria um Array com tres posições ["2016", "17", "10"]
-  var dataFinal = date[2] + "/" +
-  date[1];
-  return dataFinal; //Retona a data No Padrao Brasileiro ["10/17/2016"]
-}
- //Metodo que faz um split em string DataTime e retonar apenas a Hora
- $scope.toHora = function(dateTime) {
-  var dateTime = dateTime.split(" "); //Cria um array com uma posição ["2016-07-10 12:40:10"]
-  var time = dateTime[1].split(":"); //Separa a string aprtir do ":" Cria um Array com tres posições ["12", "40", "10"]
-  var timeFinal = time[0] + ":" + time[1];
-  return timeFinal; //Retona a hora descosiderando os segundos ["12:40"]
-}
-
-
 });
-
-
 //--------------------------FIM VALIDAÇÂO DE CODIGO DE APOSTA DO APP CLIENT-------------------------------------------------
 
 //Controller para realizar o acerto com os agentes, pra consumir o servico é necessario o cod. Seguranca do cambista e do ADM.
@@ -424,8 +427,8 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
     // Adicionar ou remover dados das aposta dos arrays de acordo com os radios.
     $scope.check = function(event,j, p) {
 
-      var teste = event.currentTarget.id;
-      var np = teste.split("@");
+        var teste = event.currentTarget.id;
+        var np = teste.split("@");
         //console.log(teste2[0]+" "+teste2[1]+" "+teste);
         //Pega a classe do inpunt clicado
         var classe = event.currentTarget.className;
@@ -522,12 +525,11 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
         }
       }).
       success(function(resposta) {
-       // Materialize.toast('Aposta realizada Com Sucesso', 4000);
-       jsonApostas = resposta;
-        //console.log(jsonApostas);
-        //imprimirAposta();
-        $location.path("/comprovante");
         Materialize.toast('Aposta realizada Com Sucesso', 4000);
+        jsonApostas = resposta;
+        imprimirAposta();
+        $location.path("/aposta");
+       // Materialize.toast('Aposta realizada Com Sucesso', 4000);
       }).
       error(function(data) {
         Materialize.toast('Erro na comunicação!', 4000);
@@ -547,6 +549,8 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
 
 
   });
+
+
 
     app.controller('aposta', function($scope, $http, $routeParams, $location, $rootScope) {
 

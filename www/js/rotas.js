@@ -520,7 +520,7 @@ app.controller('controlCollapseible', function($scope, $http, $route, $location,
     $scope.enviar = function() {
       var json = $scope.montarJsonServidor(jogosIdAposta, palpites, nome_palpites);
       $http({
-        url: 'http://betsoccer.club/public/aposta/apostar',
+        url: 'http://test.betsoccer.club/public/aposta/apostar',
         method: 'POST',
         data: json,
         headers: {

@@ -130,7 +130,7 @@ function printSomeTestText2() {
   window.DatecsPrinter.printText("------------------------------------------------{br}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("AGENTE: "+jsonApostas.cambista+"{br}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("CODIGO APOSTA: {w}{b}"+jsonApostas.aposta.codigo+"{/b}{/w}{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText("DATA: "+toData(jsonApostas.aposta.data.date)+" AS "+toHora(jsonApostas.aposta.created_at)+" HRS{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("DATA: "+toData(jsonApostas.aposta.data.date)+" AS "+toHora(jsonApostas.aposta.data.date)+" HRS{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("NOME APOSTADOR: {b}"+jsonApostas.aposta.apostador+"{/b}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("VALOR APOSTADO: {b}R$ "+jsonApostas.aposta.valor_apostado+"{/b}{br}RETORNO POSSIVEL: {w}{b}R$"+jsonApostas.possivel_premio+"{/b}{/w}{br}",'ISO-8859-1',  function(){ });
 

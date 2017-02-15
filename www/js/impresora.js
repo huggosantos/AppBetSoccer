@@ -15,7 +15,7 @@ function imprimirAposta()
 {
   window.DatecsPrinter.listBluetoothDevices(
     function (devices) {
-      window.DatecsPrinter.connect(devices[0].address,printSomeTestText2,erroImpressao);
+      window.DatecsPrinter.connect(devices[0].address,printSomeTestText2,erroImpressao2);
     },
     function (error) {
       alert("Erro!");
@@ -41,6 +41,9 @@ function imprimirUltimaApostaCambista()
 function erroImpressao() {
    alert("Erro na conmunicação com a impressora!");
    location.reload();
+}
+function erroImpressao2() {
+   alert("Erro na conmunicação com a impressora!");
 }
 
 
@@ -119,17 +122,17 @@ window.DatecsPrinter.printText("{br}{br}{br}{br}{br}{br}",'ISO-8859-1', function
 }
 
 
-function printSomeTestText2() {  alert("Imprimir");
+function printSomeTestText2() { 
   window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("{b}{w}{h}BETSOCCER{/h}{/w}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("{b}{w}COMPROVANTE{/w}{/b}{CENTER}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("------------------------------------------------{br}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("AGENTE: "+jsonApostas.cambista+"{br}{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText("CÓDIGO APOSTA: {w}{b}"+jsonApostas.aposta.codigo+"{/b}{/w}{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText("DATA: "+toData(jsonApostas.aposta.created_at)+" AS "+toHora(jsonApostas.aposta.created_at)+" HRS{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText("NOME APOSTADOR: {b}"+jsonApostas.aposta.nome_apostador+"{/b}{br}",'ISO-8859-1', function(){} );
-  window.DatecsPrinter.printText("VALOR APOSTADO: {b}R$ "+jsonApostas.aposta.valor_aposta+"{/b}{br}RETORNO POSSIVEL: {w}{b}R$"+auxiliar.toFixed(2)+"{/b}{/w}{br}",'ISO-8859-1',  function(){ });
+  window.DatecsPrinter.printText("CODIGO APOSTA: {w}{b}"+jsonApostas.aposta.codigo+"{/b}{/w}{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("DATA: "+toData(jsonApostas.aposta.data.date)+" AS "+toHora(jsonApostas.aposta.created_at)+" HRS{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("NOME APOSTADOR: {b}"+jsonApostas.aposta.apostador+"{/b}{br}",'ISO-8859-1', function(){} );
+  window.DatecsPrinter.printText("VALOR APOSTADO: {b}R$ "+jsonApostas.aposta.valor_apostado+"{/b}{br}RETORNO POSSIVEL: {w}{b}R$"+jsonApostas.possivel_premio+"{/b}{/w}{br}",'ISO-8859-1',  function(){ });
 
   for (var i in jogosIdAposta) {
     window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
@@ -138,10 +141,10 @@ function printSomeTestText2() {  alert("Imprimir");
   }
   window.DatecsPrinter.printText("________________________________________________{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("{w}AVISOS{/w}{CENTER}{br}",'ISO-8859-1', function(){});
-  window.DatecsPrinter.printText("* Não pagaremos jogos já realizados que por     falha quaisquer que sejam continuem no sistema;{br}",'ISO-8859-1', function(){});
-  window.DatecsPrinter.printText("* Ticket válido por 8 dias;{br}",'ISO-8859-1', function(){});
-  window.DatecsPrinter.printText("* Ticket será pago em até 72 horas;{br}",'ISO-8859-1', function(){});
-  window.DatecsPrinter.printText("* Se o jogo não acontecer no prazo de 24 horas  da data e hora marcada ele será retirado e as   apostas serão recalculadas.{br}",'ISO-8859-1', function(){});
+  window.DatecsPrinter.printText("* Nao pagaremos jogos ja realizados que por     falha quaisquer que sejam continuem no sistema;{br}",'ISO-8859-1', function(){});
+  window.DatecsPrinter.printText("* Ticket valido por 8 dias;{br}",'ISO-8859-1', function(){});
+  window.DatecsPrinter.printText("* Ticket sera pago em ate 72 horas;{br}",'ISO-8859-1', function(){});
+  window.DatecsPrinter.printText("* Se o jogo não acontecer no prazo de 24 horas  da data e hora marcada ele sera retirado e as   apostas serao recalculadas.{br}",'ISO-8859-1', function(){});
   window.DatecsPrinter.printText("{br}{br}{br}{br}{br}{br}",'ISO-8859-1', function(){});
   location.reload();
 

@@ -39,11 +39,11 @@ function imprimirUltimaApostaCambista()
     );
 }
 function erroImpressao() {
-   alert("Erro na conmunicação com a impressora!");
-   location.reload();
+ alert("Erro na conmunicação com a impressora!");
+ location.reload();
 }
 function erroImpressao2() {
-   alert("Erro na conmunicação com a impressora!");
+ alert("Erro na conmunicação com a impressora!");
 }
 
 
@@ -134,10 +134,10 @@ function printSomeTestText2() {
   window.DatecsPrinter.printText("NOME APOSTADOR: {b}"+jsonApostas.aposta.apostador+"{/b}{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("VALOR APOSTADO: {b}R$ "+jsonApostas.aposta.valor_apostado+"{/b}{br}RETORNO POSSIVEL: {w}{b}R$"+jsonApostas.possivel_premio+"{/b}{/w}{br}",'ISO-8859-1',  function(){ });
 
-  for (var i in jogosIdAposta) {
+  for (var i in jsonApostas.aposta.jogos) {
     window.DatecsPrinter.printText("------------------------------------------------{br}",'ISO-8859-1', function(){} );
-    window.DatecsPrinter.printText(toData(datasJogos[i])+" "+toHora(datasJogos[i])+" {b} "+casa[i]+" VS "+ fora[i]+"{/b}{br}",'ISO-8859-1',  function(){ });
-    window.DatecsPrinter.printText("PALPITE: "+nomePapites(i)+"  VALOR PALPITE: "+palpites[i]+"{br}",'ISO-8859-1',  function(){ });
+    window.DatecsPrinter.printText(toData(jsonApostas.aposta.jogos[i].data)+" "+toHora(jsonApostas.aposta.jogos[i].data)+" {b} "+jsonApostas.aposta.jogos[i].times[0].descricao_time+" VS "+ jsonApostas.aposta.jogos[i].times[1].descricao_time+"{/b}{br}",'ISO-8859-1',  function(){ });
+    window.DatecsPrinter.printText("PALPITE: "+legendaPalpites(jsonApostas.palpites[i].tpalpite)+"  VALOR PALPITE: "+jsonApostas.palpites[i].palpite+"{br}",'ISO-8859-1',  function(){ });
   }
   window.DatecsPrinter.printText("________________________________________________{br}",'ISO-8859-1', function(){} );
   window.DatecsPrinter.printText("{w}AVISOS{/w}{CENTER}{br}",'ISO-8859-1', function(){});

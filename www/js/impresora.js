@@ -6,7 +6,7 @@ function imprimirTodosJogos()
     },
     function (error) {
       alert("Erro na conmunicação com a impressora!");
-      swal(JSON.stringify(error));
+     // swal(JSON.stringify(error));
     }
     );
 }
@@ -18,9 +18,8 @@ function imprimirAposta()
       window.DatecsPrinter.connect(devices[0].address,printSomeTestText2,erroImpressao2);
     },
     function (error) {
-      alert("Erro!");
-      location.reload();
-      swal(JSON.stringify(error));
+      alert("Erro na conmunicação via Bluetooth!");
+      //swal(JSON.stringify(error));
     }
     );
 }
@@ -34,7 +33,7 @@ function imprimirUltimaApostaCambista()
     function (error) {
       alert("Erro na conmunicação com a impressora!");
       location.reload();
-      swal(JSON.stringify(error));
+     // swal(JSON.stringify(error));
     }
     );
 }

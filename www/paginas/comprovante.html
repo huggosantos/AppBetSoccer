@@ -20,10 +20,12 @@
         <em id="texto3">&nbsp;Status Aposta : </em><em id="texto8">{{verificaStatusAposta(jsonComprovante.aposta.ativa)}}&nbsp;&nbsp;</em> 
 
       </p>
+      <hr>
       <p ng-repeat="a in jsonComprovante.aposta.jogos">
-        <em id="texto3">&nbsp;{{toData(a.data)}}&nbsp;{{toHora(a.data)}}<br></em><em id="texto3">{{a.times[0].descricao_time}}&nbsp;</em><em id="texto7">{{a.resultado.r_casa}}</em>&nbsp;vs&nbsp;<em id="texto7">{{a.resultado.r_fora}}</em>&nbsp;<em id="texto3">{{a.times[1].descricao_time}}</em>
+        <em id="texto3">DATA:&nbsp;</em>{{toData(a.data)}}&nbsp;{{toHora(a.data)}}<br><em id="texto3">{{a.times[0].descricao_time}}&nbsp;</em><em id="texto7">{{a.resultado.r_casa}}</em>&nbsp;vs&nbsp;<em id="texto7">{{a.resultado.r_fora}}</em>&nbsp;<em id="texto3">{{a.times[1].descricao_time}}</em>
         <br><em id="texto3">&nbsp;Palpite:&nbsp;</em><em id="texto7">{{retornaPalpite(a.id)}}</em>&nbsp;<em id="texto3">&nbsp;Valor Palpite:&nbsp;</em><em id="texto7">{{retornaValorPalpite(a.id)}}</em>
       </p>
+      <hr>
       <p>
         <em id="texto3">* Não pagaremos jogos ja realizados que por falha quaisquer que sejam continuem no sistema;</em><br>
         <em id="texto3">* Ticket válido por 8 dias;</em><br>
